@@ -730,7 +730,7 @@
 </head>
 <body>
     <!-- User Login/Register Screen -->
-    <div id="userAuthScreen" class="login-container">
+    <div id="userAuthScreen" class="login-container hidden">
         <div class="login-box">
             <div class="profile-tabs">
                 <button class="profile-tab active" id="loginTab" onclick="switchAuthTab('login')">লগইন</button>
@@ -745,7 +745,7 @@
                     type="text" 
                     id="loginIdentifier" 
                     class="login-input" 
-                    placeholder="ইমেইল বা ফোন নম্বর"
+                    placeholder="নাম, ইমেইল বা ফোন নম্বর (Admin: khokon)"
                     onkeypress="if(event.key === 'Enter') userLogin()"
                 />
                 <input 
@@ -761,6 +761,9 @@
                 <p id="userLoginError" style="color: #f44336; margin-top: 15px; display: none; font-size: 0.9rem;">
                     ভুল তথ্য! আবার চেষ্টা করুন।
                 </p>
+                <button class="btn btn-outline" onclick="resetAdminUser()" style="width: 100%; margin-top: 10px; font-size: 0.85rem;">
+                    🔄 Admin User Reset করুন
+                </button>
             </div>
 
             <!-- Register Form -->
@@ -1312,6 +1315,9 @@
 
         // User Login
         function userLogin() {
+            // Ensure default admin user exists
+            initializeDefaultUser();
+            
             const identifier = document.getElementById('loginIdentifier').value.trim();
             const password = document.getElementById('loginPassword').value;
             const errorEl = document.getElementById('userLoginError');
@@ -1325,13 +1331,26 @@
             }
 
             const users = getAllUsers();
-            const user = users.find(u => 
-                (u.email === identifier || u.phone === identifier) && u.password === password
-            );
+            
+            // Debug: Log users for troubleshooting
+            console.log('All users:', users);
+            console.log('Login attempt:', { identifier, password });
+            
+            // Allow login by email, phone, or name
+            // Handle null phone values properly
+            const user = users.find(u => {
+                const emailMatch = u.email && u.email === identifier;
+                const phoneMatch = u.phone && u.phone === identifier;
+                const nameMatch = u.name && u.name === identifier;
+                const passwordMatch = u.password === password;
+                
+                return (emailMatch || phoneMatch || nameMatch) && passwordMatch;
+            });
 
             if (!user) {
-                errorEl.textContent = 'ভুল ইমেইল/ফোন নম্বর বা পাসওয়ার্ড!';
+                errorEl.textContent = 'ভুল ইমেইল/ফোন নম্বর/নাম বা পাসওয়ার্ড!';
                 errorEl.style.display = 'block';
+                console.log('Login failed - no matching user found');
                 return;
             }
 
@@ -1347,11 +1366,31 @@
             showMainApp();
         }
 
+        // Reset admin user (for troubleshooting)
+        function resetAdminUser() {
+            if (confirm('Admin user reset করবেন? এটি localStorage থেকে সব user মুছে দেবে এবং নতুন admin user তৈরি করবে।')) {
+                localStorage.removeItem(USERS_STORAGE_KEY);
+                localStorage.removeItem(CURRENT_USER_KEY);
+                initializeDefaultUser();
+                alert('Admin user reset সম্পন্ন! এখন লগইন করুন:\n\nUsername: khokon\nPassword: joy1234');
+                document.getElementById('loginIdentifier').value = 'khokon';
+                document.getElementById('loginPassword').value = '';
+            }
+        }
+
         // User Logout
         function userLogout() {
             if (confirm('আপনি কি নিশ্চিত যে আপনি লগআউট করতে চান?')) {
                 localStorage.removeItem(CURRENT_USER_KEY);
-                showUserAuth();
+                // Auto-login as admin again
+                const users = getAllUsers();
+                const adminUser = users.find(u => 
+                    (u.email === 'khokon' || u.phone === 'khokon' || u.name === 'khokon')
+                );
+                if (adminUser) {
+                    setCurrentUser(adminUser);
+                }
+                showMainApp();
             }
         }
 
@@ -1359,7 +1398,16 @@
         function showUserProfile() {
             const user = getCurrentUser();
             if (!user) {
-                showUserAuth();
+                // Auto-login as admin if no user
+                const users = getAllUsers();
+                const adminUser = users.find(u => 
+                    (u.email === 'khokon' || u.phone === 'khokon' || u.name === 'khokon')
+                );
+                if (adminUser) {
+                    setCurrentUser(adminUser);
+                    showUserProfile();
+                    return;
+                }
                 return;
             }
 
@@ -1369,19 +1417,16 @@
                   '\n\nনিবন্ধনের তারিখ: ' + new Date(user.createdAt).toLocaleDateString('bn-BD'));
         }
 
-        // Show user auth screen
+        // Show user auth screen (disabled - login removed)
         function showUserAuth() {
-            document.getElementById('mainApp').classList.add('hidden');
-            document.getElementById('adminLoginScreen').classList.add('hidden');
-            document.getElementById('userAuthScreen').classList.remove('hidden');
-            switchAuthTab('login');
+            // Login removed - always show main app
+            showMainApp();
         }
 
-        // Show admin login
+        // Show admin login (disabled - login removed)
         function showAdminLogin() {
-            document.getElementById('mainApp').classList.add('hidden');
-            document.getElementById('userAuthScreen').classList.add('hidden');
-            document.getElementById('adminLoginScreen').classList.remove('hidden');
+            // Login removed - always show main app
+            showMainApp();
         }
 
         // Navigation Section Management
@@ -1842,54 +1887,91 @@
 
         // Initialize default user
         function initializeDefaultUser() {
-            const users = getAllUsers();
-            const defaultUserExists = users.find(u => 
-                u.email === 'khokon' || u.phone === 'khokon' || u.name === 'khokon'
-            );
-            
-            if (!defaultUserExists) {
+            try {
+                const users = getAllUsers();
+                const defaultUserExists = users.find(u => 
+                    (u.email === 'khokon' || u.phone === 'khokon' || u.name === 'khokon')
+                );
+                
+                if (!defaultUserExists) {
+                    const defaultUser = {
+                        id: 'default_user_' + Date.now(),
+                        name: 'khokon',
+                        email: 'khokon',
+                        phone: null,
+                        password: 'joy1234',
+                        isAdmin: true, // Grant admin privileges
+                        createdAt: new Date().toISOString()
+                    };
+                    users.push(defaultUser);
+                    saveUsers(users);
+                    console.log('Default admin user created:', defaultUser);
+                } else {
+                    // Update existing user to be admin
+                    const userIndex = users.findIndex(u => 
+                        (u.email === 'khokon' || u.phone === 'khokon' || u.name === 'khokon')
+                    );
+                    if (userIndex !== -1) {
+                        users[userIndex].isAdmin = true;
+                        users[userIndex].password = 'joy1234'; // Ensure password is correct
+                        saveUsers(users);
+                        console.log('Default admin user updated:', users[userIndex]);
+                    }
+                }
+            } catch (error) {
+                console.error('Error initializing default user:', error);
+                // Create fresh user list if there's an error
                 const defaultUser = {
                     id: 'default_user_' + Date.now(),
                     name: 'khokon',
                     email: 'khokon',
                     phone: null,
                     password: 'joy1234',
-                    isAdmin: true, // Grant admin privileges
+                    isAdmin: true,
                     createdAt: new Date().toISOString()
                 };
-                users.push(defaultUser);
-                saveUsers(users);
-            } else {
-                // Update existing user to be admin
-                const userIndex = users.findIndex(u => 
-                    u.email === 'khokon' || u.phone === 'khokon' || u.name === 'khokon'
-                );
-                if (userIndex !== -1) {
-                    users[userIndex].isAdmin = true;
-                    saveUsers(users);
-                }
+                saveUsers([defaultUser]);
+                console.log('Created fresh admin user after error');
             }
         }
 
-        // Initialize - check if user is logged in
-        window.addEventListener('DOMContentLoaded', function() {
-            // Initialize default user
+        // Initialize app - auto-login as admin and show main app
+        function initializeApp() {
+            // Initialize default user FIRST (before any other operations)
             initializeDefaultUser();
             
-            const currentUser = getCurrentUser();
+            // Auto-login as admin user
+            const users = getAllUsers();
+            const adminUser = users.find(u => 
+                (u.email === 'khokon' || u.phone === 'khokon' || u.name === 'khokon')
+            );
             
-            if (currentUser) {
-                // User is logged in, show main app
-                showMainApp();
-                // Load short stories for content section
-                loadShortStories();
-            } else {
-                // No user logged in, show login screen
-                document.getElementById('userAuthScreen').classList.remove('hidden');
-                document.getElementById('mainApp').classList.add('hidden');
-                document.getElementById('adminLoginScreen').classList.add('hidden');
+            if (adminUser) {
+                setCurrentUser(adminUser);
             }
-        });
+            
+            // Hide login screens immediately
+            const userAuthScreen = document.getElementById('userAuthScreen');
+            const adminLoginScreen = document.getElementById('adminLoginScreen');
+            const mainApp = document.getElementById('mainApp');
+            
+            if (userAuthScreen) userAuthScreen.classList.add('hidden');
+            if (adminLoginScreen) adminLoginScreen.classList.add('hidden');
+            if (mainApp) mainApp.classList.remove('hidden');
+            
+            // Load short stories for content section
+            if (typeof loadShortStories === 'function') {
+                loadShortStories();
+            }
+        }
+        
+        // Run initialization when DOM is ready
+        if (document.readyState === 'loading') {
+            window.addEventListener('DOMContentLoaded', initializeApp);
+        } else {
+            // DOM already loaded, run immediately
+            initializeApp();
+        }
 
         // Data storage using localStorage
         const STORAGE_KEY = 'lifeStories';

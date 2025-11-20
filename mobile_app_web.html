@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>জীবনী-</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans Bengali', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('background.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            color: #444;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 211, 166, 0.2) 0%, rgba(255, 179, 122, 0.2) 50%, rgba(255, 168, 94, 0.2) 100%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .app-container {
+            max-width: 480px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            min-height: 100vh;
+            position: relative;
+            z-index: 1;
+        }
+
+        .app-header {
+            background: rgba(255, 255, 255, 0.28);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+            color: #333;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+        }
+
+        .app-header h1 {
+            font-size: 22px;
+            margin-bottom: 5px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .admin-badge {
+            background: rgba(255, 168, 94, 0.7);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-top: 8px;
+            display: inline-block;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 480px;
+            background: rgba(255, 255, 255, 0.24);
+            backdrop-filter: blur(15px);
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 5px 15px;
+            cursor: pointer;
+            color: #999;
+            transition: all 0.3s;
+            border-radius: 12px;
+            margin: 0 5px;
+        }
+
+        .nav-item.active {
+            color: #FFA95E;
+            background: rgba(255, 169, 94, 0.1);
+        }
+
+        .nav-item i {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+
+        .nav-item span {
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .content-area {
+            padding: 20px;
+            padding-bottom: 90px;
+            min-height: calc(100vh - 60px);
+            background: transparent;
+        }
+
+        .screen {
+            display: none;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        .search-box {
+            margin-bottom: 20px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 15px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.22);
+            backdrop-filter: blur(18px);
+            font-family: 'Noto Sans Bengali', sans-serif;
+            transition: all 0.3s;
+            color: #333;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: rgba(255, 168, 94, 0.6);
+            box-shadow: 0 0 0 3px rgba(255, 169, 94, 0.15);
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .search-box input::placeholder {
+            color: rgba(102, 102, 102, 0.7);
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.28);
+            backdrop-filter: blur(20px);
+            border-radius: 18px;
+            padding: 18px;
+            margin-bottom: 16px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+            background: rgba(255, 255, 255, 0.35);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 12px;
+        }
+
+        .card-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #FFD3A6 0%, #FFA95E 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: 700;
+            box-shadow: 0 2px 8px rgba(255, 169, 94, 0.3);
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 4px;
+            color: #333;
+        }
+
+        .card-subtitle {
+            color: #888;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .card-description {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-top: 8px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        .status-pending {
+            background: #FFF3CD;
+            color: #856404;
+        }
+
+        .status-approved {
+            background: #D4EDDA;
+            color: #155724;
+        }
+
+        .fab {
+            position: fixed;
+            bottom: 100px;
+            right: 50%;
+            transform: translateX(calc(50% - 200px));
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(255, 165, 100, 0.65);
+            backdrop-filter: blur(12px);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            font-size: 28px;
+            cursor: pointer;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 99;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .fab:hover {
+            transform: translateX(calc(50% - 200px)) scale(1.1);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+            background: rgba(255, 165, 100, 0.75);
+        }
+
+        .fab.show {
+            display: flex;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: rgba(102, 102, 102, 0.8);
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+            border-radius: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            margin: 20px 0;
+        }
+
+        .empty-state i {
+            font-size: 64px;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .empty-state h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #666;
+        }
+
+        .detail-header {
+            background: rgba(255, 255, 255, 0.28);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+            color: #333;
+            padding: 50px 20px 30px;
+            text-align: center;
+        }
+
+        .detail-content {
+            padding: 24px;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            margin: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .detail-title {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .detail-section {
+            margin-bottom: 28px;
+        }
+
+        .detail-section h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: #FFA95E;
+            font-weight: 700;
+        }
+
+        .detail-section p {
+            line-height: 1.8;
+            color: #555;
+            font-size: 15px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            cursor: pointer; 
+            margin: 5px;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-family: 'Noto Sans Bengali', sans-serif;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #FFA95E 0%, #FF8C42 100%);
+            color: white;
+            box-shadow: 0 2px 8px rgba(255, 169, 94, 0.3);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 4px 12px rgba(255, 169, 94, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 20px;
+            padding: 24px;
+            max-width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .modal-header {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #FFA95E;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 10px;
+            font-size: 15px;
+            font-family: 'Noto Sans Bengali', sans-serif;
+            transition: all 0.3s;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            color: #333;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: rgba(255, 168, 94, 0.6);
+            box-shadow: 0 0 0 3px rgba(255, 169, 94, 0.15);
+            background: rgba(255, 255, 255, 0.35);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(102, 102, 102, 0.7);
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .admin-section {
+            background: rgba(255, 255, 255, 0.28);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+        }
+
+        .admin-section h2 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #FFA95E;
+            border-bottom: 2px solid #FFD3A6;
+            padding-bottom: 10px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .tab {
+            padding: 12px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #999;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .tab.active {
+            color: #FFA95E;
+            border-bottom-color: #FFA95E;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <div class="app-header">
+            <h1>বাংলাদেশের বৌদ্ধ ভিক্ষু</h1>
+            <span id="adminBadge" class="admin-badge hidden">প্রশাসক</span>
+        </div>
+
+        <div class="content-area">
+            <!-- Monks Screen -->
+            <div id="monksScreen" class="screen active">
+                <div class="search-box">
+                    <input type="text" id="monkSearch" placeholder="ভিক্ষু খুঁজুন…" oninput="searchMonks()">
+                </div>
+                <div id="monksList"></div>
+            </div>
+
+            <!-- Villages Screen -->
+            <div id="villagesScreen" class="screen">
+                <div class="search-box">
+                    <input type="text" id="villageSearch" placeholder="গ্রাম খুঁজুন…" oninput="searchVillages()">
+                </div>
+                <div id="villagesList"></div>
+            </div>
+
+            <!-- Renowned People Screen -->
+            <div id="renownedScreen" class="screen">
+                <div class="search-box">
+                    <input type="text" id="renownedSearch" placeholder="বিশিষ্ট ব্যক্তিত্ব খুঁজুন…" oninput="searchRenowned()">
+                </div>
+                <div id="renownedList"></div>
+            </div>
+
+            <!-- Admin Screen -->
+            <div id="adminScreen" class="screen">
+                <div class="tabs">
+                    <div class="tab active" onclick="showAdminTab('pending')">অনুমোদন অপেক্ষা</div>
+                    <div class="tab" onclick="showAdminTab('approved')">অনুমোদিত</div>
+                    <div class="tab" onclick="showAdminTab('all')">সব</div>
+                </div>
+                <div id="adminContent"></div>
+            </div>
+
+            <!-- Search Screen -->
+            <div id="searchScreen" class="screen">
+                <div class="search-box">
+                    <input type="text" id="globalSearch" placeholder="সার্চ করুন…" oninput="globalSearch()">
+                </div>
+                <div id="searchResults"></div>
+            </div>
+
+            <!-- Profile Screen -->
+            <div id="profileScreen" class="screen">
+                <div style="text-align: center; padding: 40px 20px;">
+                    <div class="card-avatar" style="margin: 0 auto 20px; width: 80px; height: 80px; font-size: 40px;">
+                        👤
+                    </div>
+                    <h2 id="userName" style="font-size: 24px; font-weight: 700; margin-bottom: 10px;">খোকন</h2>
+                    <p style="color: #666; margin-top: 10px; font-weight: 600;">প্রশাসক</p>
+                    <button class="btn btn-danger" onclick="logout()" style="margin-top: 30px; width: 100%;">
+                        লগআউট
+                    </button>
+                </div>
+            </div>
+
+            <!-- Detail Screen -->
+            <div id="detailScreen" class="screen">
+                <div id="detailContent"></div>
+            </div>
+        </div>
+
+        <button id="fab" class="fab" onclick="showAddForm()">+</button>
+
+        <div class="bottom-nav">
+            <div class="nav-item active" onclick="showScreen('monks')">
+                <i>📖</i>
+                <span>ভিক্ষু</span>
+            </div>
+            <div class="nav-item" onclick="showScreen('villages')">
+                <i>🏘</i>
+                <span>গ্রাম</span>
+            </div>
+            <div class="nav-item" onclick="showScreen('renowned')">
+                <i>⭐</i>
+                <span>বিশিষ্ট ব্যক্তিত্ব</span>
+            </div>
+            <div class="nav-item" id="adminNavItem" onclick="showScreen('admin')">
+                <i>⚙️</i>
+                <span>প্রশাসক</span>
+            </div>
+            <div class="nav-item" onclick="showScreen('search')">
+                <i>🔎</i>
+                <span>অনুসন্ধান</span>
+            </div>
+            <div class="nav-item" onclick="showScreen('profile')">
+                <i>👤</i>
+                <span>প্রোফাইল</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Renowned People Modal -->
+    <div id="renownedModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">বিশিষ্ট ব্যক্তিত্ব যোগ করুন</div>
+            <form id="renownedForm" onsubmit="submitRenowned(event)">
+                <div class="form-group">
+                    <label>নাম *</label>
+                    <input type="text" id="renownedFormName" required>
+                </div>
+                <div class="form-group">
+                    <label>ছবি (URL)</label>
+                    <input type="url" id="renownedFormImageUrl">
+                </div>
+                <div class="form-group">
+                    <label>যুগ / Era</label>
+                    <input type="text" id="renownedFormEra" placeholder="যেমন: ১৮০০-১৯০০">
+                </div>
+                <div class="form-group">
+                    <label>অঞ্চল / Region</label>
+                    <input type="text" id="renownedFormRegion" placeholder="যেমন: চট্টগ্রাম, কক্সবাজার, রামু">
+                </div>
+                <div class="form-group">
+                    <label>জীবনী</label>
+                    <textarea id="renownedFormBiography" rows="6"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>অবদান / অর্জন (প্রতি লাইনে একটি)</label>
+                    <textarea id="renownedFormAchievements" rows="4" placeholder="প্রতি লাইনে একটি অর্জন লিখুন"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>ঐতিহাসিক গুরুত্ব</label>
+                    <textarea id="renownedFormLegacy" rows="4"></textarea>
+                </div>
+                <div class="action-buttons">
+                    <button type="submit" class="btn btn-primary">সংরক্ষণ করুন</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeRenownedForm()">বাতিল</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Story Submission Modal -->
+    <div id="storyModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">কাহিনী জমা দিন</div>
+            <form id="storyForm" onsubmit="submitStory(event)">
+                <div class="form-group">
+                    <label>নাম *</label>
+                    <input type="text" id="formName" required>
+                </div>
+                <div class="form-group">
+                    <label>উপাধি/ভূমিকা</label>
+                    <input type="text" id="formOccupation">
+                </div>
+                <div class="form-group">
+                    <label>জন্ম তারিখ</label>
+                    <input type="date" id="formBirthDate">
+                </div>
+                <div class="form-group">
+                    <label>মৃত্যু তারিখ</label>
+                    <input type="date" id="formDeathDate">
+                </div>
+                <div class="form-group">
+                    <label>ছবির URL</label>
+                    <input type="url" id="formImageUrl">
+                </div>
+                <div class="form-group">
+                    <label>জীবনী *</label>
+                    <textarea id="formBiography" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>শিক্ষা / অর্জন (প্রতি লাইনে একটি)</label>
+                    <textarea id="formAchievements" placeholder="প্রতি লাইনে একটি অর্জন লিখুন"></textarea>
+                </div>
+                <div class="action-buttons">
+                    <button type="submit" class="btn btn-primary">জমা দিন</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeStoryForm()">বাতিল</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Data Storage
+        const STORAGE_KEY = 'lifeStories';
+        const VILLAGES_KEY = 'villages';
+        const RENOWNED_KEY = 'renownedPeople';
+        const USERS_KEY = 'appUsers';
+        const CURRENT_USER_KEY = 'currentUser';
+
+        let currentScreen = 'monks';
+        let isAdmin = true;
+        let currentAdminTab = 'pending';
+
+        // Initialize
+        function init() {
+            initializeDefaultUser();
+            autoLogin();
+            loadMonks();
+            loadVillages();
+            loadRenowned();
+            updateAdminBadge();
+            if (isAdmin) {
+                loadAdminContent();
+            }
+        }
+
+        function initializeDefaultUser() {
+            let users = JSON.parse(localStorage.getItem(USERS_KEY) || '[]');
+            const adminExists = users.find(u => u.name === 'khokon');
+            if (!adminExists) {
+                users.push({
+                    id: 'admin_' + Date.now(),
+                    name: 'khokon',
+                    email: 'khokon',
+                    password: 'joy1234',
+                    isAdmin: true,
+                    createdAt: new Date().toISOString()
+                });
+                localStorage.setItem(USERS_KEY, JSON.stringify(users));
+            }
+        }
+
+        function autoLogin() {
+            const users = JSON.parse(localStorage.getItem(USERS_KEY) || '[]');
+            const admin = users.find(u => u.name === 'khokon');
+            if (admin) {
+                localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(admin));
+                isAdmin = admin.isAdmin;
+            }
+        }
+
+        function updateAdminBadge() {
+            document.getElementById('adminBadge').classList.toggle('hidden', !isAdmin);
+            document.getElementById('adminNavItem').classList.toggle('hidden', !isAdmin);
+            const fab = document.getElementById('fab');
+            if (currentScreen === 'monks' || currentScreen === 'villages' || currentScreen === 'renowned') {
+                fab.classList.toggle('show', true);
+            } else {
+                fab.classList.toggle('show', false);
+            }
+        }
+
+        // Navigation
+        function showScreen(screen) {
+            currentScreen = screen;
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            
+            document.getElementById(screen + 'Screen').classList.add('active');
+            event.target.closest('.nav-item').classList.add('active');
+            
+            if (screen === 'monks') loadMonks();
+            if (screen === 'villages') loadVillages();
+            if (screen === 'renowned') loadRenowned();
+            if (screen === 'admin' && isAdmin) loadAdminContent();
+            updateAdminBadge();
+        }
+
+        // Monks
+        function loadMonks() {
+            const allStories = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            const monks = allStories.filter(s => s.status === 'approved' || !s.status);
+            const container = document.getElementById('monksList');
+            
+            if (monks.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div style="font-size: 64px;">📖</div>
+                        <h3>এখনও কোন কাহিনী নেই</h3>
+                        <p>বাংলাদেশের একজন শ্রদ্ধেয় বৌদ্ধ ভিক্ষুর জীবন কাহিনী যোগ করে শুরু করুন।</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = monks.map(monk => `
+                <div class="card" onclick="showMonkDetail('${monk.id}')">
+                    <div class="card-header">
+                        <div class="card-avatar">${monk.name.charAt(0)}</div>
+                        <div style="flex: 1;">
+                            <div class="card-title">${monk.name}</div>
+                            <div class="card-subtitle">${monk.occupation || ''}</div>
+                        </div>
+                    </div>
+                    <div class="card-description">${monk.biography.substring(0, 120)}${monk.biography.length > 120 ? '...' : ''}</div>
+                </div>
+            `).join('');
+        }
+
+        function searchMonks() {
+            const query = document.getElementById('monkSearch').value.toLowerCase();
+            const allStories = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            const monks = allStories.filter(s => s.status === 'approved' || !s.status);
+            const filtered = monks.filter(m => 
+                m.name.toLowerCase().includes(query) ||
+                m.biography.toLowerCase().includes(query) ||
+                (m.occupation && m.occupation.toLowerCase().includes(query))
+            );
+            
+            const container = document.getElementById('monksList');
+            if (filtered.length === 0) {
+                container.innerHTML = '<div class="empty-state"><p>কোন ফলাফল নেই</p></div>';
+                return;
+            }
+            
+            container.innerHTML = filtered.map(monk => `
+                <div class="card" onclick="showMonkDetail('${monk.id}')">
+                    <div class="card-header">
+                        <div class="card-avatar">${monk.name.charAt(0)}</div>
+                        <div style="flex: 1;">
+                            <div class="card-title">${monk.name}</div>
+                            <div class="card-subtitle">${monk.occupation || ''}</div>
+                        </div>
+                    </div>
+                    <div class="card-description">${monk.biography.substring(0, 120)}${monk.biography.length > 120 ? '...' : ''}</div>
+                </div>
+            `).join('');
+        }
+
+        function showMonkDetail(id) {
+            const allStories = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            const monk = allStories.find(m => m.id === id);
+            if (!monk) return;
+            
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById('detailScreen').classList.add('active');
+            
+            const achievements = monk.achievements && monk.achievements.length > 0 
+                ? monk.achievements.map(a => `<li style="margin-bottom: 8px;">${a}</li>`).join('')
+                : '';
+            
+            document.getElementById('detailContent').innerHTML = `
+                <div class="detail-header">
+                    <div style="font-size: 48px; margin-bottom: 10px;">${monk.name.charAt(0)}</div>
+                    <div class="detail-title">${monk.name}</div>
+                    <div style="opacity: 0.95; font-size: 16px;">${monk.occupation || ''}</div>
+                </div>
+                <div class="detail-content">
+                    <div class="detail-section">
+                        <h3>জীবনী</h3>
+                        <p>${monk.biography.replace(/\n/g, '<br>')}</p>
+                    </div>
+                    ${achievements ? `
+                        <div class="detail-section">
+                            <h3>অর্জনসমূহ</h3>
+                            <ul style="padding-left: 20px; color: #555;">
+                                ${achievements}
+                            </ul>
+                        </div>
+                    ` : ''}
+                    <div class="action-buttons">
+                        ${isAdmin ? `
+                            <button class="btn btn-primary" onclick="editStory('${monk.id}')">সম্পাদনা</button>
+                            <button class="btn btn-danger" onclick="deleteStory('${monk.id}')">মুছুন</button>
+                        ` : ''}
+                        <button class="btn btn-secondary" onclick="showScreen('monks')" style="flex: 1;">← ফিরে যান</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Story Submission
+        function showStoryForm() {
+            document.getElementById('storyModal').classList.add('active');
+            document.getElementById('storyForm').reset();
+        }
+
+        function closeStoryForm() {
+            document.getElementById('storyModal').classList.remove('active');
+        }
+
+        function submitStory(event) {
+            event.preventDefault();
+            const currentUser = JSON.parse(localStorage.getItem(CURRENT_USER_KEY) || '{}');
+            
+            const achievements = document.getElementById('formAchievements').value
+                .split('\n')
+                .map(a => a.trim())
+                .filter(a => a.length > 0);
+            
+            const story = {
+                id: 'story_' + Date.now(),
+                name: document.getElementById('formName').value,
+                occupation: document.getElementById('formOccupation').value || '',
+                birthDate: document.getElementById('formBirthDate').value || null,
+                deathDate: document.getElementById('formDeathDate').value || null,
+                imageUrl: document.getElementById('formImageUrl').value || null,
+                biography: document.getElementById('formBiography').value,
+                achievements: achievements,
+                status: isAdmin ? 'approved' : 'pending',
+                submittedBy: currentUser.name || 'Anonymous',
+                submissionDate: new Date().toISOString(),
+                createdAt: new Date().toISOString(),
+                updatedAt: new Date().toISOString()
+            };
+            
+            const allStories = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            allStories.push(story);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(allStories));
+            
+            closeStoryForm();
+            if (isAdmin) {
+                loadMonks();
+            } else {
+                alert('আপনার কাহিনী জমা দেওয়া হয়েছে! প্রশাসকের অনুমোদনের পর এটি প্রকাশিত হবে।');
+            }
+        }
+
+        // Admin Functions
+        function showAdminTab(tab) {
+            currentAdminTab = tab;
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            loadAdminContent();
+        }
+
+        function loadAdminContent() {
+            const allStories = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            const container = document.getElementById('adminContent');
+            
+            let stories = [];
+            if (currentAdminTab === 'pending') {
+                stories = allStories.filter(s => s.status === 'pending');
+            } else if (currentAdminTab === 'approved') {
+                stories = allStories.filter(s => s.status === 'approved');
+            } else {
+                stories = allStories;
+            }
+            
+            if (stories.length === 0) {
+                container.innerHTML = '<div class="empty-state"><p>কোন কাহিনী নেই</p></div>';
+                return;
+            }
+            
+            container.innerHTML = stories.map(story => `
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-avatar">${story.name.charAt(0)}</div>
+                        <div style="flex: 1;">
+                            <div class="card-title">${story.name}</div>
+                            <div class="card-subtitle">${story.occupation || ''}</div>
+                            <span class="status-badge ${story.status === 'pending' ? 'status-pending' : 'status-approved'}">
+                                ${story.status === 'pending' ? 'অনুমোদন অপেক্ষা' : 'অনুমোদিত'}
+                            </span>
+                            ${story.submittedBy ? `<div style="font-size: 12px; color: #999; margin-top: 4px;">জমা দিয়েছেন: ${story.submittedBy}</div>` : ''}
+                        </div>
+                    </div>
+                    <div class="card-description">${story.biography.substring(0, 100)}...</div>
+                    <div class="action-buttons" style="margin-top: 12px;">
+                        ${story.status === 'pending' ? `
+                            <button class="btn btn-success" onclick="approveStory('${story.id}')">অনুমোদন</button>
+                            <button class="btn btn-danger" onclick="rejectStory('${story.id}')">প্রত্যাখ্যান</button>
+                        ` : ''}
+                        <button class="btn btn-primary" onclick="editStory('${story.id}')">সম্পাদনা</button>
+                        <button class="btn btn-danger" onclick="deleteStory('${story.id}')">মুছুন</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function approveStory(id) {
+            const allStories = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            const index = allStories.findIndex(s => s.id === id);
+            if (index !== -1) {
+                allStories[index].status = 'approved';
+                allStories[index].updatedAt = new Date().toISOString();
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(allStories));
+                loadAdminContent();
+                loadMonks();
+            }
+        }
+
+        function rejectStory(id) {
+            if (!confirm('আপনি কি এই কাহিনী প্রত্যাখ্যান করতে চান?')) return;
+            deleteStory(id);
+        }
+
+        function editStory(id) {
+            const allStories = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            const story = allStories.find(s => s.id === id);
+            if (!story) return;
+            
+            document.getElementById('formName').value = story.name;
+            document.getElementById('formOccupation').value = story.occupation || '';
+            document.getElementById('formBirthDate').value = story.birthDate || '';
+            document.getElementById('formDeathDate').value = story.deathDate || '';
+            document.getElementById('formImageUrl').value = story.imageUrl || '';
+            document.getElementById('formBiography').value = story.biography;
+            document.getElementById('formAchievements').value = (story.achievements || []).join('\n');
+            
+            document.getElementById('storyModal').classList.add('active');
+            
+            // Update form submission to edit
+            document.getElementById('storyForm').onsubmit = function(e) {
+                e.preventDefault();
+                const achievements = document.getElementById('formAchievements').value
+                    .split('\n')
+                    .map(a => a.trim())
+                    .filter(a => a.length > 0);
+                
+                const index = allStories.findIndex(s => s.id === id);
+                if (index !== -1) {
+                    allStories[index] = {
+                        ...allStories[index],
+                        name: document.getElementById('formName').value,
+                        occupation: document.getElementById('formOccupation').value || '',
+                        birthDate: document.getElementById('formBirthDate').value || null,
+                        deathDate: document.getElementById('formDeathDate').value || null,
+                        imageUrl: document.getElementById('formImageUrl').value || null,
+                        biography: document.getElementById('formBiography').value,
+                        achievements: achievements,
+                        updatedAt: new Date().toISOString()
+                    };
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(allStories));
+                    closeStoryForm();
+                    loadMonks();
+                    loadAdminContent();
+                    if (currentScreen === 'detail') {
+                        showMonkDetail(id);
+                    }
+                }
+            };
+        }
+
+        function deleteStory(id) {
+            if (!confirm('আপনি কি এই কাহিনী মুছে ফেলতে চান?')) return;
+            const allStories = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            const filtered = allStories.filter(s => s.id !== id);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(filtered));
+            loadMonks();
+            loadAdminContent();
+            if (currentScreen === 'detail') {
+                showScreen('monks');
+            }
+        }
+
+        // Villages
+        function loadVillages() {
+            const villages = JSON.parse(localStorage.getItem(VILLAGES_KEY) || '[]');
+            const container = document.getElementById('villagesList');
+            
+            if (villages.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div style="font-size: 64px;">🏘</div>
+                        <h3>এখনও কোন গ্রাম নেই</h3>
+                        <p>একটি বৌদ্ধ গ্রামের তথ্য যোগ করে শুরু করুন।</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = villages.map(village => `
+                <div class="card" onclick="showVillageDetail('${village.id}')">
+                    <div class="card-header">
+                        <div class="card-avatar">🏘</div>
+                        <div style="flex: 1;">
+                            <div class="card-title">${village.name}</div>
+                            <div class="card-subtitle">${village.upazila}, ${village.district}</div>
+                        </div>
+                    </div>
+                    <div class="card-description">${village.description.substring(0, 120)}${village.description.length > 120 ? '...' : ''}</div>
+                </div>
+            `).join('');
+        }
+
+        function searchVillages() {
+            const query = document.getElementById('villageSearch').value.toLowerCase();
+            const villages = JSON.parse(localStorage.getItem(VILLAGES_KEY) || '[]');
+            const filtered = villages.filter(v => 
+                v.name.toLowerCase().includes(query) ||
+                v.description.toLowerCase().includes(query) ||
+                v.district.toLowerCase().includes(query)
+            );
+            
+            const container = document.getElementById('villagesList');
+            if (filtered.length === 0) {
+                container.innerHTML = '<div class="empty-state"><p>কোন ফলাফল নেই</p></div>';
+                return;
+            }
+            
+            container.innerHTML = filtered.map(village => `
+                <div class="card" onclick="showVillageDetail('${village.id}')">
+                    <div class="card-header">
+                        <div class="card-avatar">🏘</div>
+                        <div style="flex: 1;">
+                            <div class="card-title">${village.name}</div>
+                            <div class="card-subtitle">${village.upazila}, ${village.district}</div>
+                        </div>
+                    </div>
+                    <div class="card-description">${village.description.substring(0, 120)}${village.description.length > 120 ? '...' : ''}</div>
+                </div>
+            `).join('');
+        }
+
+        function showVillageDetail(id) {
+            const villages = JSON.parse(localStorage.getItem(VILLAGES_KEY) || '[]');
+            const village = villages.find(v => v.id === id);
+            if (!village) return;
+            
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById('detailScreen').classList.add('active');
+            
+            document.getElementById('detailContent').innerHTML = `
+                <div class="detail-header">
+                    <div style="font-size: 48px; margin-bottom: 10px;">🏘</div>
+                    <div class="detail-title">${village.name}</div>
+                    <div style="opacity: 0.95; font-size: 16px;">${village.upazila}, ${village.district}</div>
+                </div>
+                <div class="detail-content">
+                    <div class="detail-section">
+                        <h3>বর্ণনা</h3>
+                        <p>${village.description.replace(/\n/g, '<br>')}</p>
+                    </div>
+                    ${village.revolution ? `
+                        <div class="detail-section">
+                            <h3>ইতিহাস ও বিপ্লব</h3>
+                            <p>${village.revolution.replace(/\n/g, '<br>')}</p>
+                        </div>
+                    ` : ''}
+                    <button class="btn btn-secondary" onclick="showScreen('villages')" style="width: 100%; margin-top: 20px;">← ফিরে যান</button>
+                </div>
+            `;
+        }
+
+        function globalSearch() {
+            const query = document.getElementById('globalSearch').value.toLowerCase();
+            const container = document.getElementById('searchResults');
+            
+            if (!query) {
+                container.innerHTML = '<div class="empty-state"><p>সার্চ করুন…</p></div>';
+                return;
+            }
+            
+            const allStories = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            const approvedStories = allStories.filter(s => s.status === 'approved' || !s.status);
+            const villages = JSON.parse(localStorage.getItem(VILLAGES_KEY) || '[]');
+            
+            const monkResults = approvedStories.filter(m => 
+                m.name.toLowerCase().includes(query) ||
+                m.biography.toLowerCase().includes(query)
+            );
+            
+            const villageResults = villages.filter(v => 
+                v.name.toLowerCase().includes(query) ||
+                v.description.toLowerCase().includes(query)
+            );
+            
+            const renowned = JSON.parse(localStorage.getItem(RENOWNED_KEY) || '[]');
+            const renownedResults = renowned.filter(p => 
+                p.name.toLowerCase().includes(query) ||
+                (p.biography && p.biography.toLowerCase().includes(query)) ||
+                (p.legacy && p.legacy.toLowerCase().includes(query))
+            );
+            
+            if (monkResults.length === 0 && villageResults.length === 0 && renownedResults.length === 0) {
+                container.innerHTML = '<div class="empty-state"><p>কোন ফলাফল নেই</p></div>';
+                return;
+            }
+            
+            let html = '';
+            if (monkResults.length > 0) {
+                html += '<h3 style="margin-bottom: 10px; color: #FFA95E; font-weight: 700;">ভিক্ষু</h3>';
+                html += monkResults.map(m => `
+                    <div class="card" onclick="showMonkDetail('${m.id}')">
+                        <div class="card-title">${m.name}</div>
+                        <div class="card-description">${m.biography.substring(0, 80)}...</div>
+                    </div>
+                `).join('');
+            }
+            
+            if (villageResults.length > 0) {
+                html += '<h3 style="margin: 20px 0 10px; color: #FFA95E; font-weight: 700;">গ্রাম</h3>';
+                html += villageResults.map(v => `
+                    <div class="card" onclick="showVillageDetail('${v.id}')">
+                        <div class="card-title">${v.name}</div>
+                        <div class="card-description">${v.description.substring(0, 80)}...</div>
+                    </div>
+                `).join('');
+            }
+            
+            if (renownedResults.length > 0) {
+                html += '<h3 style="margin: 20px 0 10px; color: #FFA95E; font-weight: 700;">বিশিষ্ট ব্যক্তিত্ব</h3>';
+                html += renownedResults.map(p => `
+                    <div class="card" onclick="showRenownedDetail('${p.id}')">
+                        <div class="card-title">${p.name}</div>
+                        <div class="card-description">${(p.legacy || p.biography || '').substring(0, 80)}...</div>
+                    </div>
+                `).join('');
+            }
+            
+            container.innerHTML = html;
+        }
+
+        // Renowned People Functions
+        function loadRenowned() {
+            const renowned = JSON.parse(localStorage.getItem(RENOWNED_KEY) || '[]');
+            const container = document.getElementById('renownedList');
+            
+            if (renowned.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div style="font-size: 64px;">⭐</div>
+                        <h3>এখনও কোন বিশিষ্ট ব্যক্তিত্ব নেই</h3>
+                        <p>বৌদ্ধ ইতিহাসের একজন বিশিষ্ট ব্যক্তিত্বের তথ্য যোগ করে শুরু করুন।</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = renowned.map(person => `
+                <div class="card" onclick="showRenownedDetail('${person.id}')">
+                    <div class="card-header">
+                        ${person.imageUrl ? `
+                            <img src="${person.imageUrl}" alt="${person.name}" 
+                                 style="width: 60px; height: 60px; border-radius: 12px; object-fit: cover; box-shadow: 0 2px 8px rgba(255, 169, 94, 0.3);">
+                        ` : `
+                            <div class="card-avatar">${person.name.charAt(0)}</div>
+                        `}
+                        <div style="flex: 1;">
+                            <div class="card-title">${person.name}</div>
+                            <div class="card-subtitle">${person.era || ''} ${person.region ? '• ' + person.region : ''}</div>
+                        </div>
+                    </div>
+                    <div class="card-description">${person.legacy ? person.legacy.substring(0, 120) : (person.biography ? person.biography.substring(0, 120) : '')}${person.legacy && person.legacy.length > 120 ? '...' : (person.biography && person.biography.length > 120 ? '...' : '')}</div>
+                </div>
+            `).join('');
+        }
+
+        function searchRenowned() {
+            const query = document.getElementById('renownedSearch').value.toLowerCase();
+            const renowned = JSON.parse(localStorage.getItem(RENOWNED_KEY) || '[]');
+            const filtered = renowned.filter(p => 
+                p.name.toLowerCase().includes(query) ||
+                (p.biography && p.biography.toLowerCase().includes(query)) ||
+                (p.legacy && p.legacy.toLowerCase().includes(query)) ||
+                (p.era && p.era.toLowerCase().includes(query)) ||
+                (p.region && p.region.toLowerCase().includes(query))
+            );
+            
+            const container = document.getElementById('renownedList');
+            if (filtered.length === 0) {
+                container.innerHTML = '<div class="empty-state"><p>কোন ফলাফল নেই</p></div>';
+                return;
+            }
+            
+            container.innerHTML = filtered.map(person => `
+                <div class="card" onclick="showRenownedDetail('${person.id}')">
+                    <div class="card-header">
+                        ${person.imageUrl ? `
+                            <img src="${person.imageUrl}" alt="${person.name}" 
+                                 style="width: 60px; height: 60px; border-radius: 12px; object-fit: cover; box-shadow: 0 2px 8px rgba(255, 169, 94, 0.3);">
+                        ` : `
+                            <div class="card-avatar">${person.name.charAt(0)}</div>
+                        `}
+                        <div style="flex: 1;">
+                            <div class="card-title">${person.name}</div>
+                            <div class="card-subtitle">${person.era || ''} ${person.region ? '• ' + person.region : ''}</div>
+                        </div>
+                    </div>
+                    <div class="card-description">${person.legacy ? person.legacy.substring(0, 120) : (person.biography ? person.biography.substring(0, 120) : '')}${person.legacy && person.legacy.length > 120 ? '...' : (person.biography && person.biography.length > 120 ? '...' : '')}</div>
+                </div>
+            `).join('');
+        }
+
+        function showRenownedDetail(id) {
+            const renowned = JSON.parse(localStorage.getItem(RENOWNED_KEY) || '[]');
+            const person = renowned.find(p => p.id === id);
+            if (!person) return;
+            
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById('detailScreen').classList.add('active');
+            
+            const achievements = person.achievements && person.achievements.length > 0 
+                ? person.achievements.map(a => `<li style="margin-bottom: 8px;">${a}</li>`).join('')
+                : '';
+            
+            document.getElementById('detailContent').innerHTML = `
+                <div class="detail-header">
+                    ${person.imageUrl ? `
+                        <img src="${person.imageUrl}" alt="${person.name}" 
+                             style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 15px; border: 4px solid white; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+                    ` : `
+                        <div style="font-size: 64px; margin-bottom: 10px;">${person.name.charAt(0)}</div>
+                    `}
+                    <div class="detail-title">${person.name}</div>
+                    <div style="opacity: 0.95; font-size: 16px; margin-top: 8px;">
+                        ${person.era || ''} ${person.region ? '• ' + person.region : ''}
+                    </div>
+                </div>
+                <div class="detail-content">
+                    ${person.biography ? `
+                        <div class="detail-section">
+                            <h3>জীবনী</h3>
+                            <p>${person.biography.replace(/\n/g, '<br>')}</p>
+                        </div>
+                    ` : ''}
+                    ${achievements ? `
+                        <div class="detail-section">
+                            <h3>অবদান / অর্জন</h3>
+                            <ul style="padding-left: 20px; color: #555;">
+                                ${achievements}
+                            </ul>
+                        </div>
+                    ` : ''}
+                    ${person.legacy ? `
+                        <div class="detail-section">
+                            <h3>ঐতিহাসিক গুরুত্ব</h3>
+                            <p>${person.legacy.replace(/\n/g, '<br>')}</p>
+                        </div>
+                    ` : ''}
+                    <div class="action-buttons">
+                        ${isAdmin ? `
+                            <button class="btn btn-primary" onclick="editRenowned('${person.id}')">সম্পাদনা</button>
+                            <button class="btn btn-danger" onclick="deleteRenowned('${person.id}')">মুছুন</button>
+                        ` : ''}
+                        <button class="btn btn-secondary" onclick="showScreen('renowned')" style="flex: 1;">← ফিরে যান</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function showAddForm() {
+            if (currentScreen === 'monks' || currentScreen === 'villages') {
+                showStoryForm();
+            } else if (currentScreen === 'renowned') {
+                showRenownedForm();
+            }
+        }
+
+        function showRenownedForm(person = null) {
+            document.getElementById('renownedModal').classList.add('active');
+            const form = document.getElementById('renownedForm');
+            if (person) {
+                document.getElementById('renownedFormName').value = person.name || '';
+                document.getElementById('renownedFormImageUrl').value = person.imageUrl || '';
+                document.getElementById('renownedFormEra').value = person.era || '';
+                document.getElementById('renownedFormRegion').value = person.region || '';
+                document.getElementById('renownedFormBiography').value = person.biography || '';
+                document.getElementById('renownedFormAchievements').value = (person.achievements || []).join('\n');
+                document.getElementById('renownedFormLegacy').value = person.legacy || '';
+                form.dataset.editId = person.id;
+                document.querySelector('#renownedModal .modal-header').textContent = 'সম্পাদনা করুন';
+            } else {
+                form.reset();
+                delete form.dataset.editId;
+                document.querySelector('#renownedModal .modal-header').textContent = 'বিশিষ্ট ব্যক্তিত্ব যোগ করুন';
+            }
+        }
+
+        function closeRenownedForm() {
+            document.getElementById('renownedModal').classList.remove('active');
+        }
+
+        function submitRenowned(event) {
+            event.preventDefault();
+            const form = document.getElementById('renownedForm');
+            const editId = form.dataset.editId;
+            
+            const achievements = document.getElementById('renownedFormAchievements').value
+                .split('\n')
+                .map(a => a.trim())
+                .filter(a => a.length > 0);
+            
+            const person = {
+                id: editId || 'renowned_' + Date.now(),
+                name: document.getElementById('renownedFormName').value,
+                imageUrl: document.getElementById('renownedFormImageUrl').value || null,
+                era: document.getElementById('renownedFormEra').value || '',
+                region: document.getElementById('renownedFormRegion').value || '',
+                biography: document.getElementById('renownedFormBiography').value || '',
+                achievements: achievements,
+                legacy: document.getElementById('renownedFormLegacy').value || '',
+                createdAt: editId ? JSON.parse(localStorage.getItem(RENOWNED_KEY) || '[]').find(p => p.id === editId)?.createdAt || new Date().toISOString() : new Date().toISOString(),
+                updatedAt: new Date().toISOString()
+            };
+            
+            const renowned = JSON.parse(localStorage.getItem(RENOWNED_KEY) || '[]');
+            if (editId) {
+                const index = renowned.findIndex(p => p.id === editId);
+                if (index !== -1) {
+                    renowned[index] = person;
+                }
+            } else {
+                renowned.push(person);
+            }
+            localStorage.setItem(RENOWNED_KEY, JSON.stringify(renowned));
+            
+            closeRenownedForm();
+            loadRenowned();
+            if (currentScreen === 'detail') {
+                showRenownedDetail(person.id);
+            }
+        }
+
+        function editRenowned(id) {
+            const renowned = JSON.parse(localStorage.getItem(RENOWNED_KEY) || '[]');
+            const person = renowned.find(p => p.id === id);
+            if (person) {
+                showRenownedForm(person);
+            }
+        }
+
+        function deleteRenowned(id) {
+            if (!confirm('আপনি কি এই বিশিষ্ট ব্যক্তিত্ব মুছে ফেলতে চান?')) return;
+            const renowned = JSON.parse(localStorage.getItem(RENOWNED_KEY) || '[]');
+            const filtered = renowned.filter(p => p.id !== id);
+            localStorage.setItem(RENOWNED_KEY, JSON.stringify(filtered));
+            loadRenowned();
+            if (currentScreen === 'detail') {
+                showScreen('renowned');
+            }
+        }
+
+        function logout() {
+            if (confirm('আপনি কি লগআউট করতে চান?')) {
+                localStorage.removeItem(CURRENT_USER_KEY);
+                location.reload();
+            }
+        }
+
+        // Initialize on load
+        init();
+    </script>
+</body>
+</html>
