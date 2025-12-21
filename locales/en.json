@@ -1,0 +1,154 @@
+{
+  "app": {
+    "title": "Buddhist Monks of Bangladesh",
+    "admin": "Administrator"
+  },
+  "auth": {
+    "welcome": "Welcome",
+    "loginSubtitle": "Sign in to your account",
+    "loginButton": "Login",
+    "newAccount": "New Account",
+    "createAccount": "Create a new account",
+    "registerButton": "Register",
+    "backToLogin": "← Back to Login",
+    "goBack": "← Go Back",
+    "usernameEmailPhone": "Username, Email or Phone Number",
+    "usernameEmailPhonePlaceholder": "Enter username, email or phone number",
+    "password": "Password",
+    "passwordPlaceholder": "Enter password",
+    "newUser": "New user?",
+    "alreadyHaveAccount": "Already have an account?",
+    "registrationMethod": "Registration Method",
+    "phoneNumber": "Phone Number",
+    "email": "Email",
+    "emailAddress": "Email Address",
+    "emailPlaceholder": "example@email.com",
+    "name": "Name",
+    "namePlaceholder": "Enter your name",
+    "passwordMinLength": "Enter password (minimum 6 characters)",
+    "confirmPassword": "Confirm Password",
+    "confirmPasswordPlaceholder": "Enter password again",
+    "verificationCode": "Verification Code",
+    "verificationSubtitle": "Enter the code sent to your {{method}} ({{identifier}})",
+    "sixDigitCode": "6-digit Verification Code",
+    "verify": "Verify",
+    "resendCode": "Resend Code",
+    "resendTimer": "Try again after {{seconds}} seconds",
+    "demoMode": "Demo Mode: Verification Code",
+    "demoNote": "(In production, this will be sent via email/SMS)"
+  },
+  "errors": {
+    "userNotFound": "User not found. Please provide correct information.",
+    "wrongPassword": "Wrong password. Please try again.",
+    "accountNotVerified": "Your account has not been verified yet. Please activate your account with the verification code.",
+    "invalidOtp": "Invalid verification code. Please try again.",
+    "otpExpired": "Verification code has expired.",
+    "invalidOtpFormat": "Please enter a valid 6-digit code.",
+    "nameMinLength": "Name must be at least 2 characters.",
+    "invalidPhone": "Please enter a valid phone number (11 digits, starting with 01)",
+    "invalidEmail": "Please enter a valid email address.",
+    "passwordMinLength": "Password must be at least 6 characters.",
+    "passwordMismatch": "Passwords do not match. Please try again.",
+    "emailExists": "This email is already registered. Please use a different email.",
+    "phoneExists": "This phone number is already registered. Please use a different phone number.",
+    "emailPending": "An account has been created with this email but has not been verified yet. Please activate your account with the verification code.",
+    "phonePending": "An account has been created with this phone number but has not been verified yet. Please activate your account with the verification code.",
+    "verificationDataMissing": "Verification data not found. Please register again.",
+    "resendDataMissing": "Data not found for resending."
+  },
+  "success": {
+    "verificationSuccess": "Verification successful! Your account has been activated.",
+    "codeResent": "New verification code has been sent.",
+    "registrationSubmitted": "Your story has been submitted! It will be published after admin approval."
+  },
+  "navigation": {
+    "monks": "Monks",
+    "villages": "Villages",
+    "renowned": "Renowned People",
+    "admin": "Admin",
+    "search": "Search",
+    "profile": "Profile"
+  },
+  "search": {
+    "searchMonks": "Search monks…",
+    "searchVillages": "Search villages…",
+    "searchRenowned": "Search renowned people…",
+    "globalSearch": "Search…",
+    "noResults": "No results found"
+  },
+  "emptyStates": {
+    "noMonks": "No stories yet",
+    "noMonksDesc": "Start by adding the life story of a respected Buddhist monk from Bangladesh.",
+    "noVillages": "No villages yet",
+    "noVillagesDesc": "Start by adding information about a Buddhist village.",
+    "noRenowned": "No renowned people yet",
+    "noRenownedDesc": "Start by adding information about a distinguished figure in Buddhist history.",
+    "noStories": "No stories"
+  },
+  "forms": {
+    "addMonk": "Submit Story",
+    "addRenowned": "Add Renowned Person",
+    "editRenowned": "Edit",
+    "name": "Name",
+    "occupation": "Title/Role",
+    "birthDate": "Birth Date",
+    "deathDate": "Death Date",
+    "imageUrl": "Image URL",
+    "biography": "Biography",
+    "biographyRequired": "Biography *",
+    "achievements": "Education / Achievements (one per line)",
+    "achievementsPlaceholder": "Enter one achievement per line",
+    "era": "Era / Period",
+    "eraPlaceholder": "e.g., 1800-1900",
+    "region": "Region",
+    "regionPlaceholder": "e.g., Chittagong, Cox's Bazar, Ramu",
+    "legacy": "Historical Significance",
+    "renownedAchievements": "Contributions / Achievements (one per line)",
+    "save": "Save",
+    "submit": "Submit",
+    "cancel": "Cancel"
+  },
+  "detail": {
+    "biography": "Biography",
+    "achievements": "Achievements",
+    "renownedAchievements": "Contributions / Achievements",
+    "legacy": "Historical Significance",
+    "description": "Description",
+    "history": "History & Revolution",
+    "goBack": "← Go Back",
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+  "admin": {
+    "pending": "Pending Approval",
+    "approved": "Approved",
+    "all": "All",
+    "approve": "Approve",
+    "reject": "Reject",
+    "edit": "Edit",
+    "delete": "Delete",
+    "submittedBy": "Submitted by: {{name}}"
+  },
+  "profile": {
+    "user": "User",
+    "admin": "Administrator",
+    "logout": "Logout"
+  },
+  "confirmations": {
+    "logout": "Do you want to logout?",
+    "deleteStory": "Do you want to delete this story?",
+    "deleteRenowned": "Do you want to delete this renowned person?",
+    "rejectStory": "Do you want to reject this story?",
+    "clearAllUsers": "Are you sure you want to delete all users?\n\nThis will remove all registered users, pending OTPs, and current session data.",
+    "allUsersCleared": "All users have been deleted.\n\nYou can now add new users."
+  },
+  "dev": {
+    "clearAllUsers": "🗑️ Clear All Users (Development)"
+  },
+  "searchResults": {
+    "monks": "Monks",
+    "villages": "Villages",
+    "renowned": "Renowned People"
+  }
+}
+
