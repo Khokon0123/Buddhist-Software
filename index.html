@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Khokon Barua | Minecraft World Portfolio</title>
+  <!-- Pixel / Minecraft-style font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@300;400;500;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- Global UI: Navbar, Toggles, XP bar -->
+  <header class="navbar">
+    <div class="navbar-left">
+      <span class="navbar-logo">KB</span>
+      <span class="navbar-title">Khokon&#39;s World</span>
+    </div>
+    <nav class="navbar-links">
+      <button class="nav-link" data-target="spawn">Spawn</button>
+      <button class="nav-link" data-target="about">Book</button>
+      <button class="nav-link" data-target="skills">Inventory</button>
+      <button class="nav-link" data-target="experience">Chests</button>
+      <button class="nav-link" data-target="projects">Crafting</button>
+      <button class="nav-link" data-target="achievements">Achievements</button>
+      <button class="nav-link" data-target="leadership">Village</button>
+      <button class="nav-link" data-target="contact">Portal</button>
+    </nav>
+    <div class="navbar-controls">
+      <button id="dayNightToggle" class="toggle-btn" aria-label="Toggle day and night">
+        🌞
+      </button>
+      <button id="soundToggle" class="toggle-btn" aria-label="Toggle sound">
+        🔇
+      </button>
+    </div>
+  </header>
+
+  <div class="xp-bar-wrapper">
+    <div class="xp-label">XP</div>
+    <div class="xp-bar">
+      <div class="xp-fill" id="xpFill"></div>
+    </div>
+  </div>
+
+  <main>
+    <!-- SPAWN POINT / HERO -->
+    <section id="spawn" class="section section-spawn">
+      <div class="sky">
+        <div class="cloud cloud-1"></div>
+        <div class="cloud cloud-2"></div>
+        <div class="cloud cloud-3"></div>
+      </div>
+      <div class="ground"></div>
+
+      <div class="hero-content">
+        <h1 class="hero-title">Khokon Barua</h1>
+        <p class="hero-role">IT Support &amp; Computer Science Student</p>
+        <p class="hero-tagline">&ldquo;Building ideas, one block at a time&rdquo;</p>
+
+        <div class="hero-actions">
+          <button id="enterWorldBtn" class="btn-primary">
+            ▶ Enter World
+          </button>
+        </div>
+
+        <div class="hero-contact">
+          <span>Email: <a href="mailto:kbarua@owu.edu">kbarua@owu.edu</a></span>
+          <span>Phone: <a href="tel:+17409723000">(740) 972-3000</a></span>
+          <span>Ohio Wesleyan University &mdash; B.A. CS &amp; Economics, May 2029</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT / CHARACTER BOOK -->
+    <section id="about" class="section section-about locked">
+      <div class="section-label">Character Book</div>
+      <div class="book-wrapper">
+        <div class="book-cover">
+          <span class="book-title">About Me</span>
+          <button class="book-open-btn">Open</button>
+        </div>
+        <div class="book-inner">
+          <div class="book-page page-left">
+            <h2>Player Profile</h2>
+            <p><strong>Name:</strong> Khokon Barua</p>
+            <p><strong>Role:</strong> IT Support &amp; Computer Science Student</p>
+            <p><strong>World:</strong> Ohio Wesleyan University</p>
+          </div>
+          <div class="book-page page-right">
+            <h2>Story</h2>
+            <p>
+              IT Support and Computer Science student with experience resolving 50–60 support tickets weekly, maintaining
+              95%+ system uptime, and supporting systems used by 1,000+ users. Strong in system reliability, data
+              accuracy, and operational efficiency. Seeking IT Support or entry-level Software Engineering roles.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS / INVENTORY -->
+    <section id="skills" class="section section-skills locked">
+      <div class="section-label">Inventory</div>
+      <div class="inventory-grid">
+        <div class="inventory-slot" data-tooltip="User-focused support across hardware, software, and campus systems.">
+          <span class="item-icon">🧑‍💻</span>
+          <span class="item-label">IT Support</span>
+        </div>
+        <div class="inventory-slot"
+          data-tooltip="Diagnosing and resolving issues across desktops, laptops, peripherals, and common software.">
+          <span class="item-icon">🛠</span>
+          <span class="item-label">HW &amp; SW Troubleshooting</span>
+        </div>
+        <div class="inventory-slot" data-tooltip="Ticketing, tracking, and escalation using helpdesk workflows.">
+          <span class="item-icon">📨</span>
+          <span class="item-label">Helpdesk Systems</span>
+        </div>
+        <div class="inventory-slot" data-tooltip="Fundamentals of networking, connectivity, and basic diagnostics.">
+          <span class="item-icon">🌐</span>
+          <span class="item-label">Network Basics</span>
+        </div>
+        <div class="inventory-slot" data-tooltip="Data structures, algorithms, and problem solving in C++ and Python.">
+          <span class="item-icon">💻</span>
+          <span class="item-label">C++ &amp; Python</span>
+        </div>
+        <div class="inventory-slot" data-tooltip="Collecting, cleaning, and interpreting data for decisions.">
+          <span class="item-icon">📊</span>
+          <span class="item-label">Data Analysis</span>
+        </div>
+        <div class="inventory-slot"
+          data-tooltip="Working with relational databases, version control, and Linux environments.">
+          <span class="item-icon">🗄</span>
+          <span class="item-label">SQL, Git, Linux</span>
+        </div>
+        <div class="inventory-slot"
+          data-tooltip="Keeping systems stable, reliable, and integrated with tools like Ardupilot.">
+          <span class="item-icon">🧱</span>
+          <span class="item-label">Reliability &amp; Ardupilot</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE / CHESTS -->
+    <section id="experience" class="section section-experience locked">
+      <div class="section-label">Chests</div>
+      <div class="chest-grid">
+        <article class="chest-card">
+          <div class="chest-lid"></div>
+          <div class="chest-body">
+            <h3>Tech Intern &mdash; Calico (Tabbycat)</h3>
+            <ul>
+              <li>100% scoring accuracy across 1,000+ tournaments</li>
+              <li>Reduced errors by ~30% and processing time by 25%</li>
+              <li>Fixed 10+ system inconsistencies</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="chest-card">
+          <div class="chest-lid"></div>
+          <div class="chest-body">
+            <h3>IT Technician &mdash; Ohio Wesleyan University</h3>
+            <p class="subtext">(Sep 2025 &ndash; Present)</p>
+            <ul>
+              <li>50+ support requests weekly</li>
+              <li>95%+ system availability</li>
+              <li>Supported 15+ campus events (100&ndash;300 users)</li>
+              <li>Maintained 10+ labs and 25+ classrooms</li>
+              <li>Created 30+ documentation entries</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- PROJECTS / CRAFTING TABLE -->
+    <section id="projects" class="section section-projects locked">
+      <div class="section-label">Crafting Table</div>
+      <div class="crafting-wrapper">
+        <div class="crafting-grid">
+          <div class="craft-slot filled">Dept Needs</div>
+          <div class="craft-slot filled">User Requests</div>
+          <div class="craft-slot filled">Room Data</div>
+          <div class="craft-slot filled">Approval Flow</div>
+          <div class="craft-slot filled">Calendar Rules</div>
+          <div class="craft-slot filled">Error Checks</div>
+          <div class="craft-slot filled">Usage Metrics</div>
+          <div class="craft-slot filled">Conflict Checks</div>
+          <div class="craft-slot filled">Docs &amp; Training</div>
+        </div>
+        <div class="crafting-arrow"></div>
+        <div class="crafting-output">
+          <h3>Campus Room Booking System</h3>
+          <ul>
+            <li>Supports 15+ departments &amp; 1,000+ users</li>
+            <li>Improved booking accuracy by ~30%</li>
+            <li>Reduced scheduling conflicts across campus</li>
+            <li>Built with structured approval workflows</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACHIEVEMENTS -->
+    <section id="achievements" class="section section-achievements locked">
+      <div class="section-label">Advancements</div>
+      <div class="achievement-grid">
+        <div class="achievement-card" data-title="Tab Director — Western IV 2025">
+          <span class="achievement-icon">🏆</span>
+          <span class="achievement-text">Tab Director &mdash; Western IV 2025</span>
+        </div>
+        <div class="achievement-card" data-title="IMO Malaysia 2024">
+          <span class="achievement-icon">🌍</span>
+          <span class="achievement-text">IMO Malaysia 2024</span>
+        </div>
+        <div class="achievement-card" data-title="Schubert Scholarship">
+          <span class="achievement-icon">🎓</span>
+          <span class="achievement-text">Schubert Scholarship</span>
+        </div>
+        <div class="achievement-card" data-title="Honors Student">
+          <span class="achievement-icon">📚</span>
+          <span class="achievement-text">Honors Student</span>
+        </div>
+        <div class="achievement-card" data-title="Google Data Analytics">
+          <span class="achievement-icon">📈</span>
+          <span class="achievement-text">Google Data Analytics</span>
+        </div>
+        <div class="achievement-card" data-title="Google AI Certification (2025)">
+          <span class="achievement-icon">🤖</span>
+          <span class="achievement-text">Google AI Certification (2025)</span>
+        </div>
+      </div>
+
+      <div id="achievementPopup" class="achievement-popup" aria-hidden="true">
+        <div class="popup-inner">
+          <span class="popup-icon">🎉</span>
+          <span class="popup-text"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- LEADERSHIP / VILLAGE BOARD -->
+    <section id="leadership" class="section section-leadership locked">
+      <div class="section-label">Village Board</div>
+      <div class="village-board">
+        <div class="board-post">
+          <h3>Founding President &mdash; Debate Club</h3>
+          <ul>
+            <li>Founded club, recruited 20+ members</li>
+            <li>Organized 5+ campus events</li>
+          </ul>
+        </div>
+        <div class="board-post">
+          <h3>Student Representative &mdash; OWU AI Workforce</h3>
+          <ul>
+            <li>Helped shape AI policies affecting 1,000+ students</li>
+            <li>Collaborated across 3+ departments</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT / END PORTAL -->
+    <section id="contact" class="section section-contact locked">
+      <div class="section-label">End Portal</div>
+      <div class="portal-frame">
+        <div class="portal-inner">
+          <h2>Enter the Portal</h2>
+          <p>Ready to explore more of this world or start a new build together?</p>
+          <div class="portal-buttons">
+            <a href="mailto:kbarua@owu.edu" class="btn-portal">Email</a>
+            <a href="#" class="btn-portal" aria-label="GitHub profile placeholder">GitHub</a>
+            <a href="#" class="btn-portal" aria-label="LinkedIn profile placeholder">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Simple audio for subtle UI sounds (sound off by default) -->
+  <audio id="uiClickSound"
+    src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_7cf1917741.mp3?filename=menu-click-89198.mp3"
+    preload="auto"></audio>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
+
+
