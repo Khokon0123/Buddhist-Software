@@ -1,0 +1,2931 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>জীবনী-</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- i18n System -->
+    <script src="js/i18n.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans Bengali', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('background.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            color: #444;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 211, 166, 0.2) 0%, rgba(255, 179, 122, 0.2) 50%, rgba(255, 168, 94, 0.2) 100%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .app-container {
+            max-width: 480px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            min-height: 100vh;
+            position: relative;
+            z-index: 1;
+        }
+
+        .app-header {
+            background: rgba(255, 255, 255, 0.28);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+            color: #333;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+        }
+
+        .app-header h1 {
+            font-size: 22px;
+            margin-bottom: 5px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .admin-badge {
+            background: rgba(255, 168, 94, 0.7);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-top: 8px;
+            display: inline-block;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 480px;
+            background: #ffffff;
+            border-top: 2px solid rgba(255, 169, 94, 0.2);
+            display: flex;
+            justify-content: space-around;
+            padding: 14px 0;
+            box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.15), 0 -2px 8px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 6px 16px;
+            cursor: pointer;
+            color: #555555;
+            transition: all 0.3s;
+            border-radius: 12px;
+            margin: 0 4px;
+        }
+
+        .nav-item.active {
+            color: #FFA95E;
+            background: rgba(255, 169, 94, 0.15);
+        }
+
+        .nav-item i {
+            font-size: 26px;
+            margin-bottom: 5px;
+            opacity: 0.9;
+        }
+
+        .nav-item.active i {
+            opacity: 1;
+        }
+
+        .nav-item span {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        .nav-item.active span {
+            color: #FF8C42;
+            font-weight: 700;
+        }
+
+        .content-area {
+            padding: 20px;
+            padding-bottom: 90px;
+            min-height: calc(100vh - 60px);
+            background: transparent;
+        }
+
+        .screen {
+            display: none;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        .search-box {
+            margin-bottom: 20px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 15px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.22);
+            backdrop-filter: blur(18px);
+            font-family: 'Noto Sans Bengali', sans-serif;
+            transition: all 0.3s;
+            color: #333;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: rgba(255, 168, 94, 0.6);
+            box-shadow: 0 0 0 3px rgba(255, 169, 94, 0.15);
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .search-box input::placeholder {
+            color: rgba(102, 102, 102, 0.7);
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.28);
+            backdrop-filter: blur(20px);
+            border-radius: 18px;
+            padding: 18px;
+            margin-bottom: 16px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+            background: rgba(255, 255, 255, 0.35);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 12px;
+        }
+
+        .card-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #FFD3A6 0%, #FFA95E 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: 700;
+            box-shadow: 0 2px 8px rgba(255, 169, 94, 0.3);
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 4px;
+            color: #333;
+        }
+
+        .card-subtitle {
+            color: #888;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .card-description {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-top: 8px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        .status-pending {
+            background: #FFF3CD;
+            color: #856404;
+        }
+
+        .status-approved {
+            background: #D4EDDA;
+            color: #155724;
+        }
+
+        .fab {
+            position: fixed;
+            bottom: 140px;
+            left: 50%;
+            transform: translateX(-50%); /* always centered under the phone panel */
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #FFA95E 0%, #FF8C42 100%);
+            color: white;
+            border: 3px solid #ffffff;
+            font-size: 36px;
+            line-height: 1;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(255, 169, 94, 0.5), 0 6px 20px rgba(0, 0, 0, 0.25);
+            display: flex; /* always visible */
+            align-items: center;
+            justify-content: center;
+            z-index: 99;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .fab:hover {
+            transform: translateX(-50%) translateY(-4px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(255, 169, 94, 0.6), 0 8px 24px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, #FF8C42 0%, #FF7A2E 100%);
+        }
+
+        .fab.show {
+            display: flex;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 80px 30px;
+            color: #2c2c2c;
+            background: #ffffff;
+            border-radius: 20px;
+            border: 2px solid rgba(255, 169, 94, 0.3);
+            margin: 20px 0;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .empty-state i,
+        .empty-state div[style*="font-size"],
+        .empty-state > div:first-child {
+            font-size: 80px !important;
+            margin-bottom: 24px;
+            opacity: 1 !important;
+            display: block;
+        }
+
+        .empty-state h3 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #1a1a1a;
+            line-height: 1.4;
+        }
+
+        .empty-state p {
+            font-size: 16px;
+            font-weight: 500;
+            color: #444444;
+            line-height: 1.6;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .detail-header {
+            background: rgba(255, 255, 255, 0.28);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+            color: #333;
+            padding: 50px 20px 30px;
+            text-align: center;
+        }
+
+        .detail-content {
+            padding: 24px;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            margin: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .detail-title {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .detail-section {
+            margin-bottom: 28px;
+        }
+
+        .detail-section h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: #FFA95E;
+            font-weight: 700;
+        }
+
+        .detail-section p {
+            line-height: 1.8;
+            color: #555;
+            font-size: 15px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            cursor: pointer; 
+            margin: 5px;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-family: 'Noto Sans Bengali', sans-serif;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #FFA95E 0%, #FF8C42 100%);
+            color: white;
+            box-shadow: 0 2px 8px rgba(255, 169, 94, 0.3);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 4px 12px rgba(255, 169, 94, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.65); /* darker, calmer dimming */
+            backdrop-filter: blur(4px); /* subtle blur of background behind popup */
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: rgba(255, 255, 255, 0.96); /* almost solid for strong readability */
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            padding: 24px;
+            max-width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35); /* clear separation from background */
+            color: #222;
+        }
+
+        .modal-header {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #FFA95E;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+            letter-spacing: 0.01em;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgba(0, 0, 0, 0.12);
+            border-radius: 10px;
+            font-size: 15px;
+            font-family: 'Noto Sans Bengali', sans-serif;
+            transition: all 0.3s;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(4px);
+            color: #222;
+            line-height: 1.6;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: rgba(255, 168, 94, 0.9);
+            box-shadow: 0 0 0 3px rgba(255, 169, 94, 0.25);
+            background: #ffffff;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(120, 120, 120, 0.85);
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .admin-section {
+            background: rgba(255, 255, 255, 0.28);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+        }
+
+        .admin-section h2 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #FFA95E;
+            border-bottom: 2px solid #FFD3A6;
+            padding-bottom: 10px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .tab {
+            padding: 12px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #999;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .tab.active {
+            color: #FFA95E;
+            border-bottom-color: #FFA95E;
+        }
+
+        /* Login & Registration Styles */
+        .auth-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .auth-box {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(25px);
+            border-radius: 24px;
+            padding: 40px 30px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2), 0 8px 24px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .auth-header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 8px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .auth-header p {
+            font-size: 15px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .auth-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .auth-input-group.hidden {
+            display: none !important;
+        }
+
+        .auth-input-group label {
+            font-size: 15px;
+            font-weight: 600;
+            color: #333;
+            letter-spacing: 0.01em;
+        }
+
+        .auth-input {
+            width: 100%;
+            padding: 16px 18px;
+            border: 2px solid rgba(255, 169, 94, 0.2);
+            border-radius: 14px;
+            font-size: 16px;
+            font-family: 'Noto Sans Bengali', sans-serif;
+            background: rgba(255, 255, 255, 0.9);
+            color: #222;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .auth-input:focus {
+            border-color: rgba(255, 168, 94, 0.8);
+            box-shadow: 0 0 0 4px rgba(255, 169, 94, 0.15);
+            background: #ffffff;
+            transform: translateY(-1px);
+        }
+
+        .auth-input::placeholder {
+            color: rgba(120, 120, 120, 0.7);
+            font-weight: 400;
+        }
+
+        .auth-method-selector {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .auth-method-btn {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid rgba(255, 169, 94, 0.3);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.6);
+            color: #666;
+            font-size: 15px;
+            font-weight: 600;
+            font-family: 'Noto Sans Bengali', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .auth-method-btn.active {
+            background: linear-gradient(135deg, rgba(255, 169, 94, 0.2) 0%, rgba(255, 140, 66, 0.2) 100%);
+            border-color: rgba(255, 168, 94, 0.6);
+            color: #FF8C42;
+            box-shadow: 0 2px 8px rgba(255, 169, 94, 0.2);
+        }
+
+        .auth-method-btn:hover {
+            border-color: rgba(255, 168, 94, 0.5);
+            transform: translateY(-1px);
+        }
+
+        .auth-submit-btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 14px;
+            font-size: 17px;
+            font-weight: 700;
+            font-family: 'Noto Sans Bengali', sans-serif;
+            background: linear-gradient(135deg, #FFA95E 0%, #FF8C42 100%);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(255, 169, 94, 0.4);
+            margin-top: 8px;
+        }
+
+        .auth-submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 169, 94, 0.5);
+            background: linear-gradient(135deg, #FF8C42 0%, #FF7A2E 100%);
+        }
+
+        .auth-submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .auth-link {
+            text-align: center;
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255, 169, 94, 0.2);
+        }
+
+        .auth-link-text {
+            font-size: 15px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .auth-link-btn {
+            color: #FFA95E;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .auth-link-btn:hover {
+            color: #FF8C42;
+            text-decoration: underline;
+        }
+
+        .auth-back-btn {
+            background: rgba(255, 255, 255, 0.7);
+            border: 2px solid rgba(255, 169, 94, 0.3);
+            color: #666;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            font-family: 'Noto Sans Bengali', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .auth-back-btn:hover {
+            background: rgba(255, 255, 255, 0.9);
+            border-color: rgba(255, 168, 94, 0.5);
+            transform: translateX(-2px);
+        }
+
+        .auth-error {
+            background: rgba(220, 53, 69, 0.1);
+            border: 1px solid rgba(220, 53, 69, 0.3);
+            color: #dc3545;
+            padding: 12px 16px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            text-align: center;
+            animation: shake 0.4s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .auth-success {
+            background: rgba(40, 167, 69, 0.1);
+            border: 1px solid rgba(40, 167, 69, 0.3);
+            color: #28a745;
+            padding: 12px 16px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .password-toggle {
+            position: relative;
+        }
+
+        .password-toggle-btn {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #666;
+            font-size: 18px;
+            cursor: pointer;
+            padding: 8px;
+            transition: color 0.3s ease;
+        }
+
+        .password-toggle-btn:hover {
+            color: #FFA95E;
+        }
+
+        .app-container.hidden {
+            display: none;
+        }
+
+        .auth-container.hidden {
+            display: none !important;
+        }
+
+        /* Language Switcher Styles */
+        .language-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 12px;
+            padding: 8px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 169, 94, 0.3);
+            display: flex;
+            gap: 6px;
+        }
+
+        .lang-btn {
+            padding: 8px 16px;
+            border: 2px solid transparent;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.8);
+            color: #555;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Segoe UI', 'Noto Sans Bengali', sans-serif;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .lang-btn:hover {
+            background: rgba(255, 169, 94, 0.2);
+            border-color: rgba(255, 169, 94, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .lang-btn.active {
+            background: linear-gradient(135deg, #FFA95E 0%, #FF8C42 100%);
+            color: white;
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 2px 8px rgba(255, 169, 94, 0.4);
+        }
+
+        .lang-btn.active:hover {
+            background: linear-gradient(135deg, #FF8C42 0%, #FF7A2E 100%);
+        }
+
+        /* Language-specific font styles */
+        .lang-pli {
+            font-family: 'Noto Serif', 'Times New Roman', serif;
+        }
+
+        .lang-bn {
+            font-family: 'Noto Sans Bengali', 'Segoe UI', sans-serif;
+        }
+
+        .lang-en {
+            font-family: 'Segoe UI', 'Noto Sans Bengali', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Switcher -->
+    <div class="language-switcher">
+        <button class="lang-btn active" id="langBtn-bn" onclick="switchLanguage('bn')" title="বাংলা">বাংলা</button>
+        <button class="lang-btn" id="langBtn-en" onclick="switchLanguage('en')" title="English">EN</button>
+        <button class="lang-btn" id="langBtn-pli" onclick="switchLanguage('pli')" title="Pāli">Pāli</button>
+    </div>
+
+    <!-- Login Screen -->
+    <div id="loginScreen" class="auth-container" style="display: flex;">
+        <div class="auth-box">
+            <div class="auth-header">
+                <h1 data-i18n="auth.welcome">স্বাগতম</h1>
+                <p data-i18n="auth.loginSubtitle">আপনার অ্যাকাউন্টে প্রবেশ করুন</p>
+            </div>
+            <div id="loginError" class="auth-error hidden"></div>
+            <form id="loginForm" class="auth-form" onsubmit="handleLogin(event)">
+                <div class="auth-input-group">
+                    <label for="loginIdentifier" data-i18n="auth.usernameEmailPhone">ইউজারনেম, ইমেইল বা ফোন নম্বর</label>
+                    <input 
+                        type="text" 
+                        id="loginIdentifier" 
+                        class="auth-input" 
+                        data-i18n-placeholder="auth.usernameEmailPhonePlaceholder"
+                        placeholder="ইউজারনেম, ইমেইল বা ফোন নম্বর লিখুন"
+                        required
+                        autocomplete="username"
+                    >
+                </div>
+                <div class="auth-input-group">
+                    <label for="loginPassword" data-i18n="auth.password">পাসওয়ার্ড</label>
+                    <div class="password-toggle">
+                        <input 
+                            type="password" 
+                            id="loginPassword" 
+                            class="auth-input" 
+                            data-i18n-placeholder="auth.passwordPlaceholder"
+                            placeholder="পাসওয়ার্ড লিখুন"
+                            required
+                            autocomplete="current-password"
+                        >
+                        <button type="button" class="password-toggle-btn" onclick="togglePassword('loginPassword')">👁️</button>
+                    </div>
+                </div>
+                <button type="submit" class="auth-submit-btn" data-i18n="auth.loginButton">লগইন করুন</button>
+            </form>
+            <div class="auth-link">
+                <div class="auth-link-text" data-i18n="auth.newUser">নতুন ব্যবহারকারী?</div>
+                <a href="#" class="auth-link-btn" onclick="showRegister(); return false;" data-i18n="auth.registerButton">রেজিস্টার করুন</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Registration Screen -->
+    <div id="registerScreen" class="auth-container hidden">
+        <div class="auth-box">
+            <button class="auth-back-btn" onclick="showLogin()" data-i18n="auth.backToLogin">← লগইনে ফিরে যান</button>
+            <div class="auth-header">
+                <h1 data-i18n="auth.newAccount">নতুন অ্যাকাউন্ট</h1>
+                <p data-i18n="auth.createAccount">একটি নতুন অ্যাকাউন্ট তৈরি করুন</p>
+            </div>
+            <div id="registerError" class="auth-error hidden"></div>
+            <div id="registerSuccess" class="auth-success hidden"></div>
+            <form id="registerForm" class="auth-form" onsubmit="handleRegister(event)">
+                <div class="auth-input-group">
+                    <label data-i18n="auth.registrationMethod">নিবন্ধনের মাধ্যম</label>
+                    <div class="auth-method-selector">
+                        <button type="button" class="auth-method-btn active" onclick="selectAuthMethod('phone')" data-i18n="auth.phoneNumber">ফোন নম্বর</button>
+                        <button type="button" class="auth-method-btn" onclick="selectAuthMethod('email')" data-i18n="auth.email">ইমেইল</button>
+                    </div>
+                </div>
+                <div class="auth-input-group" id="phoneGroup">
+                    <label for="registerPhone" data-i18n="auth.phoneNumber">ফোন নম্বর</label>
+                    <input 
+                        type="tel" 
+                        id="registerPhone" 
+                        class="auth-input" 
+                        placeholder="01XXXXXXXXX"
+                        pattern="[0-9]{11}"
+                        autocomplete="tel"
+                    >
+                </div>
+                <div class="auth-input-group hidden" id="emailGroup">
+                    <label for="registerEmail" data-i18n="auth.emailAddress">ইমেইল ঠিকানা</label>
+                    <input 
+                        type="email" 
+                        id="registerEmail" 
+                        class="auth-input" 
+                        data-i18n-placeholder="auth.emailPlaceholder"
+                        placeholder="example@email.com"
+                        autocomplete="email"
+                    >
+                </div>
+                <div class="auth-input-group">
+                    <label for="registerName" data-i18n="auth.name">নাম</label>
+                    <input 
+                        type="text" 
+                        id="registerName" 
+                        class="auth-input" 
+                        data-i18n-placeholder="auth.namePlaceholder"
+                        placeholder="আপনার নাম লিখুন"
+                        required
+                        autocomplete="name"
+                    >
+                </div>
+                <div class="auth-input-group">
+                    <label for="registerPassword" data-i18n="auth.password">পাসওয়ার্ড</label>
+                    <div class="password-toggle">
+                        <input 
+                            type="password" 
+                            id="registerPassword" 
+                            class="auth-input" 
+                            data-i18n-placeholder="auth.passwordMinLength"
+                            placeholder="পাসওয়ার্ড লিখুন (কমপক্ষে ৬ অক্ষর)"
+                            required
+                            minlength="6"
+                            autocomplete="new-password"
+                        >
+                        <button type="button" class="password-toggle-btn" onclick="togglePassword('registerPassword')">👁️</button>
+                    </div>
+                </div>
+                <div class="auth-input-group">
+                    <label for="registerConfirmPassword" data-i18n="auth.confirmPassword">পাসওয়ার্ড নিশ্চিত করুন</label>
+                    <div class="password-toggle">
+                        <input 
+                            type="password" 
+                            id="registerConfirmPassword" 
+                            class="auth-input" 
+                            data-i18n-placeholder="auth.confirmPasswordPlaceholder"
+                            placeholder="পাসওয়ার্ড আবার লিখুন"
+                            required
+                            autocomplete="new-password"
+                        >
+                        <button type="button" class="password-toggle-btn" onclick="togglePassword('registerConfirmPassword')">👁️</button>
+                    </div>
+                </div>
+                <button type="submit" class="auth-submit-btn" data-i18n="auth.registerButton">রেজিস্টার করুন</button>
+            </form>
+            <div class="auth-link">
+                <div class="auth-link-text" data-i18n="auth.alreadyHaveAccount">ইতিমধ্যে অ্যাকাউন্ট আছে?</div>
+                <a href="#" class="auth-link-btn" onclick="showLogin(); return false;" data-i18n="auth.loginButton">লগইন করুন</a>
+            </div>
+            <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255, 169, 94, 0.2); text-align: center;">
+                <button type="button" onclick="clearAllUsers()" style="background: rgba(220, 53, 69, 0.1); border: 1px solid rgba(220, 53, 69, 0.3); color: #dc3545; padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: 'Noto Sans Bengali', sans-serif;" data-i18n="dev.clearAllUsers">
+                    🗑️ সব ব্যবহারকারী মুছুন (ডেভেলপমেন্ট)
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- OTP Verification Screen -->
+    <div id="verificationScreen" class="auth-container hidden">
+        <div class="auth-box">
+            <button class="auth-back-btn" onclick="goBackToRegister()">← ফিরে যান</button>
+            <div class="auth-header">
+                <h1>যাচাইকরণ কোড</h1>
+                <p id="verificationSubtitle"></p>
+            </div>
+            <div id="verificationError" class="auth-error hidden"></div>
+            <div id="verificationSuccess" class="auth-success hidden"></div>
+            <div id="demoOtpDisplay" style="background: rgba(255, 169, 94, 0.1); border: 2px dashed rgba(255, 169, 94, 0.5); border-radius: 12px; padding: 16px; margin-bottom: 20px; text-align: center;">
+                <div style="font-size: 13px; color: #666; margin-bottom: 8px; font-weight: 600;">📧 ডেমো মোড: যাচাইকরণ কোড</div>
+                <div id="demoOtpCode" style="font-size: 32px; font-weight: 700; color: #FF8C42; letter-spacing: 8px; font-family: 'Courier New', monospace;">------</div>
+                <div style="font-size: 11px; color: #999; margin-top: 8px;">(প্রোডাকশনে এটি ইমেইল/SMS এ পাঠানো হবে)</div>
+            </div>
+            <form id="verificationForm" class="auth-form" onsubmit="handleVerification(event)">
+                <div class="auth-input-group">
+                    <label for="otpCode">৬ সংখ্যার যাচাইকরণ কোড</label>
+                    <input 
+                        type="text" 
+                        id="otpCode" 
+                        class="auth-input" 
+                        placeholder="000000"
+                        maxlength="6"
+                        pattern="[0-9]{6}"
+                        required
+                        autocomplete="one-time-code"
+                        style="text-align: center; font-size: 24px; letter-spacing: 8px; font-weight: 600;"
+                    >
+                </div>
+                <button type="submit" class="auth-submit-btn">যাচাই করুন</button>
+                <div style="text-align: center; margin-top: 16px;">
+                    <button type="button" class="auth-link-btn" onclick="resendOTP()" id="resendBtn" style="font-size: 14px;">
+                        কোড পুনরায় পাঠান
+                    </button>
+                    <div id="resendTimer" style="font-size: 13px; color: #666; margin-top: 8px;"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="app-container hidden">
+        <div class="app-header">
+            <h1 data-i18n="app.title">বাংলাদেশের বৌদ্ধ ভিক্ষু</h1>
+            <span id="adminBadge" class="admin-badge hidden" data-i18n="app.admin">প্রশাসক</span>
+        </div>
+
+        <div class="content-area">
+            <!-- Monks Screen -->
+            <div id="monksScreen" class="screen active">
+                <div class="search-box">
+                    <input type="text" id="monkSearch" data-i18n-placeholder="search.searchMonks" placeholder="ভিক্ষু খুঁজুন…" oninput="searchMonks()">
+                </div>
+                <div id="monksList"></div>
+            </div>
+
+            <!-- Villages Screen -->
+            <div id="villagesScreen" class="screen">
+                <div class="search-box">
+                    <input type="text" id="villageSearch" data-i18n-placeholder="search.searchVillages" placeholder="গ্রাম খুঁজুন…" oninput="searchVillages()">
+                </div>
+                <div id="villagesList"></div>
+            </div>
+
+            <!-- Renowned People Screen -->
+            <div id="renownedScreen" class="screen">
+                <div class="search-box">
+                    <input type="text" id="renownedSearch" data-i18n-placeholder="search.searchRenowned" placeholder="বিশিষ্ট ব্যক্তিত্ব খুঁজুন…" oninput="searchRenowned()">
+                </div>
+                <div id="renownedList"></div>
+            </div>
+
+            <!-- Admin Screen -->
+            <div id="adminScreen" class="screen">
+                <div class="tabs">
+                    <div class="tab active" onclick="showAdminTab('pending')">অনুমোদন অপেক্ষা</div>
+                    <div class="tab" onclick="showAdminTab('approved')">অনুমোদিত</div>
+                    <div class="tab" onclick="showAdminTab('all')">সব</div>
+                </div>
+                <div id="adminContent"></div>
+            </div>
+
+            <!-- Search Screen -->
+            <div id="searchScreen" class="screen">
+                <div class="search-box">
+                    <input type="text" id="globalSearch" data-i18n-placeholder="search.globalSearch" placeholder="সার্চ করুন…" oninput="globalSearch()">
+                </div>
+                <div id="searchResults"></div>
+            </div>
+
+            <!-- Profile Screen -->
+            <div id="profileScreen" class="screen">
+                <div style="text-align: center; padding: 40px 20px;">
+                    <div class="card-avatar" style="margin: 0 auto 20px; width: 80px; height: 80px; font-size: 40px;">
+                        👤
+                    </div>
+                    <h2 id="userName" style="font-size: 24px; font-weight: 700; margin-bottom: 10px;">-</h2>
+                    <p id="userRole" style="color: #666; margin-top: 10px; font-weight: 600;">-</p>
+                    <div id="userContact" style="color: #888; font-size: 14px; margin-top: 8px;"></div>
+                    <button class="btn btn-danger" onclick="logout()" style="margin-top: 30px; width: 100%;" data-i18n="profile.logout">
+                        লগআউট
+                    </button>
+                </div>
+            </div>
+
+            <!-- Detail Screen -->
+            <div id="detailScreen" class="screen">
+                <div id="detailContent"></div>
+            </div>
+        </div>
+
+        <button id="fab" class="fab" onclick="showAddForm()">+</button>
+
+        <div class="bottom-nav">
+            <div class="nav-item active" onclick="showScreen('monks')">
+                <i>📖</i>
+                <span data-i18n="navigation.monks">ভিক্ষু</span>
+            </div>
+            <div class="nav-item" onclick="showScreen('villages')">
+                <i>🏘</i>
+                <span data-i18n="navigation.villages">গ্রাম</span>
+            </div>
+            <div class="nav-item" onclick="showScreen('renowned')">
+                <i>⭐</i>
+                <span data-i18n="navigation.renowned">বিশিষ্ট ব্যক্তিত্ব</span>
+            </div>
+            <div class="nav-item" id="adminNavItem" onclick="showScreen('admin')">
+                <i>⚙️</i>
+                <span data-i18n="navigation.admin">প্রশাসক</span>
+            </div>
+            <div class="nav-item" onclick="showScreen('search')">
+                <i>🔎</i>
+                <span data-i18n="navigation.search">অনুসন্ধান</span>
+            </div>
+            <div class="nav-item" onclick="showScreen('profile')">
+                <i>👤</i>
+                <span data-i18n="navigation.profile">প্রোফাইল</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Renowned People Modal -->
+    <div id="renownedModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">বিশিষ্ট ব্যক্তিত্ব যোগ করুন</div>
+            <form id="renownedForm" onsubmit="submitRenowned(event)">
+                <div class="form-group">
+                    <label>নাম *</label>
+                    <input type="text" id="renownedFormName" required>
+                </div>
+                <div class="form-group">
+                    <label>ছবি (URL)</label>
+                    <input type="url" id="renownedFormImageUrl">
+                </div>
+                <div class="form-group">
+                    <label>যুগ / Era</label>
+                    <input type="text" id="renownedFormEra" placeholder="যেমন: ১৮০০-১৯০০">
+                </div>
+                <div class="form-group">
+                    <label>অঞ্চল / Region</label>
+                    <input type="text" id="renownedFormRegion" placeholder="যেমন: চট্টগ্রাম, কক্সবাজার, রামু">
+                </div>
+                <div class="form-group">
+                    <label>জীবনী</label>
+                    <textarea id="renownedFormBiography" rows="6"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>অবদান / অর্জন (প্রতি লাইনে একটি)</label>
+                    <textarea id="renownedFormAchievements" rows="4" placeholder="প্রতি লাইনে একটি অর্জন লিখুন"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>ঐতিহাসিক গুরুত্ব</label>
+                    <textarea id="renownedFormLegacy" rows="4"></textarea>
+                </div>
+                <div class="action-buttons">
+                    <button type="submit" class="btn btn-primary">সংরক্ষণ করুন</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeRenownedForm()">বাতিল</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Story Submission Modal -->
+    <div id="storyModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">কাহিনী জমা দিন</div>
+            <form id="storyForm" onsubmit="submitStory(event)">
+                <div class="form-group">
+                    <label>নাম *</label>
+                    <input type="text" id="formName" required>
+                </div>
+                <div class="form-group">
+                    <label>উপাধি/ভূমিকা</label>
+                    <input type="text" id="formOccupation">
+                </div>
+                <div class="form-group">
+                    <label>জন্ম তারিখ</label>
+                    <input type="date" id="formBirthDate">
+                </div>
+                <div class="form-group">
+                    <label>মৃত্যু তারিখ</label>
+                    <input type="date" id="formDeathDate">
+                </div>
+                <div class="form-group">
+                    <label>ছবির URL</label>
+                    <input type="url" id="formImageUrl">
+                </div>
+                <div class="form-group">
+                    <label>জীবনী *</label>
+                    <textarea id="formBiography" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>শিক্ষা / অর্জন (প্রতি লাইনে একটি)</label>
+                    <textarea id="formAchievements" placeholder="প্রতি লাইনে একটি অর্জন লিখুন"></textarea>
+                </div>
+                <div class="action-buttons">
+                    <button type="submit" class="btn btn-primary">জমা দিন</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeStoryForm()">বাতিল</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Language Switcher Function
+        // CRITICAL: This function must wait for i18n to be ready
+        // Otherwise setLanguage() might be called before translations are loaded
+        async function switchLanguage(lang) {
+            try {
+                console.log(`Switching language to: ${lang}`);
+                
+                // Ensure i18n is initialized
+                if (window.i18nReady) {
+                    await window.i18nReady;
+                }
+                
+                // Wait a bit more to ensure i18n is fully ready
+                if (!window.i18n) {
+                    let retries = 0;
+                    while (!window.i18n && retries < 20) {
+                        await new Promise(resolve => setTimeout(resolve, 50));
+                        retries++;
+                    }
+                }
+                
+                if (window.i18n && window.i18n.setLanguage) {
+                    console.log(`Calling setLanguage(${lang})`);
+                    // setLanguage() will load translations and call updateAllTranslations()
+                    await window.i18n.setLanguage(lang);
+                    console.log(`Language switched to: ${lang}`);
+                    
+                    // Update language switcher UI
+                    updateLanguageSwitcherUI(lang);
+                    
+                    // Force update all translations one more time to ensure everything is updated
+                    if (window.i18n && window.i18n.updateAllTranslations) {
+                        setTimeout(() => {
+                            window.i18n.updateAllTranslations();
+                        }, 100);
+                    }
+                } else {
+                    console.error('i18n not available. window.i18n:', window.i18n);
+                    alert(`Error: Language switching system not ready. Please refresh the page.`);
+                }
+            } catch (error) {
+                console.error('Error switching language:', error);
+                alert(`Error switching language to ${lang}: ${error.message}\n\nPlease check the browser console for details.`);
+            }
+        }
+
+        function updateLanguageSwitcherUI(lang) {
+            // Update active state of language buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            const activeBtn = document.getElementById(`langBtn-${lang}`);
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+            }
+        }
+
+        // Register language change listener to update all UI
+        // This will be called when language changes via setLanguage()
+        (async () => {
+            // Wait for i18n to be available
+            while (!window.i18n) {
+                await new Promise(resolve => setTimeout(resolve, 50));
+            }
+            
+            window.i18n.onLanguageChange(() => {
+                // updateAllTranslations() is already called inside setLanguage(),
+                // but we call it again here to ensure everything is updated
+                if (window.i18n && window.i18n.updateAllTranslations) {
+                    window.i18n.updateAllTranslations();
+                }
+                // Update dynamic content that might have hardcoded text
+                if (typeof loadMonks === 'function') loadMonks();
+                if (typeof loadVillages === 'function') loadVillages();
+                if (typeof loadRenowned === 'function') loadRenowned();
+                if (typeof loadAdminContent === 'function' && isAdmin) loadAdminContent();
+                if (typeof loadUserProfile === 'function') loadUserProfile();
+            });
+        })();
+
+        // Wait for i18n to initialize before setting up language switcher
+        // CRITICAL: This ensures translations are loaded before we try to update UI
+        (async () => {
+            try {
+                // Wait for i18n to be ready
+                if (window.i18nReady) {
+                    await window.i18nReady;
+                } else {
+                    // Fallback: wait a bit for i18n to initialize
+                    await new Promise(resolve => setTimeout(resolve, 200));
+                }
+                
+                // Update language switcher UI
+                const currentLang = window.i18n ? window.i18n.getCurrentLanguage() : 'bn';
+                updateLanguageSwitcherUI(currentLang);
+                
+                // Ensure all translations are applied
+                if (window.i18n && window.i18n.updateAllTranslations) {
+                    window.i18n.updateAllTranslations();
+                }
+            } catch (error) {
+                console.error('Error waiting for i18n initialization:', error);
+            }
+        })();
+
+        // Data Storage
+        const STORAGE_KEY = 'lifeStories';
+        const VILLAGES_KEY = 'villages';
+        const RENOWNED_KEY = 'renownedPeople';
+        const USERS_KEY = 'appUsers';
+        const CURRENT_USER_KEY = 'currentUser';
+        const OTP_STORAGE_KEY = 'pendingOTPs';
+        const PENDING_USER_KEY = 'pendingUser';
+
+        let currentScreen = 'monks';
+        let resendTimerInterval = null;
+        let resendCooldown = 60; // seconds
+        let isAdmin = false;
+        let currentAdminTab = 'pending';
+        let currentUser = null;
+
+        // Helper function to get translation (with fallback)
+        // CRITICAL: This must return null if i18n isn't ready, not the key
+        // Otherwise, keys like "errors.userNotFound" will appear in UI
+        function t(key, params) {
+            if (window.i18n && window.i18n.t) {
+                const result = window.i18n.t(key, params);
+                // If i18n.t returns null (translations not loaded), return empty string
+                // as fallback for error messages (better than showing keys)
+                return result !== null ? result : '';
+            }
+            // If i18n not loaded yet, return empty string to prevent keys from showing
+            // The original HTML text will remain visible as fallback
+            return '';
+        }
+
+        // Get current authenticated user
+        function getCurrentUser() {
+            const userStr = localStorage.getItem(CURRENT_USER_KEY);
+            if (!userStr) return null;
+            try {
+                return JSON.parse(userStr);
+            } catch (e) {
+                localStorage.removeItem(CURRENT_USER_KEY);
+                return null;
+            }
+        }
+
+        // Load and display user profile
+        function loadUserProfile() {
+            const user = getCurrentUser();
+            if (!user) return;
+
+            const userNameEl = document.getElementById('userName');
+            const userRoleEl = document.getElementById('userRole');
+            const userContactEl = document.getElementById('userContact');
+
+            if (userNameEl) {
+                userNameEl.textContent = user.name || '-';
+            }
+            if (userRoleEl) {
+                userRoleEl.textContent = user.isAdmin ? t('profile.admin') : t('profile.user');
+            }
+            if (userContactEl) {
+                const contact = user.email || user.phone || '';
+                userContactEl.textContent = contact || '';
+                userContactEl.style.display = contact ? 'block' : 'none';
+            }
+        }
+
+        // Initialize
+        function init() {
+            // Load current user first
+            currentUser = getCurrentUser();
+            if (currentUser) {
+                isAdmin = currentUser.isAdmin || false;
+            } else {
+                isAdmin = false;
+            }
+
+            // Initialize default admin user (only creates if doesn't exist)
+            initializeDefaultUser();
+            
+            // Load user profile
+            loadUserProfile();
+            
+            // Load app data
+            loadMonks();
+            loadVillages();
+            loadRenowned();
+            updateAdminBadge();
+            
+            if (isAdmin) {
+                loadAdminContent();
+            }
+        }
+
+        function clearAllUsers() {
+            if (confirm(t('confirmations.clearAllUsers'))) {
+                // Clear all user-related data
+                localStorage.removeItem(USERS_KEY);
+                localStorage.removeItem(CURRENT_USER_KEY);
+                localStorage.removeItem(OTP_STORAGE_KEY);
+                localStorage.removeItem(PENDING_USER_KEY);
+                
+                // Reset current user state
+                currentUser = null;
+                isAdmin = false;
+                
+                // Re-initialize default admin user
+                initializeDefaultUser();
+                
+                alert(t('confirmations.allUsersCleared'));
+                
+                // Refresh the page to reset state
+                location.reload();
+            }
+        }
+
+        // Quick clear function - can be called from console or automatically
+        function quickClearAllUsers() {
+            // Clear all user-related data (no confirmation for quick clear)
+            localStorage.removeItem(USERS_KEY);
+            localStorage.removeItem(CURRENT_USER_KEY);
+            localStorage.removeItem(OTP_STORAGE_KEY);
+            localStorage.removeItem(PENDING_USER_KEY);
+            
+            // Re-initialize default admin user
+            initializeDefaultUser();
+            
+            console.log('All users cleared! Default admin user recreated.');
+            return true;
+        }
+
+        // Clear all users (keeping only default admin)
+        function performUserCleanup() {
+            // Clear all user-related data except admin
+            let users = JSON.parse(localStorage.getItem(USERS_KEY) || '[]');
+            
+            // Keep only the admin user (if exists)
+            const adminUser = users.find(u => u.name === 'khokon' && u.isAdmin);
+            
+            // Clear all storage
+            localStorage.removeItem(CURRENT_USER_KEY);
+            localStorage.removeItem(OTP_STORAGE_KEY);
+            localStorage.removeItem(PENDING_USER_KEY);
+            
+            // Reset users array with only admin (if it exists)
+            if (adminUser) {
+                localStorage.setItem(USERS_KEY, JSON.stringify([adminUser]));
+            } else {
+                localStorage.removeItem(USERS_KEY);
+            }
+            
+            console.log('All users cleared (admin preserved). Ready for new registration.');
+        }
+
+        // Execute cleanup - remove all non-admin users
+        performUserCleanup();
+
+        function initializeDefaultUser() {
+            let users = JSON.parse(localStorage.getItem(USERS_KEY) || '[]');
+            const adminExists = users.find(u => u.name === 'khokon');
+            if (!adminExists) {
+                users.push({
+                    id: 'admin_' + Date.now(),
+                    name: 'khokon',
+                    email: 'khokon',
+                    phone: '',
+                    password: 'joy1234',
+                    isAdmin: true,
+                    isVerified: true,
+                    createdAt: new Date().toISOString(),
+                    verifiedAt: new Date().toISOString()
+                });
+                localStorage.setItem(USERS_KEY, JSON.stringify(users));
+            } else {
+                // Ensure existing admin has isVerified field
+                const adminIndex = users.findIndex(u => u.name === 'khokon');
+                if (adminIndex !== -1 && !users[adminIndex].isVerified) {
+                    users[adminIndex].isVerified = true;
+                    if (!users[adminIndex].verifiedAt) {
+                        users[adminIndex].verifiedAt = new Date().toISOString();
+                    }
+                    localStorage.setItem(USERS_KEY, JSON.stringify(users));
+                }
+            }
+        }
+
+        function updateAdminBadge() {
+            document.getElementById('adminBadge').classList.toggle('hidden', !isAdmin);
+            document.getElementById('adminNavItem').classList.toggle('hidden', !isAdmin);
+            const fab = document.getElementById('fab');
+            if (currentScreen === 'monks' || currentScreen === 'villages' || currentScreen === 'renowned') {
+                fab.classList.toggle('show', true);
+            } else {
+                fab.classList.toggle('show', false);
+            }
+        }
+
+        // Navigation
+        function showScreen(screen) {
+            currentScreen = screen;
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            
+            document.getElementById(screen + 'Screen').classList.add('active');
+            if (event && event.target) {
+                event.target.closest('.nav-item').classList.add('active');
+            }
+            
+            if (screen === 'monks') loadMonks();
+            if (screen === 'villages') loadVillages();
+            if (screen === 'renowned') loadRenowned();
+            if (screen === 'admin' && isAdmin) loadAdminContent();
+            if (screen === 'profile') loadUserProfile();
+            updateAdminBadge();
+        }
+
+        // Monks
+        function loadMonks() {
+            const allStories = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            const monks = allStories.filter(s => s.status === 'approved' || !s.status);
+            const container = document.getElementById('monksList');
+            
+            if (monks.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div style="font-size: 64px;">📖</div>
+                        <h3>এখনও কোন কাহিনী নেই</h3>
+                        <p>বাংলাদেশের একজন শ্রদ্ধেয় বৌদ্ধ ভিক্ষুর জীবন কাহিনী যোগ করে শুরু করুন।</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = monks.map(monk => `
+                <div class="card" onclick="showMonkDetail('${monk.id}')">
+                    <div class="card-header">
+                        <div class="card-avatar">${monk.name.charAt(0)}</div>
+                        <div style="flex: 1;">
+                            <div class="card-title">${monk.name}</div>
+                            <div class="card-subtitle">${monk.occupation || ''}</div>
+                        </div>
+                    </div>
+                    <div class="card-description">${monk.biography.substring(0, 120)}${monk.biography.length > 120 ? '...' : ''}</div>
+                </div>
+            `).join('');
+        }
+
+        function searchMonks() {
+            const query = document.getElementById('monkSearch').value.toLowerCase();
+            const allStories = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            const monks = allStories.filter(s => s.status === 'approved' || !s.status);
+            const filtered = monks.filter(m => 
+                m.name.toLowerCase().includes(query) ||
+                m.biography.toLowerCase().includes(query) ||
+                (m.occupation && m.occupation.toLowerCase().includes(query))
+            );
+            
+            const container = document.getElementById('monksList');
+            if (filtered.length === 0) {
+                container.innerHTML = '<div class="empty-state"><p>কোন ফলাফল নেই</p></div>';
+                return;
+            }
+            
+            container.innerHTML = filtered.map(monk => `
+                <div class="card" onclick="showMonkDetail('${monk.id}')">
+                    <div class="card-header">
+                        <div class="card-avatar">${monk.name.charAt(0)}</div>
+                        <div style="flex: 1;">
+                            <div class="card-title">${monk.name}</div>
+                            <div class="card-subtitle">${monk.occupation || ''}</div>
+                        </div>
+                    </div>
+                    <div class="card-description">${monk.biography.substring(0, 120)}${monk.biography.length > 120 ? '...' : ''}</div>
+                </div>
+            `).join('');
+        }
+
+        function showMonkDetail(id) {
+            const allStories = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            const monk = allStories.find(m => m.id === id);
+            if (!monk) return;
+            
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById('detailScreen').classList.add('active');
+            
+            const achievements = monk.achievements && monk.achievements.length > 0 
+                ? monk.achievements.map(a => `<li style="margin-bottom: 8px;">${a}</li>`).join('')
+                : '';
+            
+            document.getElementById('detailContent').innerHTML = `
+                <div class="detail-header">
+                    <div style="font-size: 48px; margin-bottom: 10px;">${monk.name.charAt(0)}</div>
+                    <div class="detail-title">${monk.name}</div>
+                    <div style="opacity: 0.95; font-size: 16px;">${monk.occupation || ''}</div>
+                </div>
+                <div class="detail-content">
+                    <div class="detail-section">
+                        <h3>জীবনী</h3>
+                        <p>${monk.biography.replace(/\n/g, '<br>')}</p>
+                    </div>
+                    ${achievements ? `
+                        <div class="detail-section">
+                            <h3>অর্জনসমূহ</h3>
+                            <ul style="padding-left: 20px; color: #555;">
+                                ${achievements}
+                            </ul>
+                        </div>
+                    ` : ''}
+                    <div class="action-buttons">
+                        ${isAdmin ? `
+                            <button class="btn btn-primary" onclick="editStory('${monk.id}')">সম্পাদনা</button>
+                            <button class="btn btn-danger" onclick="deleteStory('${monk.id}')">মুছুন</button>
+                        ` : ''}
+                        <button class="btn btn-secondary" onclick="showScreen('monks')" style="flex: 1;">← ফিরে যান</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Story Submission
+        function showStoryForm() {
+            document.getElementById('storyModal').classList.add('active');
+            document.getElementById('storyForm').reset();
+        }
+
+        function closeStoryForm() {
+            document.getElementById('storyModal').classList.remove('active');
+        }
+
+        function submitStory(event) {
+            event.preventDefault();
+            const user = getCurrentUser();
+            if (!user) {
+                alert(t('errors.userNotFound')); // User not logged in
+                showLogin();
+                return;
+            }
+            
+            const achievements = document.getElementById('formAchievements').value
+                .split('\n')
+                .map(a => a.trim())
+                .filter(a => a.length > 0);
+            
+            const story = {
+                id: 'story_' + Date.now(),
+                name: document.getElementById('formName').value,
+                occupation: document.getElementById('formOccupation').value || '',
+                birthDate: document.getElementById('formBirthDate').value || null,
+                deathDate: document.getElementById('formDeathDate').value || null,
+                imageUrl: document.getElementById('formImageUrl').value || null,
+                biography: document.getElementById('formBiography').value,
+                achievements: achievements,
+                status: isAdmin ? 'approved' : 'pending',
+                submittedBy: user.name || 'Anonymous',
+                submissionDate: new Date().toISOString(),
+                createdAt: new Date().toISOString(),
+                updatedAt: new Date().toISOString()
+            };
+            
+            const allStories = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            allStories.push(story);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(allStories));
+            
+            closeStoryForm();
+            if (isAdmin) {
+                loadMonks();
+            } else {
+                alert(t('success.registrationSubmitted'));
+            }
+        }
+
+        // Admin Functions
+        function showAdminTab(tab) {
+            currentAdminTab = tab;
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            loadAdminContent();
+        }
+
+        function loadAdminContent() {
+            const allStories = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            const container = document.getElementById('adminContent');
+            
+            let stories = [];
+            if (currentAdminTab === 'pending') {
+                stories = allStories.filter(s => s.status === 'pending');
+            } else if (currentAdminTab === 'approved') {
+                stories = allStories.filter(s => s.status === 'approved');
+            } else {
+                stories = allStories;
+            }
+            
+            if (stories.length === 0) {
+                container.innerHTML = '<div class="empty-state"><p>কোন কাহিনী নেই</p></div>';
+                return;
+            }
+            
+            container.innerHTML = stories.map(story => `
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-avatar">${story.name.charAt(0)}</div>
+                        <div style="flex: 1;">
+                            <div class="card-title">${story.name}</div>
+                            <div class="card-subtitle">${story.occupation || ''}</div>
+                            <span class="status-badge ${story.status === 'pending' ? 'status-pending' : 'status-approved'}">
+                                ${story.status === 'pending' ? 'অনুমোদন অপেক্ষা' : 'অনুমোদিত'}
+                            </span>
+                            ${story.submittedBy ? `<div style="font-size: 12px; color: #999; margin-top: 4px;">জমা দিয়েছেন: ${story.submittedBy}</div>` : ''}
+                        </div>
+                    </div>
+                    <div class="card-description">${story.biography.substring(0, 100)}...</div>
+                    <div class="action-buttons" style="margin-top: 12px;">
+                        ${story.status === 'pending' ? `
+                            <button class="btn btn-success" onclick="approveStory('${story.id}')">অনুমোদন</button>
+                            <button class="btn btn-danger" onclick="rejectStory('${story.id}')">প্রত্যাখ্যান</button>
+                        ` : ''}
+                        <button class="btn btn-primary" onclick="editStory('${story.id}')">সম্পাদনা</button>
+                        <button class="btn btn-danger" onclick="deleteStory('${story.id}')">মুছুন</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function approveStory(id) {
+            const allStories = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            const index = allStories.findIndex(s => s.id === id);
+            if (index !== -1) {
+                allStories[index].status = 'approved';
+                allStories[index].updatedAt = new Date().toISOString();
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(allStories));
+                loadAdminContent();
+                loadMonks();
+            }
+        }
+
+        function rejectStory(id) {
+            if (!confirm(t('confirmations.rejectStory'))) return;
+            deleteStory(id);
+        }
+
+        function editStory(id) {
+            const allStories = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            const story = allStories.find(s => s.id === id);
+            if (!story) return;
+            
+            document.getElementById('formName').value = story.name;
+            document.getElementById('formOccupation').value = story.occupation || '';
+            document.getElementById('formBirthDate').value = story.birthDate || '';
+            document.getElementById('formDeathDate').value = story.deathDate || '';
+            document.getElementById('formImageUrl').value = story.imageUrl || '';
+            document.getElementById('formBiography').value = story.biography;
+            document.getElementById('formAchievements').value = (story.achievements || []).join('\n');
+            
+            document.getElementById('storyModal').classList.add('active');
+            
+            // Update form submission to edit
+            document.getElementById('storyForm').onsubmit = function(e) {
+                e.preventDefault();
+                const achievements = document.getElementById('formAchievements').value
+                    .split('\n')
+                    .map(a => a.trim())
+                    .filter(a => a.length > 0);
+                
+                const index = allStories.findIndex(s => s.id === id);
+                if (index !== -1) {
+                    allStories[index] = {
+                        ...allStories[index],
+                        name: document.getElementById('formName').value,
+                        occupation: document.getElementById('formOccupation').value || '',
+                        birthDate: document.getElementById('formBirthDate').value || null,
+                        deathDate: document.getElementById('formDeathDate').value || null,
+                        imageUrl: document.getElementById('formImageUrl').value || null,
+                        biography: document.getElementById('formBiography').value,
+                        achievements: achievements,
+                        updatedAt: new Date().toISOString()
+                    };
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(allStories));
+                    closeStoryForm();
+                    loadMonks();
+                    loadAdminContent();
+                    if (currentScreen === 'detail') {
+                        showMonkDetail(id);
+                    }
+                }
+            };
+        } 
+        
+
+        function deleteStory(id) {
+            if (!confirm(t('confirmations.deleteStory'))) return;
+            const allStories = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            const filtered = allStories.filter(s => s.id !== id);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(filtered));
+            loadMonks();
+            loadAdminContent();
+            if (currentScreen === 'detail') {
+                showScreen('monks');
+            }
+        }
+
+        // Villages
+        function loadVillages() {
+            const villages = JSON.parse(localStorage.getItem(VILLAGES_KEY) || '[]');
+            const container = document.getElementById('villagesList');
+            
+            if (villages.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div style="font-size: 64px;">🏘</div>
+                        <h3>এখনও কোন গ্রাম নেই</h3>
+                        <p>একটি বৌদ্ধ গ্রামের তথ্য যোগ করে শুরু করুন।</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = villages.map(village => `
+                <div class="card" onclick="showVillageDetail('${village.id}')">
+                    <div class="card-header">
+                        <div class="card-avatar">🏘</div>
+                        <div style="flex: 1;">
+                            <div class="card-title">${village.name}</div>
+                            <div class="card-subtitle">${village.upazila}, ${village.district}</div>
+                        </div>
+                    </div>
+                    <div class="card-description">${village.description.substring(0, 120)}${village.description.length > 120 ? '...' : ''}</div>
+                </div>
+            `).join('');
+        }
+
+        function searchVillages() {
+            const query = document.getElementById('villageSearch').value.toLowerCase();
+            const villages = JSON.parse(localStorage.getItem(VILLAGES_KEY) || '[]');
+            const filtered = villages.filter(v => 
+                v.name.toLowerCase().includes(query) ||
+                v.description.toLowerCase().includes(query) ||
+                v.district.toLowerCase().includes(query)
+            );
+            
+            const container = document.getElementById('villagesList');
+            if (filtered.length === 0) {
+                container.innerHTML = '<div class="empty-state"><p>কোন ফলাফল নেই</p></div>';
+                return;
+            }
+            
+            container.innerHTML = filtered.map(village => `
+                <div class="card" onclick="showVillageDetail('${village.id}')">
+                    <div class="card-header">
+                        <div class="card-avatar">🏘</div>
+                        <div style="flex: 1;">
+                            <div class="card-title">${village.name}</div>
+                            <div class="card-subtitle">${village.upazila}, ${village.district}</div>
+                        </div>
+                    </div>
+                    <div class="card-description">${village.description.substring(0, 120)}${village.description.length > 120 ? '...' : ''}</div>
+                </div>
+            `).join('');
+        }
+
+        function showVillageDetail(id) {
+            const villages = JSON.parse(localStorage.getItem(VILLAGES_KEY) || '[]');
+            const village = villages.find(v => v.id === id);
+            if (!village) return;
+            
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById('detailScreen').classList.add('active');
+            
+            document.getElementById('detailContent').innerHTML = `
+                <div class="detail-header">
+                    <div style="font-size: 48px; margin-bottom: 10px;">🏘</div>
+                    <div class="detail-title">${village.name}</div>
+                    <div style="opacity: 0.95; font-size: 16px;">${village.upazila}, ${village.district}</div>
+                </div>
+                <div class="detail-content">
+                    <div class="detail-section">
+                        <h3>বর্ণনা</h3>
+                        <p>${village.description.replace(/\n/g, '<br>')}</p>
+                    </div>
+                    ${village.revolution ? `
+                        <div class="detail-section">
+                            <h3>ইতিহাস ও বিপ্লব</h3>
+                            <p>${village.revolution.replace(/\n/g, '<br>')}</p>
+                        </div>
+                    ` : ''}
+                    <button class="btn btn-secondary" onclick="showScreen('villages')" style="width: 100%; margin-top: 20px;">← ফিরে যান</button>
+                </div>
+            `;
+        }
+
+        function globalSearch() {
+            const query = document.getElementById('globalSearch').value.toLowerCase();
+            const container = document.getElementById('searchResults');
+            
+            if (!query) {
+                container.innerHTML = '<div class="empty-state"><p>সার্চ করুন…</p></div>';
+                return;
+            }
+            
+            const allStories = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            const approvedStories = allStories.filter(s => s.status === 'approved' || !s.status);
+            const villages = JSON.parse(localStorage.getItem(VILLAGES_KEY) || '[]');
+            
+            const monkResults = approvedStories.filter(m => 
+                m.name.toLowerCase().includes(query) ||
+                m.biography.toLowerCase().includes(query)
+            );
+            
+            const villageResults = villages.filter(v => 
+                v.name.toLowerCase().includes(query) ||
+                v.description.toLowerCase().includes(query)
+            );
+            
+            const renowned = JSON.parse(localStorage.getItem(RENOWNED_KEY) || '[]');
+            const renownedResults = renowned.filter(p => 
+                p.name.toLowerCase().includes(query) ||
+                (p.biography && p.biography.toLowerCase().includes(query)) ||
+                (p.legacy && p.legacy.toLowerCase().includes(query))
+            );
+            
+            if (monkResults.length === 0 && villageResults.length === 0 && renownedResults.length === 0) {
+                container.innerHTML = '<div class="empty-state"><p>কোন ফলাফল নেই</p></div>';
+                return;
+            }
+            
+            let html = '';
+            if (monkResults.length > 0) {
+                html += '<h3 style="margin-bottom: 10px; color: #FFA95E; font-weight: 700;">ভিক্ষু</h3>';
+                html += monkResults.map(m => `
+                    <div class="card" onclick="showMonkDetail('${m.id}')">
+                        <div class="card-title">${m.name}</div>
+                        <div class="card-description">${m.biography.substring(0, 80)}...</div>
+                    </div>
+                `).join('');
+            }
+            
+            if (villageResults.length > 0) {
+                html += '<h3 style="margin: 20px 0 10px; color: #FFA95E; font-weight: 700;">গ্রাম</h3>';
+                html += villageResults.map(v => `
+                    <div class="card" onclick="showVillageDetail('${v.id}')">
+                        <div class="card-title">${v.name}</div>
+                        <div class="card-description">${v.description.substring(0, 80)}...</div>
+                    </div>
+                `).join('');
+            }
+            
+            if (renownedResults.length > 0) {
+                html += '<h3 style="margin: 20px 0 10px; color: #FFA95E; font-weight: 700;">বিশিষ্ট ব্যক্তিত্ব</h3>';
+                html += renownedResults.map(p => `
+                    <div class="card" onclick="showRenownedDetail('${p.id}')">
+                        <div class="card-title">${p.name}</div>
+                        <div class="card-description">${(p.legacy || p.biography || '').substring(0, 80)}...</div>
+                    </div>
+                `).join('');
+            }
+            
+            container.innerHTML = html;
+        }
+
+        // Renowned People Functions
+        function loadRenowned() {
+            const renowned = JSON.parse(localStorage.getItem(RENOWNED_KEY) || '[]');
+            const container = document.getElementById('renownedList');
+            
+            if (renowned.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div style="font-size: 64px;">⭐</div>
+                        <h3>এখনও কোন বিশিষ্ট ব্যক্তিত্ব নেই</h3>
+                        <p>বৌদ্ধ ইতিহাসের একজন বিশিষ্ট ব্যক্তিত্বের তথ্য যোগ করে শুরু করুন।</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = renowned.map(person => `
+                <div class="card" onclick="showRenownedDetail('${person.id}')">
+                    <div class="card-header">
+                        ${person.imageUrl ? `
+                            <img src="${person.imageUrl}" alt="${person.name}" 
+                                 style="width: 60px; height: 60px; border-radius: 12px; object-fit: cover; box-shadow: 0 2px 8px rgba(255, 169, 94, 0.3);">
+                        ` : `
+                            <div class="card-avatar">${person.name.charAt(0)}</div>
+                        `}
+                        <div style="flex: 1;">
+                            <div class="card-title">${person.name}</div>
+                            <div class="card-subtitle">${person.era || ''} ${person.region ? '• ' + person.region : ''}</div>
+                        </div>
+                    </div>
+                    <div class="card-description">${person.legacy ? person.legacy.substring(0, 120) : (person.biography ? person.biography.substring(0, 120) : '')}${person.legacy && person.legacy.length > 120 ? '...' : (person.biography && person.biography.length > 120 ? '...' : '')}</div>
+                </div>
+            `).join('');
+        }
+
+        function searchRenowned() {
+            const query = document.getElementById('renownedSearch').value.toLowerCase();
+            const renowned = JSON.parse(localStorage.getItem(RENOWNED_KEY) || '[]');
+            const filtered = renowned.filter(p => 
+                p.name.toLowerCase().includes(query) ||
+                (p.biography && p.biography.toLowerCase().includes(query)) ||
+                (p.legacy && p.legacy.toLowerCase().includes(query)) ||
+                (p.era && p.era.toLowerCase().includes(query)) ||
+                (p.region && p.region.toLowerCase().includes(query))
+            );
+            
+            const container = document.getElementById('renownedList');
+            if (filtered.length === 0) {
+                container.innerHTML = '<div class="empty-state"><p>কোন ফলাফল নেই</p></div>';
+                return;
+            }
+            
+            container.innerHTML = filtered.map(person => `
+                <div class="card" onclick="showRenownedDetail('${person.id}')">
+                    <div class="card-header">
+                        ${person.imageUrl ? `
+                            <img src="${person.imageUrl}" alt="${person.name}" 
+                                 style="width: 60px; height: 60px; border-radius: 12px; object-fit: cover; box-shadow: 0 2px 8px rgba(255, 169, 94, 0.3);">
+                        ` : `
+                            <div class="card-avatar">${person.name.charAt(0)}</div>
+                        `}
+                        <div style="flex: 1;">
+                            <div class="card-title">${person.name}</div>
+                            <div class="card-subtitle">${person.era || ''} ${person.region ? '• ' + person.region : ''}</div>
+                        </div>
+                    </div>
+                    <div class="card-description">${person.legacy ? person.legacy.substring(0, 120) : (person.biography ? person.biography.substring(0, 120) : '')}${person.legacy && person.legacy.length > 120 ? '...' : (person.biography && person.biography.length > 120 ? '...' : '')}</div>
+                </div>
+            `).join('');
+        }
+
+        function showRenownedDetail(id) {
+            const renowned = JSON.parse(localStorage.getItem(RENOWNED_KEY) || '[]');
+            const person = renowned.find(p => p.id === id);
+            if (!person) return;
+            
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById('detailScreen').classList.add('active');
+            
+            const achievements = person.achievements && person.achievements.length > 0 
+                ? person.achievements.map(a => `<li style="margin-bottom: 8px;">${a}</li>`).join('')
+                : '';
+            
+            document.getElementById('detailContent').innerHTML = `
+                <div class="detail-header">
+                    ${person.imageUrl ? `
+                        <img src="${person.imageUrl}" alt="${person.name}" 
+                             style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 15px; border: 4px solid white; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+                    ` : `
+                        <div style="font-size: 64px; margin-bottom: 10px;">${person.name.charAt(0)}</div>
+                    `}
+                    <div class="detail-title">${person.name}</div>
+                    <div style="opacity: 0.95; font-size: 16px; margin-top: 8px;">
+                        ${person.era || ''} ${person.region ? '• ' + person.region : ''}
+                    </div>
+                </div>
+                <div class="detail-content">
+                    ${person.biography ? `
+                        <div class="detail-section">
+                            <h3>জীবনী</h3>
+                            <p>${person.biography.replace(/\n/g, '<br>')}</p>
+                        </div>
+                    ` : ''}
+                    ${achievements ? `
+                        <div class="detail-section">
+                            <h3>অবদান / অর্জন</h3>
+                            <ul style="padding-left: 20px; color: #555;">
+                                ${achievements}
+                            </ul>
+                        </div>
+                    ` : ''}
+                    ${person.legacy ? `
+                        <div class="detail-section">
+                            <h3>ঐতিহাসিক গুরুত্ব</h3>
+                            <p>${person.legacy.replace(/\n/g, '<br>')}</p>
+                        </div>
+                    ` : ''}
+                    <div class="action-buttons">
+                        ${isAdmin ? `
+                            <button class="btn btn-primary" onclick="editRenowned('${person.id}')">সম্পাদনা</button>
+                            <button class="btn btn-danger" onclick="deleteRenowned('${person.id}')">মুছুন</button>
+                        ` : ''}
+                        <button class="btn btn-secondary" onclick="showScreen('renowned')" style="flex: 1;">← ফিরে যান</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function showAddForm() {
+            if (currentScreen === 'monks' || currentScreen === 'villages') {
+                showStoryForm();
+            } else if (currentScreen === 'renowned') {
+                showRenownedForm();
+            }
+        }
+
+        function showRenownedForm(person = null) {
+            document.getElementById('renownedModal').classList.add('active');
+            const form = document.getElementById('renownedForm');
+            if (person) {
+                document.getElementById('renownedFormName').value = person.name || '';
+                document.getElementById('renownedFormImageUrl').value = person.imageUrl || '';
+                document.getElementById('renownedFormEra').value = person.era || '';
+                document.getElementById('renownedFormRegion').value = person.region || '';
+                document.getElementById('renownedFormBiography').value = person.biography || '';
+                document.getElementById('renownedFormAchievements').value = (person.achievements || []).join('\n');
+                document.getElementById('renownedFormLegacy').value = person.legacy || '';
+                form.dataset.editId = person.id;
+                document.querySelector('#renownedModal .modal-header').textContent = 'সম্পাদনা করুন';
+            } else {
+                form.reset();
+                delete form.dataset.editId;
+                document.querySelector('#renownedModal .modal-header').textContent = 'বিশিষ্ট ব্যক্তিত্ব যোগ করুন';
+            }
+        }
+
+        function closeRenownedForm() {
+            document.getElementById('renownedModal').classList.remove('active');
+        }
+
+        function submitRenowned(event) {
+            event.preventDefault();
+            const form = document.getElementById('renownedForm');
+            const editId = form.dataset.editId;
+            
+            const achievements = document.getElementById('renownedFormAchievements').value
+                .split('\n')
+                .map(a => a.trim())
+                .filter(a => a.length > 0);
+            
+            const person = {
+                id: editId || 'renowned_' + Date.now(),
+                name: document.getElementById('renownedFormName').value,
+                imageUrl: document.getElementById('renownedFormImageUrl').value || null,
+                era: document.getElementById('renownedFormEra').value || '',
+                region: document.getElementById('renownedFormRegion').value || '',
+                biography: document.getElementById('renownedFormBiography').value || '',
+                achievements: achievements,
+                legacy: document.getElementById('renownedFormLegacy').value || '',
+                createdAt: editId ? JSON.parse(localStorage.getItem(RENOWNED_KEY) || '[]').find(p => p.id === editId)?.createdAt || new Date().toISOString() : new Date().toISOString(),
+                updatedAt: new Date().toISOString()
+            };
+            
+            const renowned = JSON.parse(localStorage.getItem(RENOWNED_KEY) || '[]');
+            if (editId) {
+                const index = renowned.findIndex(p => p.id === editId);
+                if (index !== -1) {
+                    renowned[index] = person;
+                }
+            } else {
+                renowned.push(person);
+            }
+            localStorage.setItem(RENOWNED_KEY, JSON.stringify(renowned));
+            
+            closeRenownedForm();
+            loadRenowned();
+            if (currentScreen === 'detail') {
+                showRenownedDetail(person.id);
+            }
+        }
+
+        function editRenowned(id) {
+            const renowned = JSON.parse(localStorage.getItem(RENOWNED_KEY) || '[]');
+            const person = renowned.find(p => p.id === id);
+            if (person) {
+                showRenownedForm(person);
+            }
+        }
+
+        function deleteRenowned(id) {
+            if (!confirm('আপনি কি এই বিশিষ্ট ব্যক্তিত্ব মুছে ফেলতে চান?')) return;
+            const renowned = JSON.parse(localStorage.getItem(RENOWNED_KEY) || '[]');
+            const filtered = renowned.filter(p => p.id !== id);
+            localStorage.setItem(RENOWNED_KEY, JSON.stringify(filtered));
+            loadRenowned();
+            if (currentScreen === 'detail') {
+                showScreen('renowned');
+            }
+        }
+
+        function logout() {
+            if (confirm(t('confirmations.logout'))) {
+                // Clear all user-related state
+                localStorage.removeItem(CURRENT_USER_KEY);
+                currentUser = null;
+                isAdmin = false;
+                currentScreen = 'monks';
+                currentAdminTab = 'pending';
+                
+                // Reset profile display
+                const userNameEl = document.getElementById('userName');
+                const userRoleEl = document.getElementById('userRole');
+                const userContactEl = document.getElementById('userContact');
+                if (userNameEl) userNameEl.textContent = '-';
+                if (userRoleEl) userRoleEl.textContent = '-';
+                if (userContactEl) {
+                    userContactEl.textContent = '';
+                    userContactEl.style.display = 'none';
+                }
+                
+                // Show login screen
+                showLogin();
+            }
+        }
+
+        // OTP Functions
+        function generateOTP() {
+            // Generate a 6-digit OTP
+            return Math.floor(100000 + Math.random() * 900000).toString();
+        }
+
+        function storeOTP(identifier, otp, userData) {
+            const otps = JSON.parse(localStorage.getItem(OTP_STORAGE_KEY) || '{}');
+            const expiresAt = Date.now() + (10 * 60 * 1000); // 10 minutes expiry
+            
+            otps[identifier] = {
+                code: otp,
+                expiresAt: expiresAt,
+                userData: userData,
+                createdAt: Date.now()
+            };
+            
+            localStorage.setItem(OTP_STORAGE_KEY, JSON.stringify(otps));
+            return otp;
+        }
+
+        function getOTP(identifier) {
+            const otps = JSON.parse(localStorage.getItem(OTP_STORAGE_KEY) || '{}');
+            return otps[identifier] || null;
+        }
+
+        function removeOTP(identifier) {
+            const otps = JSON.parse(localStorage.getItem(OTP_STORAGE_KEY) || '{}');
+            delete otps[identifier];
+            localStorage.setItem(OTP_STORAGE_KEY, JSON.stringify(otps));
+        }
+
+        function isValidOTP(identifier, code) {
+            const otpData = getOTP(identifier);
+            if (!otpData) return false;
+            
+            // Check if OTP expired
+            if (Date.now() > otpData.expiresAt) {
+                removeOTP(identifier);
+                return false;
+            }
+            
+            // Check if code matches
+            return otpData.code === code;
+        }
+
+        function simulateSendOTP(identifier, otp, method) {
+            // In production, this would send via email/SMS service
+            // For demo, we'll show it in console and the verification screen
+            console.log(`OTP for ${identifier} (${method}): ${otp}`);
+            
+            // The OTP is now displayed on the verification screen
+            // This function is kept for logging purposes
+            // In production, replace this with actual email/SMS API calls:
+            // 
+            // Example with EmailJS or similar:
+            // emailjs.send('service_id', 'template_id', {
+            //     to_email: identifier,
+            //     otp_code: otp
+            // });
+            //
+            // Example with SMS service (Twilio, etc):
+            // twilio.messages.create({
+            //     to: identifier,
+            //     body: `Your verification code is: ${otp}`
+            // });
+        }
+
+        function startResendTimer() {
+            let timeLeft = resendCooldown;
+            const timerEl = document.getElementById('resendTimer');
+            const resendBtn = document.getElementById('resendBtn');
+            
+            if (resendTimerInterval) {
+                clearInterval(resendTimerInterval);
+            }
+            
+            if (resendBtn) {
+                resendBtn.style.pointerEvents = 'none';
+                resendBtn.style.opacity = '0.5';
+            }
+            
+            const updateTimer = () => {
+                if (timerEl) {
+                    timerEl.textContent = `${timeLeft} সেকেন্ড পরে আবার চেষ্টা করুন`;
+                }
+                
+                if (timeLeft <= 0) {
+                    clearInterval(resendTimerInterval);
+                    if (resendBtn) {
+                        resendBtn.style.pointerEvents = 'auto';
+                        resendBtn.style.opacity = '1';
+                    }
+                    if (timerEl) {
+                        timerEl.textContent = '';
+                    }
+                    resendTimerInterval = null;
+                } else {
+                    timeLeft--;
+                }
+            };
+            
+            updateTimer();
+            resendTimerInterval = setInterval(updateTimer, 1000);
+        }
+
+        function goBackToRegister() {
+            const registerScreen = document.getElementById('registerScreen');
+            const verificationScreen = document.getElementById('verificationScreen');
+            
+            if (registerScreen) {
+                registerScreen.classList.remove('hidden');
+                registerScreen.style.display = 'flex';
+            }
+            if (verificationScreen) {
+                verificationScreen.classList.add('hidden');
+                verificationScreen.style.display = 'none';
+            }
+            
+            // Clear pending OTP and user data
+            const pendingUser = JSON.parse(localStorage.getItem(PENDING_USER_KEY) || 'null');
+            if (pendingUser) {
+                const identifier = pendingUser.email || pendingUser.phone;
+                if (identifier) {
+                    removeOTP(identifier);
+                }
+                localStorage.removeItem(PENDING_USER_KEY);
+            }
+            
+            if (resendTimerInterval) {
+                clearInterval(resendTimerInterval);
+                resendTimerInterval = null;
+            }
+        }
+
+        function showVerificationScreen(identifier, method) {
+            const registerScreen = document.getElementById('registerScreen');
+            const verificationScreen = document.getElementById('verificationScreen');
+            const verificationSubtitle = document.getElementById('verificationSubtitle');
+            
+            if (registerScreen) {
+                registerScreen.classList.add('hidden');
+                registerScreen.style.display = 'none';
+            }
+            if (verificationScreen) {
+                verificationScreen.classList.remove('hidden');
+                verificationScreen.style.display = 'flex';
+            }
+            
+            if (verificationSubtitle) {
+                const methodText = method === 'email' ? 'ইমেইল' : 'ফোন নম্বর';
+                verificationSubtitle.innerHTML = `আপনার <strong>${methodText}</strong> (<strong>${identifier}</strong>) এ পাঠানো কোডটি লিখুন`;
+            }
+            
+            // Display OTP in demo mode
+            const pendingUser = JSON.parse(localStorage.getItem(PENDING_USER_KEY) || 'null');
+            if (pendingUser) {
+                const otpData = getOTP(identifier);
+                const demoOtpCode = document.getElementById('demoOtpCode');
+                if (demoOtpCode && otpData) {
+                    demoOtpCode.textContent = otpData.code;
+                }
+            }
+            
+            // Focus on OTP input
+            setTimeout(() => {
+                const otpInput = document.getElementById('otpCode');
+                if (otpInput) otpInput.focus();
+            }, 100);
+            
+            // Start resend timer
+            startResendTimer();
+        }
+
+        function resendOTP() {
+            const pendingUser = JSON.parse(localStorage.getItem(PENDING_USER_KEY) || 'null');
+            if (!pendingUser) {
+                alert('পুনরায় পাঠানোর জন্য তথ্য পাওয়া যায়নি।');
+                goBackToRegister();
+                return;
+            }
+            
+            const identifier = pendingUser.email || pendingUser.phone;
+            const method = pendingUser.email ? 'email' : 'phone';
+            
+            if (!identifier) {
+                alert('পুনরায় পাঠানোর জন্য তথ্য পাওয়া যায়নি।');
+                return;
+            }
+            
+            // Generate new OTP
+            const newOTP = generateOTP();
+            storeOTP(identifier, newOTP, pendingUser);
+            simulateSendOTP(identifier, newOTP, method);
+            
+            // Update demo OTP display
+            const demoOtpCode = document.getElementById('demoOtpCode');
+            if (demoOtpCode) {
+                demoOtpCode.textContent = newOTP;
+            }
+            
+            // Reset timer
+            startResendTimer();
+            
+            const successDiv = document.getElementById('verificationSuccess');
+            if (successDiv) {
+                successDiv.textContent = 'নতুন যাচাইকরণ কোড পাঠানো হয়েছে।';
+                successDiv.classList.remove('hidden');
+                setTimeout(() => successDiv.classList.add('hidden'), 3000);
+            }
+        }
+
+        function handleVerification(event) {
+            event.preventDefault();
+            const errorDiv = document.getElementById('verificationError');
+            const successDiv = document.getElementById('verificationSuccess');
+            const otpInput = document.getElementById('otpCode');
+            
+            if (!errorDiv || !successDiv || !otpInput) return;
+            
+            errorDiv.classList.add('hidden');
+            successDiv.classList.add('hidden');
+            
+            const enteredCode = otpInput.value.trim();
+            
+            if (!enteredCode || enteredCode.length !== 6 || !/^\d{6}$/.test(enteredCode)) {
+                errorDiv.textContent = 'সঠিক ৬ সংখ্যার কোড দিন।';
+                errorDiv.classList.remove('hidden');
+                return;
+            }
+            
+            const pendingUser = JSON.parse(localStorage.getItem(PENDING_USER_KEY) || 'null');
+            if (!pendingUser) {
+                errorDiv.textContent = 'যাচাইকরণ তথ্য পাওয়া যায়নি। দয়া করে আবার রেজিস্টার করুন।';
+                errorDiv.classList.remove('hidden');
+                setTimeout(() => {
+                    goBackToRegister();
+                }, 2000);
+                return;
+            }
+            
+            const identifier = pendingUser.email || pendingUser.phone;
+            if (!identifier) {
+                errorDiv.textContent = 'যাচাইকরণ তথ্য পাওয়া যায়নি।';
+                errorDiv.classList.remove('hidden');
+                return;
+            }
+            
+            // Verify OTP
+            if (!isValidOTP(identifier, enteredCode)) {
+                errorDiv.textContent = 'ভুল যাচাইকরণ কোড। দয়া করে আবার চেষ্টা করুন।';
+                errorDiv.classList.remove('hidden');
+                otpInput.value = '';
+                otpInput.focus();
+                return;
+            }
+            
+            // OTP is valid - activate account
+            const users = JSON.parse(localStorage.getItem(USERS_KEY) || '[]');
+            
+            // Remove any other unverified accounts with the same email/phone to ensure uniqueness
+            const cleanedUsers = users.filter(u => {
+                if (u.isVerified) return true; // Keep all verified users
+                // Remove unverified users with the same email or phone
+                if (pendingUser.email && u.email === pendingUser.email) return false;
+                if (pendingUser.phone && u.phone === pendingUser.phone) return false;
+                return true;
+            });
+            
+            // Create verified user
+            const newUser = {
+                ...pendingUser,
+                isVerified: true,
+                verifiedAt: new Date().toISOString()
+            };
+            
+            // Add to users list
+            cleanedUsers.push(newUser);
+            localStorage.setItem(USERS_KEY, JSON.stringify(cleanedUsers));
+            
+            // Clear pending data and OTP
+            localStorage.removeItem(PENDING_USER_KEY);
+            removeOTP(identifier);
+            
+            // Auto login
+            localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(newUser));
+            currentUser = newUser;
+            isAdmin = false;
+            
+            // Show success
+            successDiv.textContent = 'যাচাইকরণ সফল! আপনার অ্যাকাউন্ট সক্রিয় করা হয়েছে।';
+            successDiv.classList.remove('hidden');
+            
+            // Clear timer
+            if (resendTimerInterval) {
+                clearInterval(resendTimerInterval);
+                resendTimerInterval = null;
+            }
+            
+            // Show app after short delay
+            setTimeout(() => {
+                showApp();
+                init();
+            }, 1500);
+        }
+
+        // Authentication Functions
+        let currentAuthMethod = 'phone';
+
+        function selectAuthMethod(method) {
+            currentAuthMethod = method;
+            const phoneGroup = document.getElementById('phoneGroup');
+            const emailGroup = document.getElementById('emailGroup');
+            const registerPhone = document.getElementById('registerPhone');
+            const registerEmail = document.getElementById('registerEmail');
+            
+            // Get all method buttons
+            const methodButtons = document.querySelectorAll('.auth-method-btn');
+            const phoneBtn = Array.from(methodButtons).find(btn => btn.textContent.includes('ফোন'));
+            const emailBtn = Array.from(methodButtons).find(btn => btn.textContent.includes('ইমেইল'));
+            
+            if (method === 'phone') {
+                if (phoneGroup) {
+                    phoneGroup.classList.remove('hidden');
+                    phoneGroup.style.display = 'flex';
+                }
+                if (emailGroup) {
+                    emailGroup.classList.add('hidden');
+                    emailGroup.style.display = 'none';
+                }
+                if (registerEmail) registerEmail.removeAttribute('required');
+                if (registerPhone) registerPhone.setAttribute('required', 'required');
+                if (phoneBtn) phoneBtn.classList.add('active');
+                if (emailBtn) emailBtn.classList.remove('active');
+            } else {
+                if (phoneGroup) {
+                    phoneGroup.classList.add('hidden');
+                    phoneGroup.style.display = 'none';
+                }
+                if (emailGroup) {
+                    emailGroup.classList.remove('hidden');
+                    emailGroup.style.display = 'flex';
+                }
+                if (registerPhone) registerPhone.removeAttribute('required');
+                if (registerEmail) registerEmail.setAttribute('required', 'required');
+                if (phoneBtn) phoneBtn.classList.remove('active');
+                if (emailBtn) emailBtn.classList.add('active');
+            }
+        }
+
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            if (input.type === 'password') {
+                input.type = 'text';
+            } else {
+                input.type = 'password';
+            }
+        }
+
+        function showLogin() {
+            const loginScreen = document.getElementById('loginScreen');
+            const registerScreen = document.getElementById('registerScreen');
+            const appContainer = document.querySelector('.app-container');
+            
+            if (loginScreen) {
+                loginScreen.classList.remove('hidden');
+                loginScreen.style.display = 'flex';
+            }
+            if (registerScreen) {
+                registerScreen.classList.add('hidden');
+                registerScreen.style.display = 'none';
+            }
+            if (appContainer) {
+                appContainer.classList.add('hidden');
+                appContainer.style.display = 'none';
+            }
+            const loginError = document.getElementById('loginError');
+            if (loginError) loginError.classList.add('hidden');
+            const loginForm = document.getElementById('loginForm');
+            if (loginForm) loginForm.reset();
+        }
+
+        function showRegister() {
+            const loginScreen = document.getElementById('loginScreen');
+            const registerScreen = document.getElementById('registerScreen');
+            const appContainer = document.querySelector('.app-container');
+            
+            if (loginScreen) {
+                loginScreen.classList.add('hidden');
+                loginScreen.style.display = 'none';
+            }
+            if (registerScreen) {
+                registerScreen.classList.remove('hidden');
+                registerScreen.style.display = 'flex';
+            }
+            if (appContainer) {
+                appContainer.classList.add('hidden');
+                appContainer.style.display = 'none';
+            }
+            
+            const registerError = document.getElementById('registerError');
+            if (registerError) registerError.classList.add('hidden');
+            const registerSuccess = document.getElementById('registerSuccess');
+            if (registerSuccess) registerSuccess.classList.add('hidden');
+            const registerForm = document.getElementById('registerForm');
+            if (registerForm) registerForm.reset();
+            
+            // Reset to phone method
+            selectAuthMethod('phone');
+        }
+
+        function showApp() {
+            const loginScreen = document.getElementById('loginScreen');
+            const registerScreen = document.getElementById('registerScreen');
+            const appContainer = document.querySelector('.app-container');
+            
+            if (loginScreen) {
+                loginScreen.classList.add('hidden');
+                loginScreen.style.display = 'none';
+            }
+            if (registerScreen) {
+                registerScreen.classList.add('hidden');
+                registerScreen.style.display = 'none';
+            }
+            if (appContainer) {
+                appContainer.classList.remove('hidden');
+                appContainer.style.display = 'block';
+            }
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            const identifier = document.getElementById('loginIdentifier').value.trim();
+            const password = document.getElementById('loginPassword').value;
+            const errorDiv = document.getElementById('loginError');
+
+            // Get users from storage
+            const users = JSON.parse(localStorage.getItem(USERS_KEY) || '[]');
+            
+            // Find user by username, email, or phone
+            const user = users.find(u => 
+                u.name === identifier || 
+                u.email === identifier || 
+                u.phone === identifier
+            );
+
+            if (!user) {
+                errorDiv.textContent = t('errors.userNotFound');
+                errorDiv.classList.remove('hidden');
+                return;
+            }
+
+            if (user.password !== password) {
+                errorDiv.textContent = t('errors.wrongPassword');
+                errorDiv.classList.remove('hidden');
+                return;
+            }
+
+            // Check if account is verified (default to false for backward compatibility with old accounts)
+            if (user.isVerified === false || (user.isVerified === undefined && !user.isAdmin)) {
+                errorDiv.textContent = t('errors.accountNotVerified');
+                errorDiv.classList.remove('hidden');
+                return;
+            }
+
+            // Login successful
+            localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(user));
+            currentUser = user;
+            isAdmin = user.isAdmin || false;
+            showApp();
+            init();
+        }
+
+        function handleRegister(event) {
+            event.preventDefault();
+            const errorDiv = document.getElementById('registerError');
+            const successDiv = document.getElementById('registerSuccess');
+            
+            if (!errorDiv || !successDiv) {
+                console.error('Register error/success divs not found');
+                return;
+            }
+            
+            errorDiv.classList.add('hidden');
+            successDiv.classList.add('hidden');
+
+            const nameInput = document.getElementById('registerName');
+            const passwordInput = document.getElementById('registerPassword');
+            const confirmPasswordInput = document.getElementById('registerConfirmPassword');
+            const phoneInput = document.getElementById('registerPhone');
+            const emailInput = document.getElementById('registerEmail');
+            
+            if (!nameInput || !passwordInput || !confirmPasswordInput) {
+                errorDiv.textContent = 'ফর্ম লোড করতে সমস্যা হয়েছে। পৃষ্ঠাটি রিফ্রেশ করুন।';
+                errorDiv.classList.remove('hidden');
+                return;
+            }
+
+            const name = nameInput.value.trim();
+            const password = passwordInput.value;
+            const confirmPassword = confirmPasswordInput.value;
+            const phone = currentAuthMethod === 'phone' && phoneInput ? phoneInput.value.trim() : '';
+            const email = currentAuthMethod === 'email' && emailInput ? emailInput.value.trim() : '';
+
+            // Validation
+            if (!name || name.length < 2) {
+                errorDiv.textContent = 'নাম কমপক্ষে ২ অক্ষরের হতে হবে।';
+                errorDiv.classList.remove('hidden');
+                return;
+            }
+
+            if (currentAuthMethod === 'phone' && (!phone || phone.length !== 11 || !/^01\d{9}$/.test(phone))) {
+                errorDiv.textContent = 'সঠিক ফোন নম্বর দিন (11 সংখ্যা, 01 দিয়ে শুরু)';
+                errorDiv.classList.remove('hidden');
+                return;
+            }
+
+            if (currentAuthMethod === 'email' && (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))) {
+                errorDiv.textContent = 'সঠিক ইমেইল ঠিকানা দিন।';
+                errorDiv.classList.remove('hidden');
+                return;
+            }
+
+            if (password.length < 6) {
+                errorDiv.textContent = 'পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে।';
+                errorDiv.classList.remove('hidden');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                errorDiv.textContent = 'পাসওয়ার্ড মিলছে না। দয়া করে আবার চেষ্টা করুন।';
+                errorDiv.classList.remove('hidden');
+                return;
+            }
+
+            // Get existing users
+            const users = JSON.parse(localStorage.getItem(USERS_KEY) || '[]');
+            const identifier = email || phone;
+
+            // Check if email/phone already exists (including unverified users)
+            const existingUser = users.find(u => {
+                // Check if email exists (verified or unverified)
+                if (email && u.email === email) {
+                    return true;
+                }
+                // Check if phone exists (verified or unverified)
+                if (phone && u.phone === phone) {
+                    return true;
+                }
+                return false;
+            });
+
+            // Also check for pending OTP registration
+            const pendingOTP = getOTP(identifier);
+            const pendingUserData = JSON.parse(localStorage.getItem(PENDING_USER_KEY) || 'null');
+            const hasPendingRegistration = pendingOTP || (pendingUserData && (pendingUserData.email === email || pendingUserData.phone === phone));
+
+            if (existingUser || hasPendingRegistration) {
+                const duplicateField = email ? 'ইমেইল' : 'ফোন নম্বর';
+                if (existingUser && !existingUser.isVerified) {
+                    errorDiv.textContent = `এই ${duplicateField} দিয়ে একটি অ্যাকাউন্ট তৈরি হয়েছে কিন্তু এখনও যাচাই করা হয়নি। দয়া করে আপনার যাচাইকরণ কোড দিয়ে অ্যাকাউন্ট সক্রিয় করুন।`;
+                } else {
+                    errorDiv.textContent = `এই ${duplicateField} ইতিমধ্যে নিবন্ধিত। দয়া করে একটি ভিন্ন ${duplicateField} ব্যবহার করুন।`;
+                }
+                errorDiv.classList.remove('hidden');
+                return;
+            }
+
+            // Create pending user (not yet verified)
+            const pendingUser = {
+                id: 'user_' + Date.now(),
+                name: name,
+                email: email || '',
+                phone: phone || '',
+                password: password,
+                isAdmin: false,
+                isVerified: false,
+                createdAt: new Date().toISOString()
+            };
+
+            // Generate and store OTP
+            const otp = generateOTP();
+            storeOTP(identifier, otp, pendingUser);
+            
+            // Store pending user for verification
+            localStorage.setItem(PENDING_USER_KEY, JSON.stringify(pendingUser));
+            
+            // Simulate sending OTP
+            const method = email ? 'email' : 'phone';
+            simulateSendOTP(identifier, otp, method);
+
+            // Show verification screen
+            showVerificationScreen(identifier, method);
+        }
+
+        function checkAuth() {
+            const userStr = localStorage.getItem(CURRENT_USER_KEY);
+            if (userStr) {
+                try {
+                    const user = JSON.parse(userStr);
+                    // Verify user still exists in users list
+                    const users = JSON.parse(localStorage.getItem(USERS_KEY) || '[]');
+                    const userExists = users.find(u => u.id === user.id);
+                    
+                    if (userExists) {
+                        // Update current user with latest data
+                        currentUser = userExists;
+                        isAdmin = userExists.isAdmin || false;
+                        // Update stored current user
+                        localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(userExists));
+                        showApp();
+                        return true;
+                    } else {
+                        // User was deleted, clear session
+                        localStorage.removeItem(CURRENT_USER_KEY);
+                        currentUser = null;
+                        isAdmin = false;
+                    }
+                } catch (e) {
+                    localStorage.removeItem(CURRENT_USER_KEY);
+                    currentUser = null;
+                    isAdmin = false;
+                }
+            }
+            currentUser = null;
+            isAdmin = false;
+            showLogin();
+            return false;
+        }
+
+        // Initialize on load
+        // CRITICAL: Wait for i18n to initialize before initializing app
+        // This ensures translations are available when app loads
+        async function initializeApp() {
+            try {
+                // Wait for i18n to be ready before initializing app
+                if (window.i18nReady) {
+                    await window.i18nReady;
+                } else {
+                    // Fallback: wait a bit
+                    await new Promise(resolve => setTimeout(resolve, 300));
+                }
+                
+                // Now initialize the app
+                if (checkAuth()) {
+                    init();
+                } else {
+                    showLogin();
+                }
+            } catch (error) {
+                console.error('Error initializing app:', error);
+                // Initialize anyway if i18n fails
+                if (checkAuth()) {
+                    init();
+                } else {
+                    showLogin();
+                }
+            }
+        }
+
+        // Wait for DOM to be ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeApp);
+        } else {
+            // DOM is already loaded
+            initializeApp();
+        }
+    </script>
+</body>
+</html> 
+
