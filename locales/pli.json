@@ -1,0 +1,154 @@
+{
+  "app": {
+    "title": "Bangladesh Buddhānubhikkhū",
+    "admin": "Pesaka"
+  },
+  "auth": {
+    "welcome": "Svāgata",
+    "loginSubtitle": "Apanakassa khaṭṭhe pavisatha",
+    "loginButton": "Pavisatha",
+    "newAccount": "Navaka Khaṭṭha",
+    "createAccount": "Navakaṃ khaṭṭhaṃ nibbattetha",
+    "registerButton": "Nibbattetha",
+    "backToLogin": "← Pavisanaṃ otaratha",
+    "goBack": "← Otaratha",
+    "usernameEmailPhone": "Nāmadheyya, e-mail vā telephona-saṅkhyā",
+    "usernameEmailPhonePlaceholder": "Nāmadheyya, e-mail vā telephona-saṅkhyā likhatha",
+    "password": "Guḷa-pada",
+    "passwordPlaceholder": "Guḷa-padaṃ likhatha",
+    "newUser": "Navako bhāvaka?",
+    "alreadyHaveAccount": "Pubbena khaṭṭhaṃ atthi?",
+    "registrationMethod": "Nibbattanā-kāraṇa",
+    "phoneNumber": "Telephona-saṅkhyā",
+    "email": "E-mail",
+    "emailAddress": "E-mail adhikāraṇa",
+    "emailPlaceholder": "example@email.com",
+    "name": "Nāma",
+    "namePlaceholder": "Apanakaṃ nāmaṃ likhatha",
+    "passwordMinLength": "Guḷa-padaṃ likhatha (sakim cha akkharāni)",
+    "confirmPassword": "Guḷa-padaṃ paccakkhāti",
+    "confirmPasswordPlaceholder": "Guḷa-padaṃ puna likhatha",
+    "verificationCode": "Paccakkhāti-koḍa",
+    "verificationSubtitle": "{{method}} ({{identifier}}) pesitaṃ koḍaṃ likhatha",
+    "sixDigitCode": "Cha-saṅkhyā-paccakkhāti-koḍa",
+    "verify": "Paccakkhāti",
+    "resendCode": "Koḍaṃ puna pesetha",
+    "resendTimer": "{{seconds}} vikāḷe puna yatetha",
+    "demoMode": "Dīpana-parikkhā: Paccakkhāti-koḍa",
+    "demoNote": "(Paṭilābhe idaṃ e-mail/SMS pesessati)"
+  },
+  "errors": {
+    "userNotFound": "Bhāvako na vijjati. Sādhu saha sacca-paññattiṃ detha.",
+    "wrongPassword": "Micchā guḷa-pada. Punapi yatetha.",
+    "accountNotVerified": "Tava khaṭṭhaṃ na paccakkhātaṃ. Sādhu paccakkhāti-koḍena khaṭṭhaṃ sāmaggatthaṃ karotha.",
+    "invalidOtp": "Micchā paccakkhāti-koḍa. Punapi yatetha.",
+    "otpExpired": "Paccakkhāti-koḍa atītaṃ.",
+    "invalidOtpFormat": "Sādhu cha-saṅkhyā-koḍaṃ detha.",
+    "nameMinLength": "Nāma sakim dve akkharāni bhavitabbaṃ.",
+    "invalidPhone": "Sādhu saha telephona-saṅkhyā detha (ekādasa saṅkhyā, eka-dve ārabhitvā)",
+    "invalidEmail": "Sādhu saha e-mail adhikāraṇaṃ detha.",
+    "passwordMinLength": "Guḷa-pada sakim cha akkharāni bhavitabbaṃ.",
+    "passwordMismatch": "Guḷa-padāni na sameti. Punapi yatetha.",
+    "emailExists": "Etaṃ e-mail pubbena nibbattitaṃ. Sādhu aññaṃ e-mail paribhuñjatha.",
+    "phoneExists": "Esaṃ telephona-saṅkhyā pubbena nibbattitā. Sādhu aññaṃ telephona-saṅkhyā paribhuñjatha.",
+    "emailPending": "Etaṃ e-mail nibbattitaṃ khaṭṭhaṃ, na tu paccakkhātaṃ. Sādhu paccakkhāti-koḍena khaṭṭhaṃ sāmaggatthaṃ karotha.",
+    "phonePending": "Esaṃ telephona-saṅkhyā nibbattitaṃ khaṭṭhaṃ, na tu paccakkhātaṃ. Sādhu paccakkhāti-koḍena khaṭṭhaṃ sāmaggatthaṃ karotha.",
+    "verificationDataMissing": "Paccakkhāti-paññatti na vijjati. Punapi nibbattetha.",
+    "resendDataMissing": "Puna-pesanāya paññatti na vijjati."
+  },
+  "success": {
+    "verificationSuccess": "Paccakkhāti sampanna! Tava khaṭṭhaṃ sāmaggatthaṃ kataṃ.",
+    "codeResent": "Navaka paccakkhāti-koḍa pesitaṃ.",
+    "registrationSubmitted": "Tava kathā pesitā! Pesaka-anuññāya idaṃ pubbeta."
+  },
+  "navigation": {
+    "monks": "Bhikkhū",
+    "villages": "Gāmā",
+    "renowned": "Paṇḍitā",
+    "admin": "Pesaka",
+    "search": "Olanā",
+    "profile": "Bhattika"
+  },
+  "search": {
+    "searchMonks": "Bhikkhū olanā…",
+    "searchVillages": "Gāmā olanā…",
+    "searchRenowned": "Paṇḍitā olanā…",
+    "globalSearch": "Olanā…",
+    "noResults": "Phalaṃ na vijjati"
+  },
+  "emptyStates": {
+    "noMonks": "Kathā na vijjati",
+    "noMonksDesc": "Bangladesh garu-bhikkhussa jīvita-kathāya ārabhatha.",
+    "noVillages": "Gāmā na vijjanti",
+    "noVillagesDesc": "Buddha-gāmassa paññatti ārabhatha.",
+    "noRenowned": "Paṇḍitā na vijjanti",
+    "noRenownedDesc": "Buddha-itihāsa-paṇḍitassa paññatti ārabhatha.",
+    "noStories": "Kathā na vijjanti"
+  },
+  "forms": {
+    "addMonk": "Kathā pesetha",
+    "addRenowned": "Paṇḍitaṃ samodhāneti",
+    "editRenowned": "Saṃsodheti",
+    "name": "Nāma",
+    "occupation": "Upādhi/Bhūmikā",
+    "birthDate": "Jāti-divasa",
+    "deathDate": "Maraṇa-divasa",
+    "imageUrl": "Chavi URL",
+    "biography": "Jīvita-kathā",
+    "biographyRequired": "Jīvita-kathā *",
+    "achievements": "Sikkhā / Sampadā (ekaṃ ekassa rekhāya)",
+    "achievementsPlaceholder": "Ekaṃ rekhāya ekaṃ sampadaṃ likhatha",
+    "era": "Kāla / Era",
+    "eraPlaceholder": "Seyyathidaṃ: 1800-1900",
+    "region": "Deśa",
+    "regionPlaceholder": "Seyyathidaṃ: Chittagong, Cox's Bazar, Ramu",
+    "legacy": "Itihāsa-mahattara",
+    "renownedAchievements": "Upakāra / Sampadā (ekaṃ ekassa rekhāya)",
+    "save": "Rakkhatha",
+    "submit": "Pesetha",
+    "cancel": "Paccakkhāti"
+  },
+  "detail": {
+    "biography": "Jīvita-kathā",
+    "achievements": "Sampadā",
+    "renownedAchievements": "Upakāra / Sampadā",
+    "legacy": "Itihāsa-mahattara",
+    "description": "Nidassana",
+    "history": "Itihāsa ca Kammaṇḍa",
+    "goBack": "← Otaratha",
+    "edit": "Saṃsodheti",
+    "delete": "Uddharatha"
+  },
+  "admin": {
+    "pending": "Anuññāya pekkhamāna",
+    "approved": "Anuññāta",
+    "all": "Sabba",
+    "approve": "Anuññāti",
+    "reject": "Paccakkhāti",
+    "edit": "Saṃsodheti",
+    "delete": "Uddharatha",
+    "submittedBy": "Pesita: {{name}}"
+  },
+  "profile": {
+    "user": "Bhāvaka",
+    "admin": "Pesaka",
+    "logout": "Nikkhamatha"
+  },
+  "confirmations": {
+    "logout": "Nikkhamituṃ icchasi?",
+    "deleteStory": "Imā kathāṃ uddharituṃ icchasi?",
+    "deleteRenowned": "Imaṃ paṇḍitaṃ uddharituṃ icchasi?",
+    "rejectStory": "Imā kathāṃ paccakkhātituṃ icchasi?",
+    "clearAllUsers": "Sabbe bhāvake uddharituṃ niyatosi?\n\nIdaṃ sabbe nibbattita-bhāvake, pekkhamāna OTP, ca paccuppanna-sessi-paññattiṃ uddhareti.",
+    "allUsersCleared": "Sabbe bhāvakā uddharitā.\n\nIdāni navake bhāvake samodhānetuṃ sakkhosi."
+  },
+  "dev": {
+    "clearAllUsers": "🗑️ Sabbe Bhāvake Uddharatha (Vikkhambhana)"
+  },
+  "searchResults": {
+    "monks": "Bhikkhū",
+    "villages": "Gāmā",
+    "renowned": "Paṇḍitā"
+  }
+}
+
