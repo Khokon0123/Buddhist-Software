@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>জীবনী-</title>
+    <title>Buddhist Software</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&display=swap" rel="stylesheet">
     <!-- i18n System -->
@@ -876,9 +876,52 @@
         .lang-en {
             font-family: 'Segoe UI', 'Noto Sans Bengali', sans-serif;
         }
+
+        /* Splash Screen Styles */
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 99999;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease-in;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        #splash-screen.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        #splash-screen.fade-out {
+            opacity: 0;
+            transition: opacity 0.5s ease-out;
+        }
+
+        #splash-screen img {
+            max-width: 90%;
+            max-height: 90vh;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
     </style>
 </head>
 <body>
+    <!-- Splash Screen -->
+    <div id="splash-screen">
+        <img src="assetsbodhi-legacy.png" alt="Bodhi Legacy" id="splash-image">
+    </div>
     <!-- Language Switcher -->
     <div class="language-switcher">
         <button class="lang-btn active" id="langBtn-bn" onclick="switchLanguage('bn')" title="বাংলা">বাংলা</button>
@@ -1031,21 +1074,21 @@
     <!-- OTP Verification Screen -->
     <div id="verificationScreen" class="auth-container hidden">
         <div class="auth-box">
-            <button class="auth-back-btn" onclick="goBackToRegister()">← ফিরে যান</button>
+            <button class="auth-back-btn" onclick="goBackToRegister()" data-i18n="auth.goBack">← ফিরে যান</button>
             <div class="auth-header">
-                <h1>যাচাইকরণ কোড</h1>
+                <h1 data-i18n="auth.verificationCode">যাচাইকরণ কোড</h1>
                 <p id="verificationSubtitle"></p>
             </div>
             <div id="verificationError" class="auth-error hidden"></div>
             <div id="verificationSuccess" class="auth-success hidden"></div>
             <div id="demoOtpDisplay" style="background: rgba(255, 169, 94, 0.1); border: 2px dashed rgba(255, 169, 94, 0.5); border-radius: 12px; padding: 16px; margin-bottom: 20px; text-align: center;">
-                <div style="font-size: 13px; color: #666; margin-bottom: 8px; font-weight: 600;">📧 ডেমো মোড: যাচাইকরণ কোড</div>
+                <div style="font-size: 13px; color: #666; margin-bottom: 8px; font-weight: 600;" data-i18n="auth.demoMode">📧 ডেমো মোড: যাচাইকরণ কোড</div>
                 <div id="demoOtpCode" style="font-size: 32px; font-weight: 700; color: #FF8C42; letter-spacing: 8px; font-family: 'Courier New', monospace;">------</div>
-                <div style="font-size: 11px; color: #999; margin-top: 8px;">(প্রোডাকশনে এটি ইমেইল/SMS এ পাঠানো হবে)</div>
+                <div style="font-size: 11px; color: #999; margin-top: 8px;" data-i18n="auth.demoNote">(প্রোডাকশনে এটি ইমেইল/SMS এ পাঠানো হবে)</div>
             </div>
             <form id="verificationForm" class="auth-form" onsubmit="handleVerification(event)">
                 <div class="auth-input-group">
-                    <label for="otpCode">৬ সংখ্যার যাচাইকরণ কোড</label>
+                    <label for="otpCode" data-i18n="auth.sixDigitCode">৬ সংখ্যার যাচাইকরণ কোড</label>
                     <input 
                         type="text" 
                         id="otpCode" 
@@ -1058,9 +1101,9 @@
                         style="text-align: center; font-size: 24px; letter-spacing: 8px; font-weight: 600;"
                     >
                 </div>
-                <button type="submit" class="auth-submit-btn">যাচাই করুন</button>
+                <button type="submit" class="auth-submit-btn" data-i18n="auth.verify">যাচাই করুন</button>
                 <div style="text-align: center; margin-top: 16px;">
-                    <button type="button" class="auth-link-btn" onclick="resendOTP()" id="resendBtn" style="font-size: 14px;">
+                    <button type="button" class="auth-link-btn" onclick="resendOTP()" id="resendBtn" style="font-size: 14px;" data-i18n="auth.resendCode">
                         কোড পুনরায় পাঠান
                     </button>
                     <div id="resendTimer" style="font-size: 13px; color: #666; margin-top: 8px;"></div>
@@ -1071,7 +1114,7 @@
 
     <div class="app-container hidden">
         <div class="app-header">
-            <h1 data-i18n="app.title">বাংলাদেশের বৌদ্ধ ভিক্ষু Software</h1>
+            <h1 data-i18n="app.title">Buddhist Software</h1>
             <span id="adminBadge" class="admin-badge hidden" data-i18n="app.admin">প্রশাসক</span>
         </div>
 
@@ -1103,9 +1146,9 @@
             <!-- Admin Screen -->
             <div id="adminScreen" class="screen">
                 <div class="tabs">
-                    <div class="tab active" onclick="showAdminTab('pending')">অনুমোদন অপেক্ষা</div>
-                    <div class="tab" onclick="showAdminTab('approved')">অনুমোদিত</div>
-                    <div class="tab" onclick="showAdminTab('all')">সব</div>
+                    <div class="tab active" onclick="showAdminTab('pending')" data-i18n="admin.pending">অনুমোদন অপেক্ষা</div>
+                    <div class="tab" onclick="showAdminTab('approved')" data-i18n="admin.approved">অনুমোদিত</div>
+                    <div class="tab" onclick="showAdminTab('all')" data-i18n="admin.all">সব</div>
                 </div>
                 <div id="adminContent"></div>
             </div>
@@ -1172,39 +1215,39 @@
     <!-- Renowned People Modal -->
     <div id="renownedModal" class="modal">
         <div class="modal-content">
-            <div class="modal-header">বিশিষ্ট ব্যক্তিত্ব যোগ করুন</div>
+            <div class="modal-header" data-i18n="forms.addRenowned">বিশিষ্ট ব্যক্তিত্ব যোগ করুন</div>
             <form id="renownedForm" onsubmit="submitRenowned(event)">
                 <div class="form-group">
-                    <label>নাম *</label>
+                    <label data-i18n="forms.name">নাম *</label>
                     <input type="text" id="renownedFormName" required>
                 </div>
                 <div class="form-group">
-                    <label>ছবি (URL)</label>
+                    <label data-i18n="forms.imageUrl">ছবি (URL)</label>
                     <input type="url" id="renownedFormImageUrl">
                 </div>
                 <div class="form-group">
-                    <label>যুগ / Era</label>
-                    <input type="text" id="renownedFormEra" placeholder="যেমন: ১৮০০-১৯০০">
+                    <label data-i18n="forms.era">যুগ / Era</label>
+                    <input type="text" id="renownedFormEra" data-i18n-placeholder="forms.eraPlaceholder" placeholder="যেমন: ১৮০০-১৯০০">
                 </div>
                 <div class="form-group">
-                    <label>অঞ্চল / Region</label>
-                    <input type="text" id="renownedFormRegion" placeholder="যেমন: চট্টগ্রাম, কক্সবাজার, রামু">
+                    <label data-i18n="forms.region">অঞ্চল / Region</label>
+                    <input type="text" id="renownedFormRegion" data-i18n-placeholder="forms.regionPlaceholder" placeholder="যেমন: চট্টগ্রাম, কক্সবাজার, রামু">
                 </div>
                 <div class="form-group">
-                    <label>জীবনী</label>
+                    <label data-i18n="forms.biography">জীবনী</label>
                     <textarea id="renownedFormBiography" rows="6"></textarea>
                 </div>
                 <div class="form-group">
-                    <label>অবদান / অর্জন (প্রতি লাইনে একটি)</label>
-                    <textarea id="renownedFormAchievements" rows="4" placeholder="প্রতি লাইনে একটি অর্জন লিখুন"></textarea>
+                    <label data-i18n="forms.renownedAchievements">অবদান / অর্জন (প্রতি লাইনে একটি)</label>
+                    <textarea id="renownedFormAchievements" rows="4" data-i18n-placeholder="forms.achievementsPlaceholder" placeholder="প্রতি লাইনে একটি অর্জন লিখুন"></textarea>
                 </div>
                 <div class="form-group">
-                    <label>ঐতিহাসিক গুরুত্ব</label>
+                    <label data-i18n="forms.legacy">ঐতিহাসিক গুরুত্ব</label>
                     <textarea id="renownedFormLegacy" rows="4"></textarea>
                 </div>
                 <div class="action-buttons">
-                    <button type="submit" class="btn btn-primary">সংরক্ষণ করুন</button>
-                    <button type="button" class="btn btn-secondary" onclick="closeRenownedForm()">বাতিল</button>
+                    <button type="submit" class="btn btn-primary" data-i18n="forms.save">সংরক্ষণ করুন</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeRenownedForm()" data-i18n="forms.cancel">বাতিল</button>
                 </div>
             </form>
         </div>
@@ -1213,39 +1256,39 @@
     <!-- Story Submission Modal -->
     <div id="storyModal" class="modal">
         <div class="modal-content">
-            <div class="modal-header">কাহিনী জমা দিন</div>
+            <div class="modal-header" data-i18n="forms.addMonk">কাহিনী জমা দিন</div>
             <form id="storyForm" onsubmit="submitStory(event)">
                 <div class="form-group">
-                    <label>নাম *</label>
+                    <label data-i18n="forms.name">নাম *</label>
                     <input type="text" id="formName" required>
                 </div>
                 <div class="form-group">
-                    <label>উপাধি/ভূমিকা</label>
+                    <label data-i18n="forms.occupation">উপাধি/ভূমিকা</label>
                     <input type="text" id="formOccupation">
                 </div>
                 <div class="form-group">
-                    <label>জন্ম তারিখ</label>
+                    <label data-i18n="forms.birthDate">জন্ম তারিখ</label>
                     <input type="date" id="formBirthDate">
                 </div>
                 <div class="form-group">
-                    <label>মৃত্যু তারিখ</label>
+                    <label data-i18n="forms.deathDate">মৃত্যু তারিখ</label>
                     <input type="date" id="formDeathDate">
                 </div>
                 <div class="form-group">
-                    <label>ছবির URL</label>
+                    <label data-i18n="forms.imageUrl">ছবির URL</label>
                     <input type="url" id="formImageUrl">
                 </div>
                 <div class="form-group">
-                    <label>জীবনী *</label>
+                    <label data-i18n="forms.biographyRequired">জীবনী *</label>
                     <textarea id="formBiography" required></textarea>
                 </div>
                 <div class="form-group">
-                    <label>শিক্ষা / অর্জন (প্রতি লাইনে একটি)</label>
-                    <textarea id="formAchievements" placeholder="প্রতি লাইনে একটি অর্জন লিখুন"></textarea>
+                    <label data-i18n="forms.achievements">শিক্ষা / অর্জন (প্রতি লাইনে একটি)</label>
+                    <textarea id="formAchievements" data-i18n-placeholder="forms.achievementsPlaceholder" placeholder="প্রতি লাইনে একটি অর্জন লিখুন"></textarea>
                 </div>
                 <div class="action-buttons">
-                    <button type="submit" class="btn btn-primary">জমা দিন</button>
-                    <button type="button" class="btn btn-secondary" onclick="closeStoryForm()">বাতিল</button>
+                    <button type="submit" class="btn btn-primary" data-i18n="forms.submit">জমা দিন</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeStoryForm()" data-i18n="forms.cancel">বাতিল</button>
                 </div>
             </form>
         </div>
@@ -1286,7 +1329,12 @@
                     if (window.i18n && window.i18n.updateAllTranslations) {
                         setTimeout(() => {
                             window.i18n.updateAllTranslations();
-                        }, 100);
+                            // Also reload dynamic content after translations are updated
+                            if (typeof loadMonks === 'function' && currentScreen === 'monks') loadMonks();
+                            if (typeof loadVillages === 'function' && currentScreen === 'villages') loadVillages();
+                            if (typeof loadRenowned === 'function' && currentScreen === 'renowned') loadRenowned();
+                            if (typeof loadAdminContent === 'function' && currentScreen === 'admin' && isAdmin) loadAdminContent();
+                        }, 150);
                     }
                 } else {
                     console.error('i18n not available. window.i18n:', window.i18n);
@@ -1317,18 +1365,54 @@
                 await new Promise(resolve => setTimeout(resolve, 50));
             }
             
-            window.i18n.onLanguageChange(() => {
+            window.i18n.onLanguageChange(async (lang) => {
+                console.log('Language change detected, reloading all content...');
+                
+                // Wait for translations to be fully loaded
+                // Check if translations are loaded by testing a key
+                let retries = 0;
+                while (retries < 10) {
+                    const testTranslation = window.i18n.t('app.title');
+                    if (testTranslation !== null && testTranslation !== undefined) {
+                        console.log('Translations confirmed loaded:', testTranslation);
+                        break;
+                    }
+                    await new Promise(resolve => setTimeout(resolve, 50));
+                    retries++;
+                }
+                
                 // updateAllTranslations() is already called inside setLanguage(),
                 // but we call it again here to ensure everything is updated
                 if (window.i18n && window.i18n.updateAllTranslations) {
                     window.i18n.updateAllTranslations();
+                    console.log('Updated all static translations');
                 }
+                
+                // Wait a bit more to ensure DOM is updated
+                await new Promise(resolve => setTimeout(resolve, 100));
+                
                 // Update dynamic content that might have hardcoded text
-                if (typeof loadMonks === 'function') loadMonks();
-                if (typeof loadVillages === 'function') loadVillages();
-                if (typeof loadRenowned === 'function') loadRenowned();
-                if (typeof loadAdminContent === 'function' && isAdmin) loadAdminContent();
-                if (typeof loadUserProfile === 'function') loadUserProfile();
+                // These functions use t() which will now get the new language translations
+                if (typeof loadMonks === 'function') {
+                    console.log('Reloading monks list with new language...');
+                    loadMonks();
+                }
+                if (typeof loadVillages === 'function') {
+                    console.log('Reloading villages list with new language...');
+                    loadVillages();
+                }
+                if (typeof loadRenowned === 'function') {
+                    console.log('Reloading renowned list with new language...');
+                    loadRenowned();
+                }
+                if (typeof loadAdminContent === 'function' && isAdmin) {
+                    console.log('Reloading admin content with new language...');
+                    loadAdminContent();
+                }
+                if (typeof loadUserProfile === 'function') {
+                    loadUserProfile();
+                }
+                console.log('All content reloaded with new language');
             });
         })();
 
@@ -1374,18 +1458,21 @@
         let currentUser = null;
 
         // Helper function to get translation (with fallback)
-        // CRITICAL: This must return null if i18n isn't ready, not the key
-        // Otherwise, keys like "errors.userNotFound" will appear in UI
+        // CRITICAL: This must return the translation or null for fallback
         function t(key, params) {
             if (window.i18n && window.i18n.t) {
                 const result = window.i18n.t(key, params);
-                // If i18n.t returns null (translations not loaded), return empty string
-                // as fallback for error messages (better than showing keys)
-                return result !== null ? result : '';
+                // If i18n.t returns null (translations not loaded or key not found), 
+                // return null so caller can use fallback text with ||
+                if (result === null || result === undefined) {
+                    console.warn(`Translation not available for key: ${key}`);
+                    return null;
+                }
+                return result;
             }
-            // If i18n not loaded yet, return empty string to prevent keys from showing
-            // The original HTML text will remain visible as fallback
-            return '';
+            // If i18n not loaded yet, return null so caller can use fallback
+            console.warn(`i18n not available for key: ${key}`);
+            return null;
         }
 
         // Get current authenticated user
@@ -1578,11 +1665,16 @@
             const container = document.getElementById('monksList');
             
             if (monks.length === 0) {
+                // Get translations with fallback
+                const noMonksText = t('emptyStates.noMonks');
+                const noMonksDescText = t('emptyStates.noMonksDesc');
+                console.log('Empty state translations:', { noMonksText, noMonksDescText });
+                
                 container.innerHTML = `
                     <div class="empty-state">
                         <div style="font-size: 64px;">📖</div>
-                        <h3>এখনও কোন কাহিনী নেই</h3>
-                        <p>বাংলাদেশের একজন শ্রদ্ধেয় বৌদ্ধ ভিক্ষুর জীবন কাহিনী যোগ করে শুরু করুন।</p>
+                        <h3>${noMonksText || 'এখনও কোন কাহিনী নেই'}</h3>
+                        <p>${noMonksDescText || 'বাংলাদেশের একজন শ্রদ্ধেয় বৌদ্ধ ভিক্ষুর জীবন কাহিনী যোগ করে শুরু করুন।'}</p>
                     </div>
                 `;
                 return;
@@ -1614,7 +1706,7 @@
             
             const container = document.getElementById('monksList');
             if (filtered.length === 0) {
-                container.innerHTML = '<div class="empty-state"><p>কোন ফলাফল নেই</p></div>';
+                container.innerHTML = `<div class="empty-state"><p>${t('search.noResults') || 'কোন ফলাফল নেই'}</p></div>`;
                 return;
             }
             
@@ -1652,12 +1744,12 @@
                 </div>
                 <div class="detail-content">
                     <div class="detail-section">
-                        <h3>জীবনী</h3>
+                        <h3>${t('detail.biography') || 'জীবনী'}</h3>
                         <p>${monk.biography.replace(/\n/g, '<br>')}</p>
                     </div>
                     ${achievements ? `
                         <div class="detail-section">
-                            <h3>অর্জনসমূহ</h3>
+                            <h3>${t('detail.achievements') || 'অর্জনসমূহ'}</h3>
                             <ul style="padding-left: 20px; color: #555;">
                                 ${achievements}
                             </ul>
@@ -1665,10 +1757,10 @@
                     ` : ''}
                     <div class="action-buttons">
                         ${isAdmin ? `
-                            <button class="btn btn-primary" onclick="editStory('${monk.id}')">সম্পাদনা</button>
-                            <button class="btn btn-danger" onclick="deleteStory('${monk.id}')">মুছুন</button>
+                            <button class="btn btn-primary" onclick="editStory('${monk.id}')">${t('detail.edit') || 'সম্পাদনা'}</button>
+                            <button class="btn btn-danger" onclick="deleteStory('${monk.id}')">${t('detail.delete') || 'মুছুন'}</button>
                         ` : ''}
-                        <button class="btn btn-secondary" onclick="showScreen('monks')" style="flex: 1;">← ফিরে যান</button>
+                        <button class="btn btn-secondary" onclick="showScreen('monks')" style="flex: 1;">${t('detail.goBack') || '← ফিরে যান'}</button>
                     </div>
                 </div>
             `;
@@ -1748,7 +1840,7 @@
             }
             
             if (stories.length === 0) {
-                container.innerHTML = '<div class="empty-state"><p>কোন কাহিনী নেই</p></div>';
+                container.innerHTML = `<div class="empty-state"><p>${t('emptyStates.noStories') || 'কোন কাহিনী নেই'}</p></div>`;
                 return;
             }
             
@@ -1760,19 +1852,19 @@
                             <div class="card-title">${story.name}</div>
                             <div class="card-subtitle">${story.occupation || ''}</div>
                             <span class="status-badge ${story.status === 'pending' ? 'status-pending' : 'status-approved'}">
-                                ${story.status === 'pending' ? 'অনুমোদন অপেক্ষা' : 'অনুমোদিত'}
+                                ${story.status === 'pending' ? (t('admin.pending') || 'অনুমোদন অপেক্ষা') : (t('admin.approved') || 'অনুমোদিত')}
                             </span>
-                            ${story.submittedBy ? `<div style="font-size: 12px; color: #999; margin-top: 4px;">জমা দিয়েছেন: ${story.submittedBy}</div>` : ''}
+                            ${story.submittedBy ? `<div style="font-size: 12px; color: #999; margin-top: 4px;">${t('admin.submittedBy', {name: story.submittedBy}) || `জমা দিয়েছেন: ${story.submittedBy}`}</div>` : ''}
                         </div>
                     </div>
                     <div class="card-description">${story.biography.substring(0, 100)}...</div>
                     <div class="action-buttons" style="margin-top: 12px;">
                         ${story.status === 'pending' ? `
-                            <button class="btn btn-success" onclick="approveStory('${story.id}')">অনুমোদন</button>
-                            <button class="btn btn-danger" onclick="rejectStory('${story.id}')">প্রত্যাখ্যান</button>
+                            <button class="btn btn-success" onclick="approveStory('${story.id}')">${t('admin.approve') || 'অনুমোদন'}</button>
+                            <button class="btn btn-danger" onclick="rejectStory('${story.id}')">${t('admin.reject') || 'প্রত্যাখ্যান'}</button>
                         ` : ''}
-                        <button class="btn btn-primary" onclick="editStory('${story.id}')">সম্পাদনা</button>
-                        <button class="btn btn-danger" onclick="deleteStory('${story.id}')">মুছুন</button>
+                        <button class="btn btn-primary" onclick="editStory('${story.id}')">${t('admin.edit') || 'সম্পাদনা'}</button>
+                        <button class="btn btn-danger" onclick="deleteStory('${story.id}')">${t('admin.delete') || 'মুছুন'}</button>
                     </div>
                 </div>
             `).join('');
@@ -1864,8 +1956,8 @@
                 container.innerHTML = `
                     <div class="empty-state">
                         <div style="font-size: 64px;">🏘</div>
-                        <h3>এখনও কোন গ্রাম নেই</h3>
-                        <p>একটি বৌদ্ধ গ্রামের তথ্য যোগ করে শুরু করুন।</p>
+                        <h3>${t('emptyStates.noVillages') || 'এখনও কোন গ্রাম নেই'}</h3>
+                        <p>${t('emptyStates.noVillagesDesc') || 'একটি বৌদ্ধ গ্রামের তথ্য যোগ করে শুরু করুন।'}</p>
                     </div>
                 `;
                 return;
@@ -1896,7 +1988,7 @@
             
             const container = document.getElementById('villagesList');
             if (filtered.length === 0) {
-                container.innerHTML = '<div class="empty-state"><p>কোন ফলাফল নেই</p></div>';
+                container.innerHTML = `<div class="empty-state"><p>${t('search.noResults') || 'কোন ফলাফল নেই'}</p></div>`;
                 return;
             }
             
@@ -1930,16 +2022,16 @@
                 </div>
                 <div class="detail-content">
                     <div class="detail-section">
-                        <h3>বর্ণনা</h3>
+                        <h3>${t('detail.description') || 'বর্ণনা'}</h3>
                         <p>${village.description.replace(/\n/g, '<br>')}</p>
                     </div>
                     ${village.revolution ? `
                         <div class="detail-section">
-                            <h3>ইতিহাস ও বিপ্লব</h3>
+                            <h3>${t('detail.history') || 'ইতিহাস ও বিপ্লব'}</h3>
                             <p>${village.revolution.replace(/\n/g, '<br>')}</p>
                         </div>
                     ` : ''}
-                    <button class="btn btn-secondary" onclick="showScreen('villages')" style="width: 100%; margin-top: 20px;">← ফিরে যান</button>
+                    <button class="btn btn-secondary" onclick="showScreen('villages')" style="width: 100%; margin-top: 20px;">${t('detail.goBack') || '← ফিরে যান'}</button>
                 </div>
             `;
         }
@@ -1949,7 +2041,7 @@
             const container = document.getElementById('searchResults');
             
             if (!query) {
-                container.innerHTML = '<div class="empty-state"><p>সার্চ করুন…</p></div>';
+                container.innerHTML = `<div class="empty-state"><p>${t('search.globalSearch') || 'সার্চ করুন…'}</p></div>`;
                 return;
             }
             
@@ -1975,13 +2067,13 @@
             );
             
             if (monkResults.length === 0 && villageResults.length === 0 && renownedResults.length === 0) {
-                container.innerHTML = '<div class="empty-state"><p>কোন ফলাফল নেই</p></div>';
+                container.innerHTML = `<div class="empty-state"><p>${t('search.noResults') || 'কোন ফলাফল নেই'}</p></div>`;
                 return;
             }
             
             let html = '';
             if (monkResults.length > 0) {
-                html += '<h3 style="margin-bottom: 10px; color: #FFA95E; font-weight: 700;">ভিক্ষু</h3>';
+                html += `<h3 style="margin-bottom: 10px; color: #FFA95E; font-weight: 700;">${t('searchResults.monks') || 'ভিক্ষু'}</h3>`;
                 html += monkResults.map(m => `
                     <div class="card" onclick="showMonkDetail('${m.id}')">
                         <div class="card-title">${m.name}</div>
@@ -1991,7 +2083,7 @@
             }
             
             if (villageResults.length > 0) {
-                html += '<h3 style="margin: 20px 0 10px; color: #FFA95E; font-weight: 700;">গ্রাম</h3>';
+                html += `<h3 style="margin: 20px 0 10px; color: #FFA95E; font-weight: 700;">${t('searchResults.villages') || 'গ্রাম'}</h3>`;
                 html += villageResults.map(v => `
                     <div class="card" onclick="showVillageDetail('${v.id}')">
                         <div class="card-title">${v.name}</div>
@@ -2001,7 +2093,7 @@
             }
             
             if (renownedResults.length > 0) {
-                html += '<h3 style="margin: 20px 0 10px; color: #FFA95E; font-weight: 700;">বিশিষ্ট ব্যক্তিত্ব</h3>';
+                html += `<h3 style="margin: 20px 0 10px; color: #FFA95E; font-weight: 700;">${t('searchResults.renowned') || 'বিশিষ্ট ব্যক্তিত্ব'}</h3>`;
                 html += renownedResults.map(p => `
                     <div class="card" onclick="showRenownedDetail('${p.id}')">
                         <div class="card-title">${p.name}</div>
@@ -2022,8 +2114,8 @@
                 container.innerHTML = `
                     <div class="empty-state">
                         <div style="font-size: 64px;">⭐</div>
-                        <h3>এখনও কোন বিশিষ্ট ব্যক্তিত্ব নেই</h3>
-                        <p>বৌদ্ধ ইতিহাসের একজন বিশিষ্ট ব্যক্তিত্বের তথ্য যোগ করে শুরু করুন।</p>
+                        <h3>${t('emptyStates.noRenowned') || 'এখনও কোন বিশিষ্ট ব্যক্তিত্ব নেই'}</h3>
+                        <p>${t('emptyStates.noRenownedDesc') || 'বৌদ্ধ ইতিহাসের একজন বিশিষ্ট ব্যক্তিত্বের তথ্য যোগ করে শুরু করুন।'}</p>
                     </div>
                 `;
                 return;
@@ -2061,7 +2153,7 @@
             
             const container = document.getElementById('renownedList');
             if (filtered.length === 0) {
-                container.innerHTML = '<div class="empty-state"><p>কোন ফলাফল নেই</p></div>';
+                container.innerHTML = `<div class="empty-state"><p>${t('search.noResults') || 'কোন ফলাফল নেই'}</p></div>`;
                 return;
             }
             
@@ -2112,13 +2204,13 @@
                 <div class="detail-content">
                     ${person.biography ? `
                         <div class="detail-section">
-                            <h3>জীবনী</h3>
+                            <h3>${t('detail.biography') || 'জীবনী'}</h3>
                             <p>${person.biography.replace(/\n/g, '<br>')}</p>
                         </div>
                     ` : ''}
                     ${achievements ? `
                         <div class="detail-section">
-                            <h3>অবদান / অর্জন</h3>
+                            <h3>${t('detail.renownedAchievements') || 'অবদান / অর্জন'}</h3>
                             <ul style="padding-left: 20px; color: #555;">
                                 ${achievements}
                             </ul>
@@ -2126,16 +2218,16 @@
                     ` : ''}
                     ${person.legacy ? `
                         <div class="detail-section">
-                            <h3>ঐতিহাসিক গুরুত্ব</h3>
+                            <h3>${t('detail.legacy') || 'ঐতিহাসিক গুরুত্ব'}</h3>
                             <p>${person.legacy.replace(/\n/g, '<br>')}</p>
                         </div>
                     ` : ''}
                     <div class="action-buttons">
                         ${isAdmin ? `
-                            <button class="btn btn-primary" onclick="editRenowned('${person.id}')">সম্পাদনা</button>
-                            <button class="btn btn-danger" onclick="deleteRenowned('${person.id}')">মুছুন</button>
+                            <button class="btn btn-primary" onclick="editRenowned('${person.id}')">${t('detail.edit') || 'সম্পাদনা'}</button>
+                            <button class="btn btn-danger" onclick="deleteRenowned('${person.id}')">${t('detail.delete') || 'মুছুন'}</button>
                         ` : ''}
-                        <button class="btn btn-secondary" onclick="showScreen('renowned')" style="flex: 1;">← ফিরে যান</button>
+                        <button class="btn btn-secondary" onclick="showScreen('renowned')" style="flex: 1;">${t('detail.goBack') || '← ফিরে যান'}</button>
                     </div>
                 </div>
             `;
@@ -2161,11 +2253,11 @@
                 document.getElementById('renownedFormAchievements').value = (person.achievements || []).join('\n');
                 document.getElementById('renownedFormLegacy').value = person.legacy || '';
                 form.dataset.editId = person.id;
-                document.querySelector('#renownedModal .modal-header').textContent = 'সম্পাদনা করুন';
+                document.querySelector('#renownedModal .modal-header').textContent = t('forms.editRenowned') || 'সম্পাদনা করুন';
             } else {
                 form.reset();
                 delete form.dataset.editId;
-                document.querySelector('#renownedModal .modal-header').textContent = 'বিশিষ্ট ব্যক্তিত্ব যোগ করুন';
+                document.querySelector('#renownedModal .modal-header').textContent = t('forms.addRenowned') || 'বিশিষ্ট ব্যক্তিত্ব যোগ করুন';
             }
         }
 
@@ -2223,7 +2315,7 @@
         }
 
         function deleteRenowned(id) {
-            if (!confirm('আপনি কি এই বিশিষ্ট ব্যক্তিত্ব মুছে ফেলতে চান?')) return;
+            if (!confirm(t('confirmations.deleteRenowned') || 'আপনি কি এই বিশিষ্ট ব্যক্তিত্ব মুছে ফেলতে চান?')) return;
             const renowned = JSON.parse(localStorage.getItem(RENOWNED_KEY) || '[]');
             const filtered = renowned.filter(p => p.id !== id);
             localStorage.setItem(RENOWNED_KEY, JSON.stringify(filtered));
@@ -2342,7 +2434,7 @@
             
             const updateTimer = () => {
                 if (timerEl) {
-                    timerEl.textContent = `${timeLeft} সেকেন্ড পরে আবার চেষ্টা করুন`;
+                    timerEl.textContent = t('auth.resendTimer', {seconds: timeLeft}) || `${timeLeft} সেকেন্ড পরে আবার চেষ্টা করুন`;
                 }
                 
                 if (timeLeft <= 0) {
@@ -2408,8 +2500,8 @@
             }
             
             if (verificationSubtitle) {
-                const methodText = method === 'email' ? 'ইমেইল' : 'ফোন নম্বর';
-                verificationSubtitle.innerHTML = `আপনার <strong>${methodText}</strong> (<strong>${identifier}</strong>) এ পাঠানো কোডটি লিখুন`;
+                const methodText = method === 'email' ? (t('auth.email') || 'ইমেইল') : (t('auth.phoneNumber') || 'ফোন নম্বর');
+                verificationSubtitle.innerHTML = t('auth.verificationSubtitle', {method: methodText, identifier: identifier}) || `আপনার <strong>${methodText}</strong> (<strong>${identifier}</strong>) এ পাঠানো কোডটি লিখুন`;
             }
             
             // Display OTP in demo mode
@@ -2435,7 +2527,7 @@
         function resendOTP() {
             const pendingUser = JSON.parse(localStorage.getItem(PENDING_USER_KEY) || 'null');
             if (!pendingUser) {
-                alert('পুনরায় পাঠানোর জন্য তথ্য পাওয়া যায়নি।');
+                alert(t('errors.resendDataMissing') || 'পুনরায় পাঠানোর জন্য তথ্য পাওয়া যায়নি।');
                 goBackToRegister();
                 return;
             }
@@ -2464,7 +2556,7 @@
             
             const successDiv = document.getElementById('verificationSuccess');
             if (successDiv) {
-                successDiv.textContent = 'নতুন যাচাইকরণ কোড পাঠানো হয়েছে।';
+                successDiv.textContent = t('success.codeResent') || 'নতুন যাচাইকরণ কোড পাঠানো হয়েছে।';
                 successDiv.classList.remove('hidden');
                 setTimeout(() => successDiv.classList.add('hidden'), 3000);
             }
@@ -2484,14 +2576,14 @@
             const enteredCode = otpInput.value.trim();
             
             if (!enteredCode || enteredCode.length !== 6 || !/^\d{6}$/.test(enteredCode)) {
-                errorDiv.textContent = 'সঠিক ৬ সংখ্যার কোড দিন।';
+                errorDiv.textContent = t('errors.invalidOtpFormat') || 'সঠিক ৬ সংখ্যার কোড দিন।';
                 errorDiv.classList.remove('hidden');
                 return;
             }
             
             const pendingUser = JSON.parse(localStorage.getItem(PENDING_USER_KEY) || 'null');
             if (!pendingUser) {
-                errorDiv.textContent = 'যাচাইকরণ তথ্য পাওয়া যায়নি। দয়া করে আবার রেজিস্টার করুন।';
+                errorDiv.textContent = t('errors.verificationDataMissing') || 'যাচাইকরণ তথ্য পাওয়া যায়নি। দয়া করে আবার রেজিস্টার করুন।';
                 errorDiv.classList.remove('hidden');
                 setTimeout(() => {
                     goBackToRegister();
@@ -2501,14 +2593,14 @@
             
             const identifier = pendingUser.email || pendingUser.phone;
             if (!identifier) {
-                errorDiv.textContent = 'যাচাইকরণ তথ্য পাওয়া যায়নি।';
+                errorDiv.textContent = t('errors.verificationDataMissing') || 'যাচাইকরণ তথ্য পাওয়া যায়নি।';
                 errorDiv.classList.remove('hidden');
                 return;
             }
             
             // Verify OTP
             if (!isValidOTP(identifier, enteredCode)) {
-                errorDiv.textContent = 'ভুল যাচাইকরণ কোড। দয়া করে আবার চেষ্টা করুন।';
+                errorDiv.textContent = t('errors.invalidOtp') || 'ভুল যাচাইকরণ কোড। দয়া করে আবার চেষ্টা করুন।';
                 errorDiv.classList.remove('hidden');
                 otpInput.value = '';
                 otpInput.focus();
@@ -2548,7 +2640,7 @@
             isAdmin = false;
             
             // Show success
-            successDiv.textContent = 'যাচাইকরণ সফল! আপনার অ্যাকাউন্ট সক্রিয় করা হয়েছে।';
+            successDiv.textContent = t('success.verificationSuccess') || 'যাচাইকরণ সফল! আপনার অ্যাকাউন্ট সক্রিয় করা হয়েছে।';
             successDiv.classList.remove('hidden');
             
             // Clear timer
@@ -2764,31 +2856,31 @@
 
             // Validation
             if (!name || name.length < 2) {
-                errorDiv.textContent = 'নাম কমপক্ষে ২ অক্ষরের হতে হবে।';
+                errorDiv.textContent = t('errors.nameMinLength') || 'নাম কমপক্ষে ২ অক্ষরের হতে হবে।';
                 errorDiv.classList.remove('hidden');
                 return;
             }
 
             if (currentAuthMethod === 'phone' && (!phone || phone.length !== 11 || !/^01\d{9}$/.test(phone))) {
-                errorDiv.textContent = 'সঠিক ফোন নম্বর দিন (11 সংখ্যা, 01 দিয়ে শুরু)';
+                errorDiv.textContent = t('errors.invalidPhone') || 'সঠিক ফোন নম্বর দিন (11 সংখ্যা, 01 দিয়ে শুরু)';
                 errorDiv.classList.remove('hidden');
                 return;
             }
 
             if (currentAuthMethod === 'email' && (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))) {
-                errorDiv.textContent = 'সঠিক ইমেইল ঠিকানা দিন।';
+                errorDiv.textContent = t('errors.invalidEmail') || 'সঠিক ইমেইল ঠিকানা দিন।';
                 errorDiv.classList.remove('hidden');
                 return;
             }
 
             if (password.length < 6) {
-                errorDiv.textContent = 'পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে।';
+                errorDiv.textContent = t('errors.passwordMinLength') || 'পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে।';
                 errorDiv.classList.remove('hidden');
                 return;
             }
 
             if (password !== confirmPassword) {
-                errorDiv.textContent = 'পাসওয়ার্ড মিলছে না। দয়া করে আবার চেষ্টা করুন।';
+                errorDiv.textContent = t('errors.passwordMismatch') || 'পাসওয়ার্ড মিলছে না। দয়া করে আবার চেষ্টা করুন।';
                 errorDiv.classList.remove('hidden');
                 return;
             }
@@ -2816,11 +2908,14 @@
             const hasPendingRegistration = pendingOTP || (pendingUserData && (pendingUserData.email === email || pendingUserData.phone === phone));
 
             if (existingUser || hasPendingRegistration) {
-                const duplicateField = email ? 'ইমেইল' : 'ফোন নম্বর';
                 if (existingUser && !existingUser.isVerified) {
-                    errorDiv.textContent = `এই ${duplicateField} দিয়ে একটি অ্যাকাউন্ট তৈরি হয়েছে কিন্তু এখনও যাচাই করা হয়নি। দয়া করে আপনার যাচাইকরণ কোড দিয়ে অ্যাকাউন্ট সক্রিয় করুন।`;
+                    errorDiv.textContent = email 
+                        ? (t('errors.emailPending') || 'এই ইমেইল দিয়ে একটি অ্যাকাউন্ট তৈরি হয়েছে কিন্তু এখনও যাচাই করা হয়নি। দয়া করে আপনার যাচাইকরণ কোড দিয়ে অ্যাকাউন্ট সক্রিয় করুন।')
+                        : (t('errors.phonePending') || 'এই ফোন নম্বর দিয়ে একটি অ্যাকাউন্ট তৈরি হয়েছে কিন্তু এখনও যাচাই করা হয়নি। দয়া করে আপনার যাচাইকরণ কোড দিয়ে অ্যাকাউন্ট সক্রিয় করুন।');
                 } else {
-                    errorDiv.textContent = `এই ${duplicateField} ইতিমধ্যে নিবন্ধিত। দয়া করে একটি ভিন্ন ${duplicateField} ব্যবহার করুন।`;
+                    errorDiv.textContent = email 
+                        ? (t('errors.emailExists') || 'এই ইমেইল ইতিমধ্যে নিবন্ধিত। দয়া করে একটি ভিন্ন ইমেইল ব্যবহার করুন।')
+                        : (t('errors.phoneExists') || 'এই ফোন নম্বর ইতিমধ্যে নিবন্ধিত। দয়া করে একটি ভিন্ন ফোন নম্বর ব্যবহার করুন।');
                 }
                 errorDiv.classList.remove('hidden');
                 return;
@@ -2917,6 +3012,27 @@
                 }
             }
         }
+
+        // Splash Screen Handler
+        (function initSplashScreen() {
+            const splashScreen = document.getElementById('splash-screen');
+            if (!splashScreen) return;
+
+            // Show splash immediately (fade in)
+            setTimeout(() => {
+                splashScreen.classList.add('show');
+            }, 10);
+
+            // After 3 seconds, fade out
+            setTimeout(() => {
+                splashScreen.classList.add('fade-out');
+                
+                // Remove from DOM after fade-out completes
+                setTimeout(() => {
+                    splashScreen.remove();
+                }, 500); // Match fade-out transition duration
+            }, 3000); // 3 seconds display time
+        })();
 
         // Wait for DOM to be ready
         if (document.readyState === 'loading') {

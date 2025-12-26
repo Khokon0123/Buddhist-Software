@@ -18,7 +18,7 @@ life-stories-app/
 │   └── pli.json     # Pāli translations (Romanized)
 ├── js/
 │   └── i18n.js      # i18n core module
-└── mobile_app_web.html  # Main application file
+└── buddhist-software.html  # Main application file
 ```
 
 ## How It Works

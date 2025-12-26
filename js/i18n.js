@@ -18,9 +18,10 @@ let currentLanguage = DEFAULT_LANGUAGE;
 let translations = {};
 
 // Embedded translations (to avoid CORS issues with file:// protocol)
+// NOTE: These are fallback only. The system will try to load from JSON files first.
 const embeddedTranslations = {
     bn: {
-        "app": {"title": "বাংলাদেশের বৌদ্ধ ভিক্ষু", "admin": "প্রশাসক"},
+        "app": {"title": "বৌদ্ধ Software", "admin": "প্রশাসক"},
         "auth": {"welcome": "স্বাগতম", "loginSubtitle": "আপনার অ্যাকাউন্টে প্রবেশ করুন", "loginButton": "লগইন করুন", "newAccount": "নতুন অ্যাকাউন্ট", "createAccount": "একটি নতুন অ্যাকাউন্ট তৈরি করুন", "registerButton": "রেজিস্টার করুন", "backToLogin": "← লগইনে ফিরে যান", "goBack": "← ফিরে যান", "usernameEmailPhone": "ইউজারনেম, ইমেইল বা ফোন নম্বর", "usernameEmailPhonePlaceholder": "ইউজারনেম, ইমেইল বা ফোন নম্বর লিখুন", "password": "পাসওয়ার্ড", "passwordPlaceholder": "পাসওয়ার্ড লিখুন", "newUser": "নতুন ব্যবহারকারী?", "alreadyHaveAccount": "ইতিমধ্যে অ্যাকাউন্ট আছে?", "registrationMethod": "নিবন্ধনের মাধ্যম", "phoneNumber": "ফোন নম্বর", "email": "ইমেইল", "emailAddress": "ইমেইল ঠিকানা", "emailPlaceholder": "example@email.com", "name": "নাম", "namePlaceholder": "আপনার নাম লিখুন", "passwordMinLength": "পাসওয়ার্ড লিখুন (কমপক্ষে ৬ অক্ষর)", "confirmPassword": "পাসওয়ার্ড নিশ্চিত করুন", "confirmPasswordPlaceholder": "পাসওয়ার্ড আবার লিখুন", "verificationCode": "যাচাইকরণ কোড", "verificationSubtitle": "আপনার {{method}} ({{identifier}}) এ পাঠানো কোডটি লিখুন", "sixDigitCode": "৬ সংখ্যার যাচাইকরণ কোড", "verify": "যাচাই করুন", "resendCode": "কোড পুনরায় পাঠান", "resendTimer": "{{seconds}} সেকেন্ড পরে আবার চেষ্টা করুন", "demoMode": "ডেমো মোড: যাচাইকরণ কোড", "demoNote": "(প্রোডাকশনে এটি ইমেইল/SMS এ পাঠানো হবে)"},
         "errors": {"userNotFound": "ব্যবহারকারী পাওয়া যায়নি। দয়া করে সঠিক তথ্য দিন।", "wrongPassword": "পাসওয়ার্ড ভুল। দয়া করে আবার চেষ্টা করুন।", "accountNotVerified": "আপনার অ্যাকাউন্ট এখনও যাচাই করা হয়নি। দয়া করে যাচাইকরণ কোড দিয়ে আপনার অ্যাকাউন্ট সক্রিয় করুন।", "invalidOtp": "ভুল যাচাইকরণ কোড। দয়া করে আবার চেষ্টা করুন।", "otpExpired": "যাচাইকরণ কোড মেয়াদ শেষ হয়েছে।", "invalidOtpFormat": "সঠিক ৬ সংখ্যার কোড দিন।", "nameMinLength": "নাম কমপক্ষে ২ অক্ষরের হতে হবে।", "invalidPhone": "সঠিক ফোন নম্বর দিন (11 সংখ্যা, 01 দিয়ে শুরু)", "invalidEmail": "সঠিক ইমেইল ঠিকানা দিন।", "passwordMinLength": "পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে।", "passwordMismatch": "পাসওয়ার্ড মিলছে না। দয়া করে আবার চেষ্টা করুন।", "emailExists": "এই ইমেইল ইতিমধ্যে নিবন্ধিত। দয়া করে একটি ভিন্ন ইমেইল ব্যবহার করুন।", "phoneExists": "এই ফোন নম্বর ইতিমধ্যে নিবন্ধিত। দয়া করে একটি ভিন্ন ফোন নম্বর ব্যবহার করুন।", "emailPending": "এই ইমেইল দিয়ে একটি অ্যাকাউন্ট তৈরি হয়েছে কিন্তু এখনও যাচাই করা হয়নি। দয়া করে আপনার যাচাইকরণ কোড দিয়ে অ্যাকাউন্ট সক্রিয় করুন।", "phonePending": "এই ফোন নম্বর দিয়ে একটি অ্যাকাউন্ট তৈরি হয়েছে কিন্তু এখনও যাচাই করা হয়নি। দয়া করে আপনার যাচাইকরণ কোড দিয়ে অ্যাকাউন্ট সক্রিয় করুন।", "verificationDataMissing": "যাচাইকরণ তথ্য পাওয়া যায়নি। দয়া করে আবার রেজিস্টার করুন।", "resendDataMissing": "পুনরায় পাঠানোর জন্য তথ্য পাওয়া যায়নি।"},
         "success": {"verificationSuccess": "যাচাইকরণ সফল! আপনার অ্যাকাউন্ট সক্রিয় করা হয়েছে।", "codeResent": "নতুন যাচাইকরণ কোড পাঠানো হয়েছে।", "registrationSubmitted": "আপনার কাহিনী জমা দেওয়া হয়েছে! প্রশাসকের অনুমোদনের পর এটি প্রকাশিত হবে।"},
@@ -36,7 +37,7 @@ const embeddedTranslations = {
         "searchResults": {"monks": "ভিক্ষু", "villages": "গ্রাম", "renowned": "বিশিষ্ট ব্যক্তিত্ব"}
     },
     en: {
-        "app": {"title": "Buddhist Monks of Bangladesh", "admin": "Administrator"},
+        "app": {"title": "Buddhist Software", "admin": "Administrator"},
         "auth": {"welcome": "Welcome", "loginSubtitle": "Sign in to your account", "loginButton": "Login", "newAccount": "New Account", "createAccount": "Create a new account", "registerButton": "Register", "backToLogin": "← Back to Login", "goBack": "← Go Back", "usernameEmailPhone": "Username, Email or Phone Number", "usernameEmailPhonePlaceholder": "Enter username, email or phone number", "password": "Password", "passwordPlaceholder": "Enter password", "newUser": "New user?", "alreadyHaveAccount": "Already have an account?", "registrationMethod": "Registration Method", "phoneNumber": "Phone Number", "email": "Email", "emailAddress": "Email Address", "emailPlaceholder": "example@email.com", "name": "Name", "namePlaceholder": "Enter your name", "passwordMinLength": "Enter password (minimum 6 characters)", "confirmPassword": "Confirm Password", "confirmPasswordPlaceholder": "Enter password again", "verificationCode": "Verification Code", "verificationSubtitle": "Enter the code sent to your {{method}} ({{identifier}})", "sixDigitCode": "6-digit Verification Code", "verify": "Verify", "resendCode": "Resend Code", "resendTimer": "Try again after {{seconds}} seconds", "demoMode": "Demo Mode: Verification Code", "demoNote": "(In production, this will be sent via email/SMS)"},
         "errors": {"userNotFound": "User not found. Please provide correct information.", "wrongPassword": "Wrong password. Please try again.", "accountNotVerified": "Your account has not been verified yet. Please activate your account with the verification code.", "invalidOtp": "Invalid verification code. Please try again.", "otpExpired": "Verification code has expired.", "invalidOtpFormat": "Please enter a valid 6-digit code.", "nameMinLength": "Name must be at least 2 characters.", "invalidPhone": "Please enter a valid phone number (11 digits, starting with 01)", "invalidEmail": "Please enter a valid email address.", "passwordMinLength": "Password must be at least 6 characters.", "passwordMismatch": "Passwords do not match. Please try again.", "emailExists": "This email is already registered. Please use a different email.", "phoneExists": "This phone number is already registered. Please use a different phone number.", "emailPending": "An account has been created with this email but has not been verified yet. Please activate your account with the verification code.", "phonePending": "An account has been created with this phone number but has not been verified yet. Please activate your account with the verification code.", "verificationDataMissing": "Verification data not found. Please register again.", "resendDataMissing": "Data not found for resending."},
         "success": {"verificationSuccess": "Verification successful! Your account has been activated.", "codeResent": "New verification code has been sent.", "registrationSubmitted": "Your story has been submitted! It will be published after admin approval."},
@@ -80,33 +81,44 @@ const languageChangeListeners = [];
  * @returns {Promise<Object>} Translations object
  */
 async function loadTranslations(lang) {
-    // First, try embedded translations (works with file:// protocol)
-    if (embeddedTranslations && embeddedTranslations[lang]) {
-        console.log(`Loading embedded translations for language: ${lang}`);
-        const embedded = embeddedTranslations[lang];
-        console.log(`Successfully loaded embedded translations for ${lang}:`, Object.keys(embedded).length, 'top-level keys');
-        return Promise.resolve(embedded);
-    }
+    // Map language codes to file names
+    const langFileMap = {
+        'bn': 'bangla.json',
+        'en': 'english.json',
+        'pli': 'pali.json'
+    };
+    const fileName = langFileMap[lang] || `${lang}.json`;
     
-    // Fallback to fetch for HTTP servers (doesn't work with file:// protocol)
+    // Try to load from JSON files first (works with HTTP/HTTPS servers)
     try {
-        console.log(`Loading translations via fetch for language: ${lang}`);
-        const response = await fetch(`locales/${lang}.json`);
-        if (!response.ok) {
-            throw new Error(`Failed to load ${lang}.json: ${response.status} ${response.statusText}`);
+        console.log(`Attempting to load translations from locales/${fileName} for language: ${lang}`);
+        const response = await fetch(`locales/${fileName}`);
+        if (response.ok) {
+            const translations = await response.json();
+            console.log(`Successfully loaded translations from JSON file for ${lang}:`, Object.keys(translations).length, 'top-level keys');
+            return translations;
+        } else {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
         }
-        const translations = await response.json();
-        console.log(`Successfully loaded translations for ${lang}:`, Object.keys(translations).length, 'keys');
-        return translations;
     } catch (error) {
-        console.error(`Error loading translations for ${lang}:`, error);
-        // Fallback to Bangla if language file not found
+        console.warn(`Could not load translations from JSON file (${error.message}). This is normal when opening file:// directly. Using embedded translations as fallback.`);
+        
+        // Fallback to embedded translations (for file:// protocol)
+        if (embeddedTranslations && embeddedTranslations[lang]) {
+            console.log(`Loading embedded translations for language: ${lang}`);
+            const embedded = embeddedTranslations[lang];
+            console.log(`Successfully loaded embedded translations for ${lang}:`, Object.keys(embedded).length, 'top-level keys');
+            return Promise.resolve(embedded);
+        }
+        
+        // If embedded also not available, try default language
         if (lang !== DEFAULT_LANGUAGE) {
             console.warn(`Falling back to ${DEFAULT_LANGUAGE}`);
             return loadTranslations(DEFAULT_LANGUAGE);
         }
-        // If even default fails, return empty object
-        console.error('Failed to load even default language translations');
+        
+        // Last resort: return empty object
+        console.error('Failed to load translations from any source');
         return {};
     }
 }

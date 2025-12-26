@@ -19,9 +19,7 @@ A comprehensive multi-platform application for preserving and sharing Buddhist h
 
 ```
 life-stories-app/
-├── mobile_app_web.html    # Main web application (HTML/JS)
-├── life-stories.html      # Alternative web version
-├── index.html             # Entry point
+├── buddhist-software.html # Main web application (HTML/JS)
 ├── client/                # React web client
 │   ├── src/
 │   │   └── components/    # React components
@@ -50,7 +48,7 @@ life-stories-app/
 
 ### Web Application
 
-Simply open `mobile_app_web.html` or `index.html` in a web browser. No build process required!
+Simply open `buddhist-software.html` in a web browser. No build process required!
 
 ### React Client
 

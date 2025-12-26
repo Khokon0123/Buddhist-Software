@@ -122,7 +122,7 @@ locales/
 js/
 └── i18n.js  (Core i18n module - FIXED)
 
-mobile_app_web.html (Main app - updated to wait for i18n)
+buddhist-software.html (Main app - updated to wait for i18n)
 ```
 
 ## Key Takeaways

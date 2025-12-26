@@ -2,10 +2,10 @@
 
 To add the Buddha statue background image:
 
-1. **Save the image file** as `buddha-statue-background.jpg` in the same folder as `mobile_app_web.html`
+1. **Save the image file** as `buddha-statue-background.jpg` in the same folder as `buddhist-software.html`
 
 2. **Or use an online URL:**
-   - If you have the image hosted online, update line 18 in `mobile_app_web.html`:
+   - If you have the image hosted online, update line 18 in `buddhist-software.html`:
    ```css
    url('YOUR_IMAGE_URL_HERE');
    ```
