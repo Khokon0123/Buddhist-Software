@@ -1605,8 +1605,9 @@
             console.log('All users cleared (admin preserved). Ready for new registration.');
         }
 
-        // Execute cleanup - remove all non-admin users
-        performUserCleanup();
+        // Note: performUserCleanup() should NOT be called automatically on page load
+        // It should only be called manually when needed (e.g., admin panel)
+        // Removing automatic execution to prevent clearing users before default admin is created
 
         function initializeDefaultUser() {
             let users = JSON.parse(localStorage.getItem(USERS_KEY) || '[]');
