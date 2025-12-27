@@ -1612,7 +1612,7 @@
             let users = JSON.parse(localStorage.getItem(USERS_KEY) || '[]');
             const adminExists = users.find(u => u.name === 'khokon');
             if (!adminExists) {
-                users.push({
+                const adminUser = {
                     id: 'admin_' + Date.now(),
                     name: 'khokon',
                     email: 'khokon',
@@ -1622,8 +1622,10 @@
                     isVerified: true,
                     createdAt: new Date().toISOString(),
                     verifiedAt: new Date().toISOString()
-                });
+                };
+                users.push(adminUser);
                 localStorage.setItem(USERS_KEY, JSON.stringify(users));
+                console.log('Default admin user created:', adminUser);
             } else {
                 // Ensure existing admin has isVerified field
                 const adminIndex = users.findIndex(u => u.name === 'khokon');
@@ -1634,6 +1636,7 @@
                     }
                     localStorage.setItem(USERS_KEY, JSON.stringify(users));
                 }
+                console.log('Default admin user already exists');
             }
         }
 
